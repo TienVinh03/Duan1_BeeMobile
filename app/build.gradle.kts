@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.du_an1_qldt"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.du_an1_qldt"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

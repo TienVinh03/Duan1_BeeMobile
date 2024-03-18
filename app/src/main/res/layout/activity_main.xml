@@ -1,26 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8EDEE8"
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/imgall"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imgall"
+        android:background="@drawable/background_chao"
+        app:layout_anchor="@+id/anhlogo"
+        android:layout_centerInParent="true"
+        app:layout_anchorGravity="center" />
 
-        android:background="#A49107"
-
-
-        />
+    <ImageView
+        android:id="@+id/anhlogo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:src="@drawable/anhong" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imgfirst"
-       android:src="@drawable/logo"
+        android:id="@+id/anhlogo1"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/anhong"
+        />
+
+    <TextView
+        android:id="@+id/tv_tenlogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="200dp"
+        android:gravity="center"
+
+        android:text="Bee Mobile"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        android:textStyle="bold"
+
         />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
