@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Du_an1_QLDT"
         tools:targetApi="31">
         <activity
+            android:name=".TrangChuAdmin"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
