@@ -13,6 +13,51 @@
         android:theme="@style/Theme.Du_an1_QLDT"
         tools:targetApi="31">
         <activity
+            android:name=".FragMentContainer"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_ThongKe"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_LichSuDonHang"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_QuanLiHangDT"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_QuanLiKhachHang"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_GioHang"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_QuanLiHoaDon"
+            android:exported="false" />
+        <activity
+            android:name=".DoiMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_QuanLiVoucher"
+            android:exported="false" />
+        <activity
+            android:name=".Frag_QuanLiSanPham"
+            android:exported="false" />
+        <activity
+            android:name=".TrangChuNguoiDung"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachSanPham"
+            android:exported="false" />
+        <activity
+            android:name=".QuenMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".DangKy"
+            android:exported="false" />
+        <activity
+            android:name=".DangNhap"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity

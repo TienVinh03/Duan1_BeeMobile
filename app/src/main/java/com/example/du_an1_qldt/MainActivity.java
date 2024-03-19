@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity {
        handler.postDelayed(new Runnable() {
            @Override
            public void run() {
-               imgall.animate().translationX(9000).setDuration(2000);
+               imgall.animate().translationY(9000).setDuration(1500);
                anhlogo.animate().translationY(-5000).setDuration(5000);
                anhlogo1.animate().translationY(-5000).setDuration(5000);
-               tv_tenlogo.animate().translationY(-5000).setDuration(13000);
+               tv_tenlogo.animate().translationY(-5000).setDuration(7000);
 
                imgall.animate().setListener(new AnimatorListenerAdapter() {
                    @Override

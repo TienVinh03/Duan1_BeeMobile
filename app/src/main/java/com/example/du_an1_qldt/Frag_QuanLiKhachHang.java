@@ -10,22 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TrangChuAdmin extends Fragment {
+public class Frag_QuanLiKhachHang extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_trang_chu_admin,container,false);
+        View v = inflater.inflate(R.layout.activity_frag_quan_li_khach_hang,container,false);
         return v;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-    public static TrangChuAdmin newInstance() {
-        TrangChuAdmin fragment = new TrangChuAdmin();
-
-        return fragment;
     }
 }
