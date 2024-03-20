@@ -13,6 +13,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class FragMentContainer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +23,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
     private NavigationView navigationView;
     private FragmentContainerView fragmentContainerView;
     Toolbar toolbar;
+    BottomNavigationView bottomNavigationView;
     Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,24 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         toolbar = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav);
+        bottomNavigationView = findViewById(R.id.bottom_admin);
         fragmentContainerView = findViewById(R.id.fragMentContainer);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
+        });
+
+
 
         if (savedInstanceState == null) {
             repLaceFragment(TrangChuAdmin.newInstance());
             setTitle("Màn hình chính (Admin)");
+            toolbar.setTitle("Màn hình chính");
+            toolbar.setSubtitle("Admin");
+
         }
 
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(FragMentContainer.this, drawer, toolbar, 0, 0);

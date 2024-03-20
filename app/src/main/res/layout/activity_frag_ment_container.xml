@@ -15,14 +15,14 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#88EC9E"
+            android:background="#88B7FE"
 
             >
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/toolbar"
-                android:background="@color/transparent"
+                android:background="#88B7FE"
                 />
 
 
@@ -44,5 +44,20 @@
         android:clickable="true"
 
         app:menu="@menu/menu_nav"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#C9C2F0"
+            android:id="@+id/bottom_admin"
+            app:menu="@menu/menu_bottom_admin"
+
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
