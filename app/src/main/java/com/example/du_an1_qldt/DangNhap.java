@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.du_an1_qldt.DAO.KhachHangDAO;
+import com.example.du_an1_qldt.dao.TaiKhoanDAO;
 
 public class DangNhap extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class DangNhap extends AppCompatActivity {
     CheckBox chk;
     Button btnDangnhap, btnTrolai;
     KhachHangDAO khachHangDAO;
+    com.example.du_an1_qldt.dao.TaiKhoanDAO taiKhoanDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class DangNhap extends AppCompatActivity {
         btnTrolai = findViewById(R.id.btnTrolai);
 
         khachHangDAO = new KhachHangDAO(this);
+        taiKhoanDAO= new TaiKhoanDAO(this);
 
 
 //        txtQuenmk.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +60,7 @@ public class DangNhap extends AppCompatActivity {
             public void onClick(View v) {
                 String use = edTendn.getText().toString();
                 String pass = edMatkhau.getText().toString();
-                boolean check = khachHangDAO.checkLogin(use, pass);
+                boolean check = taiKhoanDAO.checkDangNhap(use, pass);
 
                 if (use.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(DangNhap.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();

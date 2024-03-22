@@ -58,7 +58,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
         String loaitaikhoan = sharedPreferences.getString("loaitaikhoan", "");
 
-        if (!loaitaikhoan.equals("admin")){
+        if (!loaitaikhoan.equals("user")){
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QL_Voucher).setVisible(false);
             menu.findItem(R.id.QLSP).setVisible(false);
@@ -68,25 +68,19 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             menu.findItem(R.id.QLHD).setVisible(false);
             menu.findItem(R.id.ThongKeDoanhThu).setVisible(false);
             menu.findItem(R.id.ThongKeTop).setVisible(false);
-
-
-        }if(loaitaikhoan.equals("admin")) {
-            Menu menu = navigationView.getMenu();
-
-            menu.findItem(R.id.QLDM).setVisible(false);
-            menu.findItem(R.id.GIOHANG).setVisible(false);
-            menu.findItem(R.id.dsSanPham).setVisible(false);
-        }
-        if (loaitaikhoan.equals("admin")) {
-            repLaceFragment(TrangChuAdmin.newInstance());
-            setTitle("Màn hình chính (Admin)");
-            toolbar.setTitle("Màn hình chính");
-            toolbar.setSubtitle("Admin");
-        }else {
             repLaceFragment(TrangChuNguoiDung);
             setTitle("Màn hình chính (User)");
             toolbar.setTitle("Màn hình chính");
             toolbar.setSubtitle("User");
+        }else{
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.QLDM).setVisible(false);
+            menu.findItem(R.id.GIOHANG).setVisible(false);
+            menu.findItem(R.id.dsSanPham).setVisible(false);
+            repLaceFragment(TrangChuAdmin.newInstance());
+            setTitle("Màn hình chính (Admin)");
+            toolbar.setTitle("Màn hình chính");
+            toolbar.setSubtitle("Admin");
         }
 
 
