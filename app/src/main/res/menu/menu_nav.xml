@@ -18,6 +18,10 @@
             android:id="@+id/QLHANG"
 
             android:title="Quản lý hãng " />
+        <item
+            android:id="@+id/QL_Voucher"
+
+            android:title="Quản lý Voucher " />
 
         <item
             android:id="@+id/QLSP"

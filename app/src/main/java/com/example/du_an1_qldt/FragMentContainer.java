@@ -56,6 +56,22 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Fragment fr;
+                if (item.getItemId()==R.id.QL_Voucher){
+
+                    fr=new Frag_QuanLiVoucher();
+                }else {
+                    fr=new Frag_QuanLiSanPham();
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,fr).commit();
+                return true;
+            }
+        });
+
     }
 
     @Override
