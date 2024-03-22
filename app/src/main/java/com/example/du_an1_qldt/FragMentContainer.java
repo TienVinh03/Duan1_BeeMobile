@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,35 +44,67 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             }
         });
 
+        Fragment TrangChuNguoiDung;
+        TrangChuNguoiDung = new TrangChuNguoiDung();
 
 
-        if (savedInstanceState == null) {
-            repLaceFragment(TrangChuAdmin.newInstance());
-            setTitle("Màn hình chính (Admin)");
-            toolbar.setTitle("Màn hình chính");
-            toolbar.setSubtitle("Admin");
 
-        }
+
 
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(FragMentContainer.this, drawer, toolbar, 0, 0);
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
+        String loaitaikhoan = sharedPreferences.getString("loaitaikhoan", "");
 
-                Fragment fr;
-                if (item.getItemId()==R.id.QL_Voucher){
+        if (!loaitaikhoan.equals("admin")){
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.QL_Voucher).setVisible(false);
+            menu.findItem(R.id.QLSP).setVisible(false);
+            menu.findItem(R.id.QLKH).setVisible(false);
+            menu.findItem(R.id.manChinhAdmin).setVisible(false);
+            menu.findItem(R.id.QLHANG).setVisible(false);
+            menu.findItem(R.id.QLHD).setVisible(false);
+            menu.findItem(R.id.ThongKeDoanhThu).setVisible(false);
+            menu.findItem(R.id.ThongKeTop).setVisible(false);
 
-                    fr=new Frag_QuanLiVoucher();
-                }else {
-                    fr=new Frag_QuanLiSanPham();
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,fr).commit();
-                return true;
-            }
-        });
+
+        }if(loaitaikhoan.equals("admin")) {
+            Menu menu = navigationView.getMenu();
+
+            menu.findItem(R.id.QLDM).setVisible(false);
+            menu.findItem(R.id.GIOHANG).setVisible(false);
+            menu.findItem(R.id.dsSanPham).setVisible(false);
+        }
+        if (loaitaikhoan.equals("admin")) {
+            repLaceFragment(TrangChuAdmin.newInstance());
+            setTitle("Màn hình chính (Admin)");
+            toolbar.setTitle("Màn hình chính");
+            toolbar.setSubtitle("Admin");
+        }else {
+            repLaceFragment(TrangChuNguoiDung);
+            setTitle("Màn hình chính (User)");
+            toolbar.setTitle("Màn hình chính");
+            toolbar.setSubtitle("User");
+        }
+
+
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                Fragment fr;
+//                if (item.getItemId()==R.id.QL_Voucher){
+//
+//                    fr=new Frag_QuanLiVoucher();
+//                }else {
+//                    fr=new Frag_QuanLiSanPham();
+//                }
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,fr).commit();
+//                return true;
+//            }
+//        });
 
     }
 
@@ -83,4 +117,13 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         fragmentTransaction.replace(R.id.fragMentContainer, fragment);
         fragmentTransaction.commit();
     }
+
+
+
+
+
+
+
+
+
 }

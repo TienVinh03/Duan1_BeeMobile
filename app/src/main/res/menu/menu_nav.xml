@@ -4,15 +4,16 @@
     tools:showIn = "navigation_view">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/dsSanPham"
+
+            android:textColor="@android:color/primary_text_light"
+            android:title="Danh sách sản phẩm " />
+        <item
             android:id="@+id/manChinhAdmin"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Màn hình chính" />
-        <item
-            android:id="@+id/manChinhNguoiDung"
 
-            android:textColor="@android:color/primary_text_light"
-            android:title="Màn hình chính" />
 
         <item
             android:id="@+id/QLHANG"
@@ -63,6 +64,10 @@
         <item android:title="Tiện ích"
             >
             <menu>
+                <item
+                    android:id="@+id/thongTin"
+
+                    android:title="Thông tin" />
                 <item
                     android:id="@+id/itDoiMatKhau"
 
