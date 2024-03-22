@@ -107,4 +107,13 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         fragmentTransaction.replace(R.id.fragMentContainer, fragment);
         fragmentTransaction.commit();
     }
+
+
+
+
+
+
+
+
+
 }

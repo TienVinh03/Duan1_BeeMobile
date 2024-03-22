@@ -4,6 +4,11 @@
     tools:showIn = "navigation_view">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/dsSanPham"
+
+            android:textColor="@android:color/primary_text_light"
+            android:title="Danh sách sản phẩm " />
+        <item
             android:id="@+id/manChinhAdmin"
 
             android:textColor="@android:color/primary_text_light"
