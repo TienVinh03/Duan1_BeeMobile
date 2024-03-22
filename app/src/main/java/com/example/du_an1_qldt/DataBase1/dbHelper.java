@@ -15,12 +15,12 @@ public class dbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String db_hang="create table Brand(idHang integer primary key autoincrement,"+
-                "tenHang text)";
+                "tenHang text , heDieuHanh TEXT not null)";
         sqLiteDatabase.execSQL(db_hang);
         String db_phone="create table Phone(maDt integer primary key autoincrement," +
                 "tenDt text," +
                 "idHang integer not null," +
-                "gia real," +
+                "gia integer," +
                 "mausac text," +
                 "trangthai int," +
                 "soluong integer,"+
@@ -29,9 +29,8 @@ public class dbHelper extends SQLiteOpenHelper {
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "maDt INTEGER not null," +
-                "ram TEXT not null," +
                 "soLuong INTEGER not null," +
-                "donGia REAL not null," +
+                "donGia integer not null," +
                 "mauSac TEXT not null," +
                 "FOREIGN KEY (maDt) REFERENCES Phone(maDt))";
         sqLiteDatabase.execSQL(db_cart);
@@ -40,6 +39,7 @@ public class dbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(db_voucher);
         String db_admin = "CREATE TABLE Admin (" +
                 "id integer PRIMARY KEY, " +
+                "username text not null,"+
                 "hoTen TEXT NOT NULL, " +
                 "matKhau TEXT NOT NULL," +
                 "Sdt TEXT NOT NULL," +
@@ -48,6 +48,7 @@ public class dbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(db_admin);
         String db_user = "CREATE TABLE User (" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
+                "username text not null,"+
                 "hoTen TEXT NOT NULL, " +
                 "matKhau TEXT NOT NULL," +
                 "Sdt TEXT NOT NULL," +
@@ -59,7 +60,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "idSp integer NOT NULL, " +
                 "idDonHang integer NOT NULL, " +
                 "soLuong integer NOT NULL," +
-                "giaTien real NOT NULL," +
+                "giaTien integer NOT NULL," +
                 "FOREIGN KEY (idSp) REFERENCES Phone(maDt),"+
                 "FOREIGN KEY (idDonHang) REFERENCES DonHang(id))";
         sqLiteDatabase.execSQL(db_order_detail);
@@ -70,7 +71,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "idSp integer NOT NULL, " +
                 "idVoucher integer NOT NULL, " +
                 "soLuong integer NOT NULL," +
-                "giaTien real NOT NULL," +
+                "giaTien integer NOT NULL," +
                 "FOREIGN KEY (idSp) REFERENCES Phone(maDt),"+
                 "FOREIGN KEY (idAdmin) REFERENCES Admin(id),"+
                 "FOREIGN KEY (idVoucher) REFERENCES Voucher(idVoucher),"+
