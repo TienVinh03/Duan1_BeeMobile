@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones1";
+    private static final String DB_name="BeePhones11";
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 1);
     }
@@ -21,6 +21,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "tenDt text," +
                 "idHang integer not null," +
                 "gia integer," +
+                "rom integer," +
                 "mausac text," +
                 "trangthai int," +
                 "soluong integer,"+
@@ -37,24 +38,18 @@ public class dbHelper extends SQLiteOpenHelper {
         String db_voucher="create table Voucher(idVoucher integer primary key autoincrement,"+
                 "giaTriGiam text,"+"tenVoucher text)";
         sqLiteDatabase.execSQL(db_voucher);
-        String db_admin = "CREATE TABLE Admin (" +
-                "id integer PRIMARY KEY, " +
-                "username text not null,"+
-                "hoTen TEXT NOT NULL, " +
-                "matKhau TEXT NOT NULL," +
-                "Sdt TEXT NOT NULL," +
-                "diaChi TEXT NOT NULL," +
-               "email text not null)";
-        sqLiteDatabase.execSQL(db_admin);
-        String db_user = "CREATE TABLE User (" +
-                "id integer PRIMARY KEY AUTOINCREMENT, " +
-                "username text not null,"+
-                "hoTen TEXT NOT NULL, " +
-                "matKhau TEXT NOT NULL," +
-                "Sdt TEXT NOT NULL," +
-                "diaChi TEXT NOT NULL," +
-                "email text not null)";
-        sqLiteDatabase.execSQL(db_user);
+        String dbnguoidung = "CREATE TABLE NguoiDung(manguoidung INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "username TEXT NOT NULL," +
+                "password TEXT NOT NULL," +
+                "hoten TEXT NOT NULL," +
+                "sodienthoai TEXT NOT NULL," +
+                "email TEXT," +
+                "diachi TEXT," +
+                "loaitaikhoan TEXT)";
+        sqLiteDatabase.execSQL(dbnguoidung);
+
+        sqLiteDatabase.execSQL("INSERT INTO nguoidung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin')");
+
         String db_order_detail ="CREATE TABLE OderDetail (" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "idSp integer NOT NULL, " +
