@@ -1,4 +1,4 @@
-package com.example.du_an1_qldt.DAO;
+package com.example.du_an1_qldt.dao;
 
 
 import android.content.ContentValues;

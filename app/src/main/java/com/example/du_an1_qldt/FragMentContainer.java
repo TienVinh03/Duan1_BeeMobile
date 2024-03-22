@@ -69,18 +69,18 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             menu.findItem(R.id.ThongKeDoanhThu).setVisible(false);
             menu.findItem(R.id.ThongKeTop).setVisible(false);
             repLaceFragment(TrangChuNguoiDung);
-            setTitle("Màn hình chính (User)");
+            setTitle("Màn hình chính (Admin)");
             toolbar.setTitle("Màn hình chính");
-            toolbar.setSubtitle("User");
+            toolbar.setSubtitle("Admin");
         }else{
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QLDM).setVisible(false);
             menu.findItem(R.id.GIOHANG).setVisible(false);
             menu.findItem(R.id.dsSanPham).setVisible(false);
             repLaceFragment(TrangChuAdmin.newInstance());
-            setTitle("Màn hình chính (Admin)");
+            setTitle("Màn hình chính (User)");
             toolbar.setTitle("Màn hình chính");
-            toolbar.setSubtitle("Admin");
+            toolbar.setSubtitle("User");
         }
 
 
