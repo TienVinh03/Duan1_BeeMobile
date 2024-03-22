@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones1111";
+    private static final String DB_name="BeePhones22";
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 12);
     }
@@ -17,6 +17,9 @@ public class dbHelper extends SQLiteOpenHelper {
         String db_hang="create table Brand(idHang integer primary key autoincrement,"+
                 "tenHang text , heDieuHanh TEXT not null)";
         sqLiteDatabase.execSQL(db_hang);
+
+        String insert_hang = "insert into Brand values (1,'Xiaomi','Android')";
+        sqLiteDatabase.execSQL(insert_hang);
 
 
         String db_phone="create table Phone(maDt integer primary key autoincrement," +
@@ -31,6 +34,8 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idHang) REFERENCES Brand(idHang))";
         sqLiteDatabase.execSQL(db_phone);
 
+        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'#FFFFFF',1,20)";
+        sqLiteDatabase.execSQL(insert_phone);
 
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
