@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,10 +11,14 @@
     tools:context=".DangNhap">
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="805dp"
-        android:layout_height="491dp"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
         android:layout_marginTop="-50dp"
         app:srcCompat="@drawable/free_vector___mobile_marketing_isometric_style" />
 
@@ -71,21 +75,21 @@
             android:inputType="text" />
     </LinearLayout>
 
-<!--    <TextView-->
-<!--        android:id="@+id/txtQuenmk"-->
-<!--        android:layout_width="110dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="200dp"-->
-<!--        android:layout_marginRight="90dp"-->
-<!--        android:text="Quên mật khẩu?"-->
-<!--        android:textStyle="italic" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/txtQuenmk"-->
+    <!--        android:layout_width="110dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="200dp"-->
+    <!--        android:layout_marginRight="90dp"-->
+    <!--        android:text="Quên mật khẩu?"-->
+    <!--        android:textStyle="italic" />-->
 
     <CheckBox
         android:id="@+id/ckMatkhau"
         android:layout_width="161dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="190dp"
+        android:layout_marginLeft="20dp"
+
         android:text="Lưu mật khẩu" />
 
 
@@ -93,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
 
@@ -117,5 +122,6 @@
 
     </LinearLayout>
 
-
 </LinearLayout>
+
+</ScrollView>
