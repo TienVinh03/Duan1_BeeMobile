@@ -1,4 +1,4 @@
-package model;
+package com.example.du_an1_qldt.model;
 
 public class phone {
     private int id;
