@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones";
+    private static final String DB_name="BeePhones1";
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 1);
     }
@@ -36,7 +36,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (maDt) REFERENCES Phone(maDt))";
         sqLiteDatabase.execSQL(db_cart);
         String db_voucher="create table Voucher(idVoucher integer primary key autoincrement,"+
-                "giaTriGiam text)";
+                "giaTriGiam text,"+"tenVoucher text)";
         sqLiteDatabase.execSQL(db_voucher);
         String db_admin = "CREATE TABLE Admin (" +
                 "id integer PRIMARY KEY, " +
@@ -54,7 +54,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "diaChi TEXT NOT NULL," +
                 "email text not null)";
         sqLiteDatabase.execSQL(db_user);
-        String db_oder_detail ="CREATE TABLE OderDetail (" +
+        String db_order_detail ="CREATE TABLE OderDetail (" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "idSp integer NOT NULL, " +
                 "idDonHang integer NOT NULL, " +
@@ -62,8 +62,8 @@ public class dbHelper extends SQLiteOpenHelper {
                 "giaTien real NOT NULL," +
                 "FOREIGN KEY (idSp) REFERENCES Phone(maDt),"+
                 "FOREIGN KEY (idDonHang) REFERENCES DonHang(id))";
-        sqLiteDatabase.execSQL(db_oder_detail);
-        String db_older="CREATE TABLE Oder (" +
+        sqLiteDatabase.execSQL(db_order_detail);
+        String db_order="CREATE TABLE Oder (" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "idAdmin integer NOT NULL, " +
                 "idUser integer NOT NULL, " +
@@ -75,7 +75,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idAdmin) REFERENCES Admin(id),"+
                 "FOREIGN KEY (idVoucher) REFERENCES Voucher(idVoucher),"+
                 "FOREIGN KEY (idUser) REFERENCES User(id))";
-        sqLiteDatabase.execSQL(db_older);
+        sqLiteDatabase.execSQL(db_order);
 
     }
 
