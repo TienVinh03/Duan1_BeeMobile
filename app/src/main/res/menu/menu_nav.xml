@@ -64,6 +64,10 @@
             >
             <menu>
                 <item
+                    android:id="@+id/thongTin"
+
+                    android:title="Thông tin" />
+                <item
                     android:id="@+id/itDoiMatKhau"
 
                     android:title="Đổi mật khẩu" />
