@@ -23,6 +23,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "tenDt text," +
                 "idHang integer not null," +
                 "gia integer," +
+                "image integer," +
                 "rom integer," +
                 "mausac text," +
                 "trangthai int," +
