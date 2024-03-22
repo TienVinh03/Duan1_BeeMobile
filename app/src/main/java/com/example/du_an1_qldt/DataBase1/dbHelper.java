@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones1";
+    private static final String DB_name="BeePhones1111";
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 12);
     }
@@ -23,6 +23,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "tenDt text," +
                 "idHang integer not null," +
                 "gia integer," +
+                "rom integer," +
                 "mausac text," +
                 "trangthai int," +
                 "soluong integer,"+
@@ -80,7 +81,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "loaitaikhoan TEXT)";
         sqLiteDatabase.execSQL(dbnguoidung);
 //////////
-        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin')");
+        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user')");
 
 
 

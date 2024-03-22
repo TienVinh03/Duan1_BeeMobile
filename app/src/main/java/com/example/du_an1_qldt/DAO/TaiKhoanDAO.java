@@ -29,6 +29,7 @@ public class TaiKhoanDAO {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("hoTen",cursor.getString(1));
             editor.putString("matKhau",cursor.getString(2));
+            editor.putString("loaitaikhoan",cursor.getString(8));
             editor.putString("email",cursor.getString(5));
             editor.commit();
             return true;

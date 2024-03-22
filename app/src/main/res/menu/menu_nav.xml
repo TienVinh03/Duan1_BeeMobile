@@ -13,11 +13,7 @@
 
             android:textColor="@android:color/primary_text_light"
             android:title="Màn hình chính" />
-        <item
-            android:id="@+id/manChinhNguoiDung"
 
-            android:textColor="@android:color/primary_text_light"
-            android:title="Màn hình chính" />
 
         <item
             android:id="@+id/QLHANG"
