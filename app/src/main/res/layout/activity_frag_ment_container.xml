@@ -6,18 +6,13 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer"
     tools:context=".FragMentContainer">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#88B7FE"
 
-            >
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -26,15 +21,27 @@
                 />
 
 
-        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:id="@+id/fragMentContainer"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"/>
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:background="#C9C2F0"
+                android:id="@+id/bottom_admin"
+                app:menu="@menu/menu_bottom_admin"
+
+                android:layout_height="wrap_content"/>
+
 
 
         
-    </LinearLayout>
+    </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav"
         android:layout_width="match_parent"
@@ -44,20 +51,7 @@
         android:clickable="true"
 
         app:menu="@menu/menu_nav"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:background="#C9C2F0"
-            android:id="@+id/bottom_admin"
-            app:menu="@menu/menu_bottom_admin"
 
-            android:layout_height="wrap_content"/>
-
-
-    </RelativeLayout>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

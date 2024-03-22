@@ -6,7 +6,18 @@ public class phone {
     private  String color;
     private  int image;
     private int rom;
+
+    public void setGia(int gia) {
+        this.gia = gia;
+    }
+
     private int soLuong;
+
+    public int getGia() {
+        return gia;
+    }
+
+    private int gia;
     private int id_Hang;
     private int status;
 
@@ -77,7 +88,7 @@ public class phone {
     public phone() {
     }
 
-    public phone(int id, String name, String color, int image, int rom, int soLuong, int id_Hang, int status) {
+    public phone(int id, String name, String color, int image, int rom,int gia, int soLuong, int id_Hang, int status) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -86,5 +97,6 @@ public class phone {
         this.soLuong = soLuong;
         this.id_Hang = id_Hang;
         this.status = status;
+        this.gia = gia;
     }
 }
