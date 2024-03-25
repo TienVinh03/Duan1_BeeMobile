@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -67,6 +71,29 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         holder.cardViewSP.setCardBackgroundColor(Color.WHITE);
         holder.cardViewSP.setRadius(70);
         holder.cardViewSP.setCardElevation(8);
+
+        holder.select_row_qlsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu= new PopupMenu(context,holder.select_row_qlsp);
+                popupMenu.getMenuInflater().inflate(R.menu.select_sua_xoa,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                       if (item.getItemId()==R.id.select_sua){
+                           Toast.makeText(context, "Sửa", Toast.LENGTH_SHORT).show();
+                           return true;
+                       } else if (item.getItemId()==R.id.select_xoa) {
+                           Toast.makeText(context, "Xóa", Toast.LENGTH_SHORT).show();
+                           return true;
+                       }else {
+                           return false;
+                       }
+                    }
+                });
+                popupMenu.show();
+            }
+        });
     }
 
     @Override
@@ -83,6 +110,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         TextView tv_statusSP;
         ImageView img_anhSP;
         CardView cardViewSP;
+        Button select_row_qlsp;
         public SanPhamViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_statusSP = itemView.findViewById(R.id.tv_TrangthaiSP);
@@ -93,6 +121,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
             tv_mauSacSp = itemView.findViewById(R.id.tv_MauSacSP);
             img_anhSP =itemView.findViewById(R.id.anh1);
             cardViewSP = itemView.findViewById(R.id.cardViewSanPham);
+            select_row_qlsp = itemView.findViewById(R.id.select_row_qlsp);
 
 
         }
