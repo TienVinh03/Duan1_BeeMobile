@@ -1,635 +1,625 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TrangChuAdmin">
-<ScrollView
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewTrangChu"
+        android:layout_width="430dp"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Doanh thu ngày"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12,000,000đ"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCA2A2"
+                android:layout_marginBottom="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đơn hàng mới"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:text="0"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đơn huỷ"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:text="0"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đơn hàng trả"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:text="0"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/khung_trangchu"
-            android:layout_alignParentTop="true">
-        </TextView>
+        android:layout_below="@+id/cardViewTrangChu"
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewTrangChu"
-            android:layout_width="430dp"
-            android:layout_height="130dp"
-            android:background="@color/white"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-
-            app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Doanh thu ngày"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12,000,000đ"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:layout_marginBottom="5dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#CCA2A2"
-                    android:layout_marginBottom="5dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Đơn huỷ"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:textSize="22sp"
-                            android:layout_gravity="center"
-                            android:text="0"/>
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Đơn hàng trả"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:textSize="22sp"
-                            android:layout_gravity="center"
-                            android:text="0"/>
-
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-
-
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
+        android:layout_marginTop="20dp"
+        android:id="@+id/iconTrangchu1"
+        android:weightSum="4"
+        android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cardViewTrangChu"
-
-            android:layout_marginTop="20dp"
-            android:id="@+id/iconTrangchu1"
-            android:weightSum="4"
-            android:orientation="horizontal">
-            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tạo đơn hàng"
-                    />
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tra cứu"
-                    />
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lịch sử ĐH"
-                    />
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Thêm sản phẩm"
-                    />
-
-
-
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="Tạo đơn hàng"
+                />
 
 
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iconTrangchu1"
-
-            android:layout_marginTop="20dp"
-            android:id="@+id/iconTrangchu2"
-            android:weightSum="4"
-            android:orientation="horizontal">
-            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
+                android:layout_height="wrap_content"
+                android:text="Tra cứu"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lịch sử ĐH"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Thêm sản phẩm"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iconTrangchu1"
+
+        android:layout_marginTop="20dp"
+        android:id="@+id/iconTrangchu2"
+        android:weightSum="4"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DS Voucher"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="ĐH hủy"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chờ Xác nhận"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/khung_tron"
+                android:drawableLeft="@drawable/icon_them"
+                android:paddingLeft="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xem thêm"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_below="@id/iconTrangchu2"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/cardView2"
+
+        app:cardCornerRadius="20dp">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView2"
+        android:layout_marginHorizontal="25dp"
+        android:text="Đơn hàng cần được xử lý"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/text1"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_below="@id/text1"
+        android:layout_height="320dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_gravity="center"
+        android:id="@+id/cardView3"
+
+        app:cardCornerRadius="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="4"
+            android:paddingHorizontal="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cart"
                     />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DS Voucher"
+                    android:layout_height="80dp"
+                    android:text="Chờ duyệt"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
                     />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Đơn hàng mới" />
+                        android:layout_height="80dp"
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="0"
                         android:textColor="@color/black"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+
                         android:textSize="22sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/arrow"
+                        android:id="@+id/mo_rong1"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="22sp"/>
 
 
-                </LinearLayout>
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="ĐH hủy"
-                    />
-
-
+                </RelativeLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cart"
                     />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chờ Xác nhận"
+                    android:layout_height="80dp"
+                    android:text="Chờ thanh toán"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
                     />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
 
 
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
+
+
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/arrow"
+                        android:id="@+id/mo_rong2"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="22sp"/>
+
+
+                </RelativeLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/khung_tron"
-                    android:drawableLeft="@drawable/icon_them"
-                    android:paddingLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cart"
                     />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Xem thêm"
+                    android:layout_height="80dp"
+                    android:text="Đang vận chuyển"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
                     />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
 
 
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/arrow"
+                        android:id="@+id/mo_rong3"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="22sp"/>
+
+
+                </RelativeLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cart"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:text="Đã vận chuyển"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="50dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
+
+
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:background="@drawable/arrow"
+                        android:id="@+id/mo_rong4"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="22sp"/>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_below="@id/iconTrangchu2"
-            android:layout_height="150dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/cardView2"
-
-            app:cardCornerRadius="20dp">
 
 
-        </androidx.cardview.widget.CardView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cardView2"
-            android:layout_marginHorizontal="25dp"
-            android:text="Đơn hàng cần được xử lý"
-            android:layout_marginTop="15dp"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:id="@+id/text1"
-            />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_below="@id/text1"
-            android:layout_height="320dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/cardView3"
-
-            app:cardCornerRadius="20dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="4"
-                android:paddingHorizontal="10dp"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/cart"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="80dp"
-                        android:text="Chờ duyệt"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="16sp"
-                        />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="80dp"
-
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/black"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="50dp"
-
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/arrow"
-                            android:id="@+id/mo_rong1"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="22sp"/>
-
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/viewPager2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/cart"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="80dp"
-                        android:text="Chờ thanh toán"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="16sp"
-                        />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="80dp"
-
-
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="50dp"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/black"
-
-
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/arrow"
-                            android:id="@+id/mo_rong2"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="22sp"/>
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/cart"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="80dp"
-                        android:text="Đang vận chuyển"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="16sp"
-                        />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="80dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="50dp"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/black"
-
-
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/arrow"
-                            android:id="@+id/mo_rong3"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="22sp"/>
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/cart"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="80dp"
-                        android:text="Đã vận chuyển"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="16sp"
-                        />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="80dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="50dp"
-                            android:gravity="center"
-                            android:text="0"
-                            android:textColor="@color/black"
-
-
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:background="@drawable/arrow"
-                            android:id="@+id/mo_rong4"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="22sp"/>
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
 </ScrollView>
-
-</RelativeLayout>

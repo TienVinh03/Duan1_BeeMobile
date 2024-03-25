@@ -65,6 +65,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         if (loaitaikhoan.equals("admin")){
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QLDM).setVisible(false);
+            menu.findItem(R.id.manChinhUser).setVisible(false);
             menu.findItem(R.id.GIOHANG).setVisible(false);
             menu.findItem(R.id.dsSanPham).setVisible(false);
             repLaceFragment(TrangChuAdmin.newInstance());
@@ -110,8 +111,13 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         }
         else if (item.getItemId()==R.id.manChinhAdmin) {
             setTitle("Màn hình chính");
-            toolbar.setTitle("Màn hình chính (admin)");
+            toolbar.setTitle("Trang chủ(admin)");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
+        }
+        else if (item.getItemId()==R.id.manChinhUser) {
+            setTitle("Màn hình chính");
+            toolbar.setTitle("Trang chủ(user)");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).addToBackStack(null).commit();
         }else if (item.getItemId()==R.id.QLSP) {
             setTitle("Quản lí sản phẩm");
             toolbar.setTitle("Quản lí sản phẩm)");
