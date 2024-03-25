@@ -1,4 +1,4 @@
-package com.example.du_an1_qldt.dao;
+package com.example.du_an1_qldt.DAO;
 
 import static android.content.Context.MODE_PRIVATE;
 
