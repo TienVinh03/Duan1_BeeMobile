@@ -13,9 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.R;
-import com.example.du_an1_qldt.dao.SanPhamDAO;
 import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;

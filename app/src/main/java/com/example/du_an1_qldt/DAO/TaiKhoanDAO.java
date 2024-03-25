@@ -1,4 +1,4 @@
-package com.example.du_an1_qldt.dao;
+package com.example.du_an1_qldt.DAO;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -23,7 +23,7 @@ public class TaiKhoanDAO {
     public boolean checkDangNhap(String hoTen, String password) {
         SQLiteDatabase sqLiteDatabase = database.getReadableDatabase();
         // mathuthu, hoten, matkhau, loaitaikhoan
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM nguoiDung WHERE username = ? AND password = ?", new String[]{hoTen, password});
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM User WHERE hoTen = ? AND matKhau = ?", new String[]{hoTen, password});
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             SharedPreferences.Editor editor = sharedPreferences.edit();
