@@ -120,7 +120,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).addToBackStack(null).commit();
         }else if (item.getItemId()==R.id.QLSP) {
             setTitle("Quản lí sản phẩm");
-            toolbar.setTitle("Quản lí sản phẩm)");
+            toolbar.setTitle("Quản lí sản phẩm");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiSanPham()).addToBackStack(null).commit();
         } else if (item.getItemId()==R.id.QLHD) {
             setTitle("Quản lí Hóa đơn");

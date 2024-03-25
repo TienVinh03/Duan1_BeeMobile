@@ -7,35 +7,30 @@
     tools:context=".Frag_QuanLiSanPham">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/linear_qlsp"
         android:weightSum="3"
         >
         <EditText
-            android:id="@+id/searchEditText"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2.3"
-            android:padding="5dp"
-            android:background="@drawable/khugn_search"
-            android:layout_height="wrap_content"
-            android:hint="Nhập từ khóa tìm kiếm" />
-        <TextView
-            android:layout_width="0dp"
-            android:padding="5dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:layout_marginHorizontal="15dp"
-            android:layout_gravity="center"
+            android:id="@+id/edt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="2.7"
 
-            android:background="@drawable/baseline_search_24"
-            />
+
+            android:background="@drawable/khugn_search"
+            android:drawableEnd="@drawable/baseline_search_24"
+            android:paddingHorizontal="5dp"
+            android:hint="Tìm kiếm"
+
+             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="0.3"
             android:padding="5dp"
             android:layout_gravity="center"
             android:background="@drawable/filter"
