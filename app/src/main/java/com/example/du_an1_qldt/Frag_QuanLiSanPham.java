@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.du_an1_qldt.Adapter.SanPhamAdapter;
-import com.example.du_an1_qldt.DAO.SanPhamDAO;
+import com.example.du_an1_qldt.dao.SanPhamDAO;
 import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;
