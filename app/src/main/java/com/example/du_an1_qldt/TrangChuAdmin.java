@@ -51,7 +51,7 @@ public class TrangChuAdmin extends Fragment {
         cardView.setRadius(20);
 
         cardView.setCardElevation(8);
-        viewPager = view.findViewById(R.id.viewPager);
+        viewPager = view.findViewById(R.id.viewPager2);
         slideAdapter = new SlideAdapter(getActivity(), images);
         viewPager.setAdapter(slideAdapter);
 
@@ -65,7 +65,6 @@ public class TrangChuAdmin extends Fragment {
     }
     public static TrangChuAdmin newInstance() {
         TrangChuAdmin fragment = new TrangChuAdmin();
-
         return fragment;
     }
     public void onDestroy() {
