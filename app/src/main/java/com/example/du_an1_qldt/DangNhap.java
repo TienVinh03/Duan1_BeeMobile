@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.du_an1_qldt.DAO.KhachHangDAO;
-import com.example.du_an1_qldt.dao.TaiKhoanDAO;
+import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 
 public class DangNhap extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class DangNhap extends AppCompatActivity {
     CheckBox chk;
     Button btnDangnhap, btnTrolai;
     KhachHangDAO khachHangDAO;
-    com.example.du_an1_qldt.dao.TaiKhoanDAO taiKhoanDAO;
+    com.example.du_an1_qldt.DAO.TaiKhoanDAO taiKhoanDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
