@@ -4,13 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,10 +19,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class FragMentContainer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FragMentContainer extends AppCompatActivity {
 
     private DrawerLayout drawer;
-    private NavigationView navigationView;
+    NavigationView navigationView;
     private FragmentContainerView fragmentContainerView;
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
@@ -39,38 +37,69 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         bottomNavigationView = findViewById(R.id.bottom_admin);
         fragmentContainerView = findViewById(R.id.fragMentContainer);
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                return false;
+//            }
+//        });
+
+
+
+        if (savedInstanceState == null) {
+            repLaceFragment(TrangChuAdmin.newInstance());
+            setTitle("Màn hình chính");
+            setTitle("Màn hình chính (Admin)");
+            toolbar.setTitle("Màn hình chính");
+            toolbar.setSubtitle("Admin");
+        }
+
+
+
+
+
+
+        ActionBarDrawerToggle drawerToggle =new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        drawerToggle.syncState();
+        drawer.addDrawerListener(drawerToggle);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragMentContainer, new TrangChuAdmin()).commit();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fr=null;
 
-                drawer.closeDrawer(GravityCompat.START);
-                return false;
+                  if (item.getItemId()==R.id.QLHANG) {
+                    fr=new Frag_QuanLiHangDT();
+                    toolbar.setTitle("Quản lí Hãng Điện thoại ");
+                }
+                 else if (item.getItemId()==R.id.QL_Voucher){
+
+                    fr=new Frag_QuanLiVoucher();
+                }
+
+                else if (item.getItemId()==R.id.QLSP) {
+                    fr=new Frag_QuanLiSanPham();
+                    toolbar.setTitle("Quản lí sản phẩm");
+                } else {
+                    fr=new TrangChuAdmin();
+                    toolbar.setTitle("Trang chủ");
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,fr).commit();
+                drawer.close();
+                return true;
             }
         });
-
-        Fragment TrangChuNguoiDung;
-        TrangChuNguoiDung = new TrangChuNguoiDung();
-
-
-
-
-
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(FragMentContainer.this, drawer, toolbar, 0, 0);
-        drawerToggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
         String loaitaikhoan = sharedPreferences.getString("loaitaikhoan", "");
 
         if (loaitaikhoan.equals("admin")){
-            Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.QLDM).setVisible(false);
-            menu.findItem(R.id.manChinhUser).setVisible(false);
-            menu.findItem(R.id.GIOHANG).setVisible(false);
-            menu.findItem(R.id.dsSanPham).setVisible(false);
-            repLaceFragment(TrangChuAdmin.newInstance());
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).commit();
-        }else if(loaitaikhoan.equals("user")){
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QL_Voucher).setVisible(false);
             menu.findItem(R.id.QLSP).setVisible(false);
@@ -80,88 +109,41 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             menu.findItem(R.id.QLHD).setVisible(false);
             menu.findItem(R.id.ThongKeDoanhThu).setVisible(false);
             menu.findItem(R.id.ThongKeTop).setVisible(false);
-            repLaceFragment((TrangChuNguoiDung));
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).commit();
+
+
+        }if(!loaitaikhoan.equals("admin")) {
+            Menu menu = navigationView.getMenu();
+
+            menu.findItem(R.id.QLDM).setVisible(false);
+            menu.findItem(R.id.GIOHANG).setVisible(false);
+            menu.findItem(R.id.dsSanPham).setVisible(false);
         }
+//        if (loaitaikhoan.equals("admin")) {
+//            repLaceFragment(TrangChuAdmin.newInstance());
+//            setTitle("Màn hình chính (Admin)");
+//            toolbar.setTitle("Màn hình chính");
+//            toolbar.setSubtitle("Admin");
+//        }else {
+//            repLaceFragment(TrangChuNguoiDung);
+//            setTitle("Màn hình chính (User)");
+//            toolbar.setTitle("Màn hình chính");
+//            toolbar.setSubtitle("User");
+//        }
 
 
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                Fragment fr;
-//                if (item.getItemId()==R.id.QL_Voucher){
-//
-//                    fr=new Frag_QuanLiVoucher();
-//                }else {
-//                    fr=new Frag_QuanLiSanPham();
-//                }
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,fr).commit();
-//                return true;
-//            }
-//        });
+
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.itDangXuat){
-            startActivity(new Intent(this, DangNhap.class));
-            finish();
-        }
-        else if (item.getItemId()==R.id.manChinhAdmin) {
-            setTitle("Màn hình chính");
-            toolbar.setTitle("Trang chủ(admin)");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
-        }
-        else if (item.getItemId()==R.id.manChinhUser) {
-            setTitle("Màn hình chính");
-            toolbar.setTitle("Trang chủ(user)");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.QLSP) {
-            setTitle("Quản lí sản phẩm");
-            toolbar.setTitle("Quản lí sản phẩm");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiSanPham()).addToBackStack(null).commit();
-        } else if (item.getItemId()==R.id.QLHD) {
-            setTitle("Quản lí Hóa đơn");
-            toolbar.setTitle("Quản lí Hóa đơn");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiHoaDon()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.QLKH) {
-            setTitle("Quản lí khách hàng");
-            toolbar.setTitle("Quản lí khách hàng");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiKhachHang()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.ThongKeDoanhThu) {
-            setTitle("Thống kê theo doanh thu");
-            toolbar.setTitle("Thống kê theo doanh thu");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_ThongKe()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.ThongKeTop) {
-            setTitle("Top 10 điện thoại bán nhiều nhất");
-            toolbar.setTitle("Top 10 điện thoại bán nhiều nhất");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_ThongKe()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.QLHANG) {
-            setTitle("Quản lí hãng điện thoại");
-            toolbar.setTitle("Quản lí hãng điện thoại");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiHangDT()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.itDoiMatKhau) {
-            setTitle("");
-         startActivity(new Intent(this,DoiMatKhau.class));
-         finish();
-        }else if (item.getItemId()==R.id.GIOHANG) {
-            setTitle("Giỏ hàng");
-            toolbar.setTitle("Giỏ hàng");
-           getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,new Frag_GioHang()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.QLDM) {
-            setTitle("Đơn mua gần đây");
-            toolbar.setTitle("Đơn mua gần đây");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,new Frag_DonMua()).addToBackStack(null).commit();
-        }
-        drawer.close();
-        return false;
-    }
+
+
+
+
+
+
     public void repLaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragMentContainer, fragment);
-        toolbar.setTitle("Trang chủ");
         fragmentTransaction.commit();
     }
 
