@@ -56,7 +56,7 @@ public class DangKy extends AppCompatActivity {
                 String email = edEmail.getText().toString();
                 String pass = edMatkhau.getText().toString();
                 String repass = edNhaplaimk.getText().toString();
-                manhinhdangky = findViewById(R.id.manhinhdangki);
+
                 String loaitaikhoan = "nguoiDung";
 
                 if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || repass.isEmpty()) {

@@ -1,5 +1,6 @@
 package com.example.du_an1_qldt.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.KhachHang_DTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class KhachHangDAO {
 

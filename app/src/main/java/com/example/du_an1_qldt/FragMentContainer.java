@@ -106,7 +106,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.itDangXuat){
-            startActivity(new Intent(this, DangNhap.class));
+            startActivity(new Intent(this, MainActivity2.class));
             finish();
         }
         else if (item.getItemId()==R.id.manChinhAdmin) {
