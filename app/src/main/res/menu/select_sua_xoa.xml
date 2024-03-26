@@ -5,8 +5,10 @@
 
     tools:showIn="navigation_view">
 
-<item android:id="@+id/select_sua" android:title="Sửa"/>
-    <item android:id="@+id/select_xoa" android:title="Xóa"/>
+<item android:id="@+id/select_sua" android:title="Sửa"
+    android:icon="@drawable/edit"  />
+    <item android:id="@+id/select_xoa" android:title="Xóa"
+        android:icon="@drawable/delete" />
 
 
 </menu>

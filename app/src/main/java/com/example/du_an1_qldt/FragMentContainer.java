@@ -86,7 +86,8 @@ public class FragMentContainer extends AppCompatActivity {
                 else if (item.getItemId()==R.id.QLSP) {
                     fr=new Frag_QuanLiSanPham();
                     toolbar.setTitle("Quản lí sản phẩm");
-                } else {
+                }
+                else {
                     fr=new TrangChuAdmin();
                     toolbar.setTitle("Trang chủ");
                 }

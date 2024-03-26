@@ -6,7 +6,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewSanPham"
         android:layout_width="430dp"
-        android:layout_height="240dp"
+        android:layout_height="180dp"
         android:background="@color/white"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
@@ -98,24 +98,7 @@
                             android:id="@+id/tv_maVoucher_ds"
                             />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="20dp"
-                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Từ ngày :"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="XXX"
-                            android:id="@+id/tv_tuNgay_ds"
-                            />
-                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -125,13 +108,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Đến ngày :"
+                            android:text="Trạng Thái :"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="XXX"
-                            android:id="@+id/tv_denNgay_ds"
+                            android:id="@+id/tv_trangthaiVoucher_ds"
                             />
                     </LinearLayout>
 
@@ -190,24 +173,7 @@
                             android:id="@+id/tv_menhGiaVoucher_ds"
                             />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Trạng thái:"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="XXX"
-                            android:id="@+id/tv_trangthaiVoucher_ds"
-                            />
-                    </LinearLayout>
 
 
 
