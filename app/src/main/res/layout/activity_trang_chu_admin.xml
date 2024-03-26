@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
 
                 android:text="Doanh thu ngày"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +58,6 @@
                 android:textSize="22sp"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -91,8 +89,6 @@
                         android:textSize="22sp"
                         android:layout_gravity="center"
                         android:text="0"/>
-
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -113,8 +109,6 @@
                         android:textSize="22sp"
                         android:layout_gravity="center"
                         android:text="0"/>
-
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -366,13 +360,11 @@
         android:id="@+id/cardView2"
 
         app:cardCornerRadius="20dp">
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
-
 
 
     </androidx.cardview.widget.CardView>
