@@ -47,6 +47,7 @@ public class SanPhamDAO {
         return list;
     }
 
+
     public int insertSP(phone sanPhamDTO){
 
         ContentValues values = new ContentValues();
