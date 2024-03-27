@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -56,6 +57,15 @@ public class TrangChuAdmin extends Fragment {
         viewPager.setAdapter(slideAdapter);
 
         handler.postDelayed(runnable, SLIDE_DELAY);
+
+        Button btn_add_sp = view.findViewById(R.id.btn_add_sp);
+
+        btn_add_sp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
 

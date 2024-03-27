@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="400dp">
+    <ImageView
+        android:id="@+id/anh5"
+        android:layout_width="98dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/k40_gaming"
+        android:layout_alignParentTop="true"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_below="@+id/anh5">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.98"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên:"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="XXX"
+                    android:id="@+id/tv_tenSP_add"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.01"
+            android:background="@color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.98"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

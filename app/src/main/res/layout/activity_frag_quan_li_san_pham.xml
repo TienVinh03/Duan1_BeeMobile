@@ -18,7 +18,7 @@
             android:id="@+id/edt_search"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.3"
 
 
             android:background="@drawable/khugn_search"
@@ -27,14 +27,15 @@
             android:hint="Tìm kiếm"
 
              />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:background="@drawable/filter"
-
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:paddingLeft="17dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/btn_add_sp"
+            android:background="@drawable/khugn_search"
+            android:drawableStart="@drawable/baseline_add_box_24"
             />
 
     </LinearLayout>
