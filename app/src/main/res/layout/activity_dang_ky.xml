@@ -47,6 +47,8 @@
                android:layout_width="match_parent"
                android:layout_height="50dp"
                android:background="@drawable/khung"
+               android:paddingLeft="10dp"
+
                android:ems="10"
                android:inputType="text" />
        </LinearLayout>
@@ -74,6 +76,8 @@
                android:layout_width="match_parent"
                android:layout_height="50dp"
                android:background="@drawable/khung"
+               android:paddingLeft="10dp"
+
                android:ems="10"
                android:inputType="text" />
        </LinearLayout>
@@ -103,6 +107,8 @@
                android:id="@+id/edMatkhau"
                android:layout_width="match_parent"
                android:layout_height="50dp"
+               android:paddingLeft="10dp"
+               android:password="true"
                android:background="@drawable/khung"
                android:ems="10"
                android:inputType="text" />
@@ -129,6 +135,8 @@
            <EditText
                android:id="@+id/edNhaplaimk"
                android:layout_width="match_parent"
+               android:paddingLeft="10dp"
+               android:password="true"
                android:layout_height="50dp"
                android:background="@drawable/khung"
                android:ems="10"
@@ -150,18 +158,22 @@
            <Button
                android:id="@+id/btnDangky"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_height="40sp"
                android:layout_marginRight="30sp"
                android:backgroundTint="#9D8DF5"
-               android:textSize="15dp"
+               android:background="@drawable/khung_bottom222"
+
+               android:textSize="13dp"
                android:text="Đăng Ký" />
 
            <Button
                android:id="@+id/btnTrolai"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_height="40sp"
                android:layout_marginLeft="30sp"
-               android:textSize="15dp"
+               android:background="@drawable/khung_bottom222"
+
+               android:textSize="13dp"
                android:backgroundTint="#9D8DF5"
                android:text="Trở lại " />
 
