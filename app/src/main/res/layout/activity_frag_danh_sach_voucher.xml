@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Frag_QuanLiVoucher">
+    tools:context=".Frag_DanhSachVoucher">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/linear_qlvoucher"
+        android:id="@+id/linear_dsvoucher"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp"
         android:layout_marginVertical="10dp"
@@ -42,7 +42,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linear_qlvoucher"
+        android:layout_below="@+id/linear_dsvoucher"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"

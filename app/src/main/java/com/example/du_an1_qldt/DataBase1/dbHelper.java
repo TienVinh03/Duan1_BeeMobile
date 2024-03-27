@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones22";
+    private static final String DB_name="BeePhones2222";
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 19);
     }
@@ -48,9 +48,11 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
         String db_voucher="create table Voucher(idVoucher integer primary key autoincrement,"+
-                "giaTriGiam text,"+"tenVoucher text)";
+                "giaTriGiam integer,"+"tenVoucher text,"+"soLuong integer,"+"trangThai integer)";
         sqLiteDatabase.execSQL(db_voucher);
 
+        String insert_voucher = "insert into Voucher values (1,20000,'Sale 30/4',10,1)";
+        sqLiteDatabase.execSQL(insert_voucher);
 
 //        String db_admin = "CREATE TABLE Admin (" +
 //                "id integer PRIMARY KEY, " +
@@ -136,6 +138,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
             onCreate(sqLiteDatabase);
         }
+
 
 
     }
