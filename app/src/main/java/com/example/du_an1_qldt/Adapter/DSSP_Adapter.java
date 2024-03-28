@@ -50,6 +50,9 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
         holder.tv_tenSP1.setText( String.valueOf(dt.getName()) );
         holder.tv_giaSPham.setText( String.valueOf( dt.getGia()));
         holder.tv_TrangthaiSP1.setText( String.valueOf(dt.getStatus() ));
+//        holder.tv_mauSac.setText( "Màu: " + String.valueOf( dt.getColor()));
+        holder.tv_romSP.setText("Rom:" + String.valueOf( dt.getRom()));
+
 
 
         phone phoneDTO = listSP.get(position);
@@ -58,6 +61,17 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
             holder.tv_TrangthaiSP1.setText("Còn hàng");
         }else {
             holder.tv_TrangthaiSP1.setText("Hết hàng");
+        }
+
+
+        if (phoneDTO.getColor().equals("#FFFFFF")){
+            holder.tv_mauSac.setText("Màu Trắng");
+        } else if (phoneDTO.getColor().equals("#FFFF00")) {
+            holder.tv_mauSac.setText("Màu Vàng");
+        } else if (phoneDTO.getColor().equals("#000000")) {
+            holder.tv_mauSac.setText("Màu Đen");
+        }else if (phoneDTO.getColor().equals("#FF0000")) {
+            holder.tv_mauSac.setText("Màu Đỏ");
         }
 
     }
@@ -70,7 +84,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
     }
 
     public class ViewHolder_DSSP extends RecyclerView.ViewHolder{
-        TextView tv_tenSP1,tv_giaSPham,tv_TrangthaiSP1;
+        TextView tv_tenSP1,tv_giaSPham,tv_TrangthaiSP1,tv_mauSac,tv_romSP;
         ImageView anh1, btnThemvaoGiohang,btnMuaNgay;
 
         public ViewHolder_DSSP(@NonNull View itemView) {
@@ -82,6 +96,8 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
             anh1 = itemView.findViewById(R.id.anh1);
             btnThemvaoGiohang = itemView.findViewById(R.id.btnThemvaoGiohang);
             btnMuaNgay = itemView.findViewById(R.id.btnMuaNgay);
+            tv_mauSac = itemView.findViewById(R.id.tv_mauSac);
+            tv_romSP = itemView.findViewById(R.id.tv_romSP);
 
         }
     }
