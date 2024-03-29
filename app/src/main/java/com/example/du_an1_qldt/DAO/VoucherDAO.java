@@ -26,18 +26,22 @@ public class VoucherDAO {
     public ArrayList<Voucher_DTO> getListVoucher(){
         ArrayList<Voucher_DTO> listVoucher = new ArrayList<>();
         Cursor c = db.rawQuery("select * from Voucher",null,null);
-        do {
+        if (c.getCount()>0){
             c.moveToFirst();
-            int id = c.getInt(0);
-            int giaTriGiam = c.getInt(1);
-            String ten = c.getString(2);
-            int soLuong = c.getInt(3);
-            int trangThai = c.getInt(4);
-            Voucher_DTO voucherDto = new Voucher_DTO(id,giaTriGiam,ten,soLuong,trangThai);
-            listVoucher.add(voucherDto);
+            do {
+
+                int id = c.getInt(0);
+                int giaTriGiam = c.getInt(1);
+                String ten = c.getString(2);
+                int soLuong = c.getInt(3);
+                int trangThai = c.getInt(4);
+                Voucher_DTO voucherDto = new Voucher_DTO(id,giaTriGiam,ten,soLuong,trangThai);
+                listVoucher.add(voucherDto);
 
 
-        }while (c.moveToNext());
+            }while (c.moveToNext());
+        }
+
 
         return listVoucher;
     }

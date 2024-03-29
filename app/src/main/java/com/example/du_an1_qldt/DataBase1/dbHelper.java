@@ -1,13 +1,15 @@
 package com.example.du_an1_qldt.DataBase1;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name="BeePhones2222";
+    private static final String DB_name="BeePhones3333333";
+
     public dbHelper(@Nullable Context context) {
         super(context, DB_name,null, 19);
     }
@@ -18,7 +20,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "tenHang text , heDieuHanh TEXT not null)";
         sqLiteDatabase.execSQL(db_hang);
 
-        String insert_hang = "insert into Brand values (1,'Xiaomi','Android')";
+        String insert_hang = "insert into Brand values (1,'Xiaomi','Android'),(2,'Apple','IOS')";
         sqLiteDatabase.execSQL(insert_hang);
 
 
@@ -34,7 +36,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idHang) REFERENCES Brand(idHang))";
         sqLiteDatabase.execSQL(db_phone);
 
-        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'#FFFFFF',1,20)";
+        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20)";
         sqLiteDatabase.execSQL(insert_phone);
 
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +
@@ -141,5 +143,17 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
 
+
+    }
+
+    public Cursor getTenLoaiSanPham() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query("Brand", new String[]{"tenHang"}, null, null, null, null, null);
+    }
+
+    public Cursor getTenLoaiSanPhamById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query("Brand", new String[]{"tenHang"}, "idHang" + "=?",
+                new String[]{String.valueOf(id)}, null, null, null);
     }
 }
