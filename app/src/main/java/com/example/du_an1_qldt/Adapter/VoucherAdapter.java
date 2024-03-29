@@ -1,23 +1,28 @@
 package com.example.du_an1_qldt.Adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.Voucher_DTO;
@@ -29,7 +34,7 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
 
     Context context;
     ArrayList<Voucher_DTO> listVoucher;
-
+    VoucherAdapter voucherAdapter;
     public VoucherAdapter(Context context, ArrayList<Voucher_DTO> listVoucher) {
         this.context = context;
         this.listVoucher = listVoucher;
@@ -75,11 +80,92 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId()==R.id.select_sua){
-                            Toast.makeText(context, "Sửa", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+                            View v1=inflater.inflate(R.layout.dialog_sua_voucher,null);
+                            EditText tenVoucher = v1.findViewById(R.id.edt_tenVoucher_sua);
+                            EditText soLuong = v1.findViewById(R.id.edt_soLuongVoucher_sua);
+                            EditText menhgia = v1.findViewById(R.id.edt_menhgia_sua);
+                            Button sua = v1.findViewById(R.id.btn_suaVoucher_sua);
+
+                            tenVoucher.setText(voucherDto.getTenVoucher());
+                            soLuong.setText(voucherDto.getSoLuong()+"");
+                            menhgia.setText(voucherDto.getGiaTriGiam()+"");
+
+
+                            listVoucher =voucherDAO.getListVoucher();
+                            voucherAdapter= new VoucherAdapter(context,listVoucher);
+
+
+
+                            builder.setTitle("                              Sửa Voucher");
+                            builder.setView(v1);
+                            Dialog dialog = builder.create();
+
+                            sua.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    try {
+
+                                        int menhgia1 = Integer.parseInt(menhgia.getText().toString());
+                                        int soluong1 = Integer.parseInt(soLuong.getText().toString());
+
+                                        if (TextUtils.isEmpty(tenVoucher.getText().toString())||TextUtils.isEmpty(soLuong.getText().toString())||TextUtils.isEmpty(menhgia.getText().toString())){
+                                            Toast.makeText(context, "Vui lòng Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                                        }else if (menhgia1<=0) {
+                                            Toast.makeText(context, "Gía không phù hợp", Toast.LENGTH_SHORT).show();
+
+                                        }else if (soluong1<0) {
+                                            Toast.makeText(context, "Số lượng không phù hợp", Toast.LENGTH_SHORT).show();
+
+                                        }else {
+                                            String tenVoucher2 = tenVoucher.getText().toString();
+                                            int soLuong2= Integer.parseInt(soLuong.getText().toString());
+                                            int menhgia2= Integer.parseInt(menhgia.getText().toString());
+
+                                            voucherDto.setTenVoucher(tenVoucher2);
+                                            voucherDto.setSoLuong(soLuong2);
+                                            voucherDto.setGiaTriGiam(menhgia2);
+                                            if (soluong1>0){
+                                                voucherDto.setTrangThai(1);
+                                            }else {
+                                                voucherDto.setTrangThai(0);
+                                            }
+                                            int check = voucherDAO.sua_Voucher(voucherDto);
+                                            if (check>0){
+                                                listVoucher.clear();
+                                                listVoucher.addAll(voucherDAO.getListVoucher());
+                                                notifyDataSetChanged();
+                                                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }else {
+                                                Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                            }
+
+                                        }
+                                    }catch (Exception e){
+                                        Toast.makeText(context, "Vui lòng Nhập đúng dịnh dạng     ", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+                            });
+                            dialog.show();
                             return true;
                         } else if (item.getItemId()==R.id.select_xoa) {
-                            Toast.makeText(context, "Xóa", Toast.LENGTH_SHORT).show();
+                            VoucherDAO voucherDAO1 = new VoucherDAO(context);
+                            int check = voucherDAO1.deleteRow_Voucher(voucherDto);
+                            if (check>0){
+                                listVoucher.remove(voucherDto);
+
+                                notifyDataSetChanged();
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            }
                             return true;
+
                         }else {
                             return false;
                         }

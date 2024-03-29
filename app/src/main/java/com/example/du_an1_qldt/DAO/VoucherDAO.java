@@ -1,11 +1,13 @@
 package com.example.du_an1_qldt.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.Voucher_DTO;
+import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,40 @@ public class VoucherDAO {
 
 
         return listVoucher;
+    }
+//    String db_voucher="create table Voucher(idVoucher integer primary key autoincrement,"+
+//            "giaTriGiam integer,"+"tenVoucher text,"+"soLuong integer,"+"trangThai integer)";
+//        sqLiteDatabase.execSQL(db_voucher);
+    public int add_Voucher(Voucher_DTO voucherDto){
+        ContentValues values = new ContentValues();
+        values.put("tenVoucher",voucherDto.getTenVoucher());
+        values.put("giaTriGiam",voucherDto.getGiaTriGiam());
+        values.put("soLuong",voucherDto.getSoLuong());
+        values.put("trangThai",voucherDto.getTrangThai());
+
+
+        return (int) db.insert("Voucher",null,values);
+
+
+    }
+    public int sua_Voucher(Voucher_DTO voucherDto){
+        ContentValues values = new ContentValues();
+        values.put("tenVoucher",voucherDto.getTenVoucher());
+        values.put("giaTriGiam",voucherDto.getGiaTriGiam());
+        values.put("soLuong",voucherDto.getSoLuong());
+        values.put("trangThai",voucherDto.getTrangThai());
+
+        String[] dk = new String[]{String.valueOf(voucherDto.getId())};
+
+        return db.update("Voucher",values,"idVoucher=?",dk);
+
+
+    }
+
+    public int deleteRow_Voucher(Voucher_DTO voucherDto){
+        String[] dk = new String[]{String.valueOf(voucherDto.getId())};
+        return db.delete("Voucher","idVoucher=?",dk);
+
     }
 
 }
