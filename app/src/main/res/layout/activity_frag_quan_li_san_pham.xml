@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="65dp"
     tools:context=".Frag_QuanLiSanPham">
+
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -18,7 +24,7 @@
             android:id="@+id/edt_search"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.3"
 
 
             android:background="@drawable/khugn_search"
@@ -27,25 +33,37 @@
             android:hint="Tìm kiếm"
 
              />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:background="@drawable/filter"
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.7"
+            android:paddingLeft="25dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/btn_add_sp"
+            android:background="@drawable/khugn_search"
+            android:drawableStart="@drawable/baseline_add_box_24"
 
             />
 
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linear_qlsp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:id="@+id/rc_QLSP"
-        />
+        android:id="@+id/swipeRefreshLayout"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:id="@+id/rc_QLSP"
+            />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </RelativeLayout>

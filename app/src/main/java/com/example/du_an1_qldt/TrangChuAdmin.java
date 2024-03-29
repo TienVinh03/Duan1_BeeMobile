@@ -2,6 +2,7 @@ package com.example.du_an1_qldt;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,12 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +62,6 @@ public class TrangChuAdmin extends Fragment {
         viewPager.setAdapter(slideAdapter);
 
         handler.postDelayed(runnable, SLIDE_DELAY);
-
 
 
 

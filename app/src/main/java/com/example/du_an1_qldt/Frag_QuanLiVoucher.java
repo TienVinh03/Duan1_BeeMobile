@@ -41,7 +41,7 @@ public class Frag_QuanLiVoucher extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rc_QLVoucher = view.findViewById(R.id.rc_QLSP);
+        rc_QLVoucher = view.findViewById(R.id.rc_QL_Voucher);
         voucherDAO = new VoucherDAO(getActivity());
         listVoucher = voucherDAO.getListVoucher();
         voucherAdapter = new VoucherAdapter(getActivity(),listVoucher);

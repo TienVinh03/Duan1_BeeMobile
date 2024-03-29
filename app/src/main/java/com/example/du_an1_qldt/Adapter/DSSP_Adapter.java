@@ -2,7 +2,6 @@ package com.example.du_an1_qldt.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.R;
-import com.example.du_an1_qldt.TaoDonHang;
 import com.example.du_an1_qldt.TrangChuNguoiDung;
 import com.example.du_an1_qldt.model.phone;
 
@@ -52,13 +50,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
         holder.tv_tenSP1.setText( String.valueOf(dt.getName()) );
         holder.tv_giaSPham.setText( String.valueOf( dt.getGia()));
         holder.tv_TrangthaiSP1.setText( String.valueOf(dt.getStatus() ));
-        holder.btnMuaNgay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, TaoDonHang.class);
-                context.startActivity(intent);
-            }
-        });
 
 
         phone phoneDTO = listSP.get(position);
@@ -70,7 +61,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
         }
 
     }
-
 
 
 

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="10dp">
+    <ImageView
+        android:id="@+id/anh5"
+        android:layout_width="98dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/k40_gaming"
+        android:layout_alignParentTop="true"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_below="@+id/anh5">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tên:"
+                    android:layout_weight="0.5"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập tên SP"
+                    android:layout_weight="1.5"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/edt_tenSP_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Tên Hãng:"
+                    android:textSize="20sp"
+                    />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/spin_tenHangDT_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Rom:"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:hint="Nhập rom"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/edt_romDT_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Giá:"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:hint="Nhập giá"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/edt_giaDT_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Màu sắc:"
+                    android:textSize="20sp"
+                    />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/spin_mauSac_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Số lượng:"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+
+                    android:hint="Nhập số lượng"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="8dp"
+                    android:background="@drawable/khung2"
+                    android:id="@+id/edt_soLuongDT_add"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Trạng thái:"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+
+                    android:clickable="false"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="15dp"
+
+                    android:background="@drawable/khung2"
+                    android:id="@+id/tv_trangThai_add"
+                    />
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/khung"
+                android:paddingLeft="33dp"
+                android:id="@+id/btn_addsp_add"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/baseline_check_24"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

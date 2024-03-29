@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/cardViewSanPham"
         android:layout_width="350dp"
-        android:layout_height="170dp"
+        android:layout_height="180dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
@@ -19,17 +19,46 @@
         android:background="@drawable/khung2"
         android:orientation="vertical">
 
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/anh1"
-                android:layout_width="98dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/k40_gaming" />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/anh1"
+                    android:layout_width="98dp"
+                    android:layout_height="122dp"
+                    android:src="@drawable/k40_gaming" />
+
+                <TextView
+                    android:id="@+id/tv_mauSac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:text="màu sắc"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,6 +128,11 @@
                             android:text="XXX" />
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/tv_romSP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rom" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

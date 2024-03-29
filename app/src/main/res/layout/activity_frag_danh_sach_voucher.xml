@@ -46,7 +46,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:id="@+id/rc_QLSP"
+        android:id="@+id/rc_DS_Voucher"
         />
 
 </RelativeLayout>
