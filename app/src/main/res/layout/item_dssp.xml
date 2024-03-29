@@ -42,14 +42,14 @@
                     android:src="@drawable/k40_gaming" />
 
                 <TextView
-                    android:id="@+id/tv_mauSac"
+                    android:id="@+id/tv_tenSP1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
                     android:textColor="@color/black"
-                    android:text="màu sắc"/>
+                    android:text="XXX" />
 
             </LinearLayout>
 
@@ -79,16 +79,15 @@
                         android:layout_marginVertical="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tên:" />
+
 
                         <TextView
-                            android:id="@+id/tv_tenSP1"
+                            android:id="@+id/tv_mauSac"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="XXX" />
+                            android:layout_gravity="center"
+                            android:text="màu sắc"/>
+
                     </LinearLayout>
 
                     <LinearLayout
