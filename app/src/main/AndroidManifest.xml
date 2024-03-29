@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Du_an1_QLDT"
         tools:targetApi="31">
         <activity
+            android:name=".TaoDonHang"
+            android:exported="false" />
+        <activity
             android:name=".Frag_DanhSachVoucher"
             android:exported="false" />
         <activity
@@ -27,11 +30,9 @@
         <activity
             android:name=".Frag_ThongKe"
             android:exported="false" />
-
         <activity
             android:name=".Frag_LichSuDonHang"
             android:exported="false" />
-
         <activity
             android:name=".Frag_QuanLiKhachHang"
             android:exported="false" />
@@ -53,7 +54,6 @@
         <activity
             android:name=".TrangChuNguoiDung"
             android:exported="false" />
-
         <activity
             android:name=".QuenMatKhau"
             android:exported="false" />
@@ -67,9 +67,8 @@
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-        android:name=".Frag_QuanLiHangDT"
-        android:exported="false" />
-
+            android:name=".Frag_QuanLiHangDT"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

@@ -2,6 +2,7 @@ package com.example.du_an1_qldt.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.R;
+import com.example.du_an1_qldt.TaoDonHang;
 import com.example.du_an1_qldt.TrangChuNguoiDung;
 import com.example.du_an1_qldt.model.phone;
 
@@ -50,10 +52,13 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
         holder.tv_tenSP1.setText( String.valueOf(dt.getName()) );
         holder.tv_giaSPham.setText( String.valueOf( dt.getGia()));
         holder.tv_TrangthaiSP1.setText( String.valueOf(dt.getStatus() ));
-//        holder.tv_mauSac.setText( "Màu: " + String.valueOf( dt.getColor()));
-        holder.tv_romSP.setText("Rom:" + String.valueOf( dt.getRom()));
-
-
+holder.btnMuaNgay.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(context, TaoDonHang.class);
+        context.startActivity(intent);
+    }
+});
 
         phone phoneDTO = listSP.get(position);
 
@@ -61,17 +66,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
             holder.tv_TrangthaiSP1.setText("Còn hàng");
         }else {
             holder.tv_TrangthaiSP1.setText("Hết hàng");
-        }
-
-
-        if (phoneDTO.getColor().equals("#FFFFFF")){
-            holder.tv_mauSac.setText("Màu Trắng");
-        } else if (phoneDTO.getColor().equals("#FFFF00")) {
-            holder.tv_mauSac.setText("Màu Vàng");
-        } else if (phoneDTO.getColor().equals("#000000")) {
-            holder.tv_mauSac.setText("Màu Đen");
-        }else if (phoneDTO.getColor().equals("#FF0000")) {
-            holder.tv_mauSac.setText("Màu Đỏ");
         }
 
     }
@@ -84,7 +78,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
     }
 
     public class ViewHolder_DSSP extends RecyclerView.ViewHolder{
-        TextView tv_tenSP1,tv_giaSPham,tv_TrangthaiSP1,tv_mauSac,tv_romSP;
+        TextView tv_tenSP1,tv_giaSPham,tv_TrangthaiSP1;
         ImageView anh1, btnThemvaoGiohang,btnMuaNgay;
 
         public ViewHolder_DSSP(@NonNull View itemView) {
@@ -96,8 +90,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter< DSSP_Adapter.ViewHolder_
             anh1 = itemView.findViewById(R.id.anh1);
             btnThemvaoGiohang = itemView.findViewById(R.id.btnThemvaoGiohang);
             btnMuaNgay = itemView.findViewById(R.id.btnMuaNgay);
-            tv_mauSac = itemView.findViewById(R.id.tv_mauSac);
-            tv_romSP = itemView.findViewById(R.id.tv_romSP);
 
         }
     }
