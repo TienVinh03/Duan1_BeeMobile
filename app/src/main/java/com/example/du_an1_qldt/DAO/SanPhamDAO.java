@@ -115,4 +115,27 @@ public class SanPhamDAO {
         return db.delete("Phone","maDt=?",dk);
 
     }
+    public String getProductNameById(int productId) {
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+
+        String productName = null;
+        Cursor cursor = null;
+
+        try {
+            // Truy vấn cơ sở dữ liệu để lấy tên sản phẩm dựa trên id
+            cursor = db.query("Phone", new String[]{"tenDt"}, "maDt=?", new String[]{String.valueOf(productId)}, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                productName = cursor.getString(0);
+            }
+        } finally {
+            // Đảm bảo đóng con trỏ và cơ sở dữ liệu
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return productName;
+    }
+
 }
