@@ -38,12 +38,31 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         navigationView = findViewById(R.id.nav);
         bottomNavigationView = findViewById(R.id.bottom_admin);
         fragmentContainerView = findViewById(R.id.fragMentContainer);
+        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
+        String loaitaikhoan = sharedPreferences.getString("loaitaikhoan", "");
+        if (!loaitaikhoan.equals("admin")){
+            Menu menu = bottomNavigationView.getMenu();
+            menu.findItem(R.id.work).setVisible(false);
 
+        }else {
+            Menu menu = bottomNavigationView.getMenu();
+            menu.findItem(R.id.donMua).setVisible(false);
+        }
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 drawer.closeDrawer(GravityCompat.START);
+                if (!loaitaikhoan.equals("admin")){
+                    Menu menu = bottomNavigationView.getMenu();
+                    menu.findItem(R.id.work).setVisible(false);
+
+                }else {
+                    Menu menu = bottomNavigationView.getMenu();
+                    menu.findItem(R.id.donMua).setVisible(false);
+                }
+
+
                 return false;
             }
         });
@@ -59,14 +78,14 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", MODE_PRIVATE);
-        String loaitaikhoan = sharedPreferences.getString("loaitaikhoan", "");
+
 
         if (loaitaikhoan.equals("admin")){
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QLDM).setVisible(false);
             menu.findItem(R.id.manChinhUser).setVisible(false);
             menu.findItem(R.id.GIOHANG).setVisible(false);
+            menu.findItem(R.id.dsVoucher).setVisible(false);
             menu.findItem(R.id.dsSanPham).setVisible(false);
             repLaceFragment(TrangChuAdmin.newInstance());
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).commit();
@@ -127,7 +146,12 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             setTitle("Quản lí Voucher");
             toolbar.setTitle("Quản lí Voucher");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiVoucher()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.QLHD) {
+        }else if (item.getItemId()==R.id.dsVoucher) {
+            setTitle("Danh sách voucher Voucher");
+            toolbar.setTitle("Danh sách Voucher");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_DanhSachVoucher()).addToBackStack(null).commit();
+        }
+        else if (item.getItemId()==R.id.QLHD) {
             setTitle("Quản lí Hóa đơn");
             toolbar.setTitle("Quản lí Hóa đơn");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiHoaDon()).addToBackStack(null).commit();

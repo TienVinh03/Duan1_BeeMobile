@@ -8,6 +8,10 @@
         android:title="Work"
         android:icon="@drawable/work"
         />
+    <item android:id="@+id/donMua"
+        android:title="Đơn mua"
+        android:icon="@drawable/cart"
+        />
     <item android:id="@+id/info"
         android:title="Info"
         android:icon="@drawable/person"

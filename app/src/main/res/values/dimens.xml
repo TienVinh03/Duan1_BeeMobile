@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="shadow_elevation" />
-
+    <dimen name="dialog_corner_radius">8dp</dimen> <!-- Bán kính của viền bo -->
+    <dimen name="dialog_stroke_width">0dp</dimen> <!-- Độ rộng của viền bo -->
 </resources>

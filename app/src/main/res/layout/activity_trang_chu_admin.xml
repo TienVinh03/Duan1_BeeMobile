@@ -226,9 +226,10 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/incon_themSP"
                 android:background="@drawable/khung_tron"
                 android:drawableLeft="@drawable/icon_them"
                 android:paddingLeft="12dp"
