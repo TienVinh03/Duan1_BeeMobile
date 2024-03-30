@@ -1,5 +1,6 @@
 package com.example.du_an1_qldt.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -49,7 +50,7 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VoucherAdapter.VoucherViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VoucherAdapter.VoucherViewHolder holder, @SuppressLint("RecyclerView") int position) {
         VoucherDAO voucherDAO = new VoucherDAO(context);
         listVoucher = voucherDAO.getListVoucher();
         Voucher_DTO voucherDto = listVoucher.get(position);
@@ -160,6 +161,7 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
                                 listVoucher.remove(voucherDto);
 
                                 notifyDataSetChanged();
+
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             }else {
                                 Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();

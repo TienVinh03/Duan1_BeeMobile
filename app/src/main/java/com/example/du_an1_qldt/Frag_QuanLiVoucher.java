@@ -115,6 +115,7 @@ public class Frag_QuanLiVoucher extends Fragment {
                                     listVoucher.clear();
                                     listVoucher.addAll(voucherDAO.getListVoucher());
                                     voucherAdapter.notifyDataSetChanged();
+
                                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }else {
