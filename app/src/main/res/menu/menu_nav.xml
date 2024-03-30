@@ -4,22 +4,25 @@
     tools:showIn = "navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/manChinhUser"
+            android:icon="@drawable/gott"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />
         <item
             android:id="@+id/dsSanPham"
+            android:icon="@drawable/godssp"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Danh sách sản phẩm " />
         <item
             android:id="@+id/dsVoucher"
+            android:icon="@drawable/govoucher"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Danh sách Voucher " />
         <item
             android:id="@+id/manChinhAdmin"
+            android:icon="@drawable/gott"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />
@@ -27,32 +30,39 @@
 
         <item
             android:id="@+id/QLHANG"
+            android:icon="@drawable/gohdt"
 
             android:title="Quản lý hãng " />
         <item
             android:id="@+id/QL_Voucher"
+            android:icon="@drawable/govouc"
 
             android:title="Quản lý Voucher " />
 
         <item
             android:id="@+id/QLSP"
+            android:icon="@drawable/goxx"
 
             android:title="Quản lý sản phẩm" />
         <item
             android:id="@+id/QLDM"
+            android:icon="@drawable/gott"
 
             android:title="Đơn Mua" />
         <item
             android:id="@+id/QLHD"
+            android:icon="@drawable/golisthd"
 
             android:title="Quản Lý Hóa Đơn" />
 
         <item
             android:id="@+id/QLKH"
+            android:icon="@drawable/gouser"
 
             android:title="Quản lý khách hàng" />
 
         <item
+            android:icon="@drawable/gogiohang"
 
             android:id="@+id/GIOHANG"
             android:title="Giỏ Hàng" />
@@ -61,11 +71,13 @@
             <menu>
                 <item
                     android:id="@+id/ThongKeDoanhThu"
+                    android:icon="@drawable/godoanhthu"
 
                     android:title="Thống kê theo doanh thu" />
 
                 <item
                     android:id="@+id/ThongKeTop"
+                    android:icon="@drawable/gotop"
 
                     android:title="Thống kê theo TOP 10" />
 
@@ -76,15 +88,18 @@
             <menu>
                 <item
                     android:id="@+id/thongTin"
+                    android:icon="@drawable/gottin"
 
                     android:title="Thông tin" />
                 <item
                     android:id="@+id/itDoiMatKhau"
+                    android:icon="@drawable/gopass"
 
                     android:title="Đổi mật khẩu" />
 
                 <item
                     android:id="@+id/itDangXuat"
+                    android:icon="@drawable/godx"
 
                     android:title="Đăng Xuất" />
             </menu>

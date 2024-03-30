@@ -20,21 +20,18 @@ public class HangDienThoaiDAO {
         this.context = context;
         dbHelper dhl = new dbHelper(context);
         db = dhl.getWritableDatabase();
-        this.db = db;
     }
     public long insert(HangDienThoai hangDienThoai) {
         ContentValues values = new ContentValues();
         values.put("tenHang", hangDienThoai.getTenHang());
         values.put("heDieuHanh", hangDienThoai.getHeDieuHanh());
-
-        return db.insert("", null, values);
+        return db.insert("Brand", null, values);
     }
 
     public int update(HangDienThoai hangDienThoai) {
         ContentValues values = new ContentValues();
         values.put("tenHang", hangDienThoai.getTenHang());
         values.put("heDieuHanh", hangDienThoai.getHeDieuHanh());
-
         return db.update("Brand", values, "idHang=?", new String[]{String.valueOf(hangDienThoai.getIdHang())});
     }
 
