@@ -72,6 +72,7 @@ public class Frag_QuanLiSanPham extends Fragment {
         Button btn_add_sp = view.findViewById(R.id.btn_add_sp);
         myDbHelper = new dbHelper(getActivity());
 
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

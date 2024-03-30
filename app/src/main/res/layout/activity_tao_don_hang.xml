@@ -13,51 +13,62 @@
     android:layout_height="50dp"
     android:title="Đơn hàng"
     android:id="@+id/toolbar"/>
-    <androidx.cardview.widget.CardView
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:endIconMode="clear_text"
+    android:background="@drawable/custom_edt"
+    app:startIconDrawable="@drawable/person"
+    android:id="@+id/custom_tf_username"
+ >
+    <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/khung"
-        app:cardBackgroundColor="#E4E4E4"
-        android:id="@+id/cardViewInfor">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/fullName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nguyễn Xuân Hải"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="-"/>
-            <TextView
-                android:id="@+id/numberPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="0972512987"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="35sp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20sp"
-                android:text="Hẻm 4/71/18 Đường Vân Canh, Hậu Ái, Vân Canh, Hoài Đức, Hà Nội"/>
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        android:hint="Họ tên"
+        android:id="@+id/username"
+        android:paddingLeft="50dp"
+        />
 
-    </androidx.cardview.widget.CardView>
+
+</com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        android:background="@drawable/custom_edt"
+        android:id="@+id/custom_tf_numberphone"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/baseline_add_call_24"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại:"
+            android:id="@+id/numberphone"
+            android:paddingLeft="50dp"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        android:background="@drawable/custom_edt"
+        android:layout_marginTop="10dp"
+        android:id="@+id/custom_tf_address"
+        app:startIconDrawable="@drawable/baseline_add_location_alt_24"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Địa chỉ"
+            android:id="@+id/address"
+            android:paddingLeft="50dp"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="130sp"
@@ -124,22 +135,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@color/hongnhat"
+                        android:background="#D6D6D6"
                         android:padding="10dp"
                         android:src="@drawable/baseline_add_24" />
 
                     <TextView
+                        android:id="@+id/tvQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
                         android:layout_marginHorizontal="5dp"
+                        android:text="1"
                         android:textSize="25sp" />
 
                     <ImageView
                         android:id="@+id/btnApart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/hongnhat"
+                        android:background="#D6D6D6"
                         android:padding="10dp"
                         android:layout_marginHorizontal="5dp"
                         android:src="@drawable/baseline_add_24" />
@@ -196,7 +208,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/khung"
+        android:background="@drawable/khung_button"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
