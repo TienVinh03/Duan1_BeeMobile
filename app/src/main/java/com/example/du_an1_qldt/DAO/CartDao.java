@@ -30,7 +30,7 @@ public class CartDao {
             do {
                 Cart cart = new Cart();
                 cart.setQuantity(c.getInt(2));
-                cart.setName(c.getString(1));
+                cart.setIdPhone(c.getInt(1));
                 cart.setColor(c.getString(4));
                 cart.setRom(c.getInt(5));
                 cart.setPrice(c.getInt(3));

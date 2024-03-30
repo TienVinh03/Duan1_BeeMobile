@@ -75,7 +75,6 @@ public class TaoDonHang extends AppCompatActivity {
                 pr = quantityPr * Integer.parseInt(pricePr);
                 String yourFormattedString = formatter.format(pr);
                 price.setText(yourFormattedString + "VND");
-                price.setText(yourFormattedString + "VND");
                 sl.setText(String.valueOf(quantityPr));
                 quantity1.setText(yourFormattedString+" đ");
             }

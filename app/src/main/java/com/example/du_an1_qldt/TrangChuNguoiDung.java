@@ -5,16 +5,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.du_an1_qldt.Adapter.DSSP_Adapter;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
@@ -31,6 +36,7 @@ public class TrangChuNguoiDung extends Fragment {
     DSSP_Adapter dsAdapter;
     SanPhamDAO spDao;
     ArrayList<phone> list;
+    ImageView cart;
 
 
     int[] images = {R.drawable.anh_slide1, R.drawable.anh_slide2, R.drawable.anh_slide3, R.drawable.anh_slide4, R.drawable.anh_slide5};
@@ -59,6 +65,30 @@ public class TrangChuNguoiDung extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         CardView cardView = view.findViewById(R.id.cardView_nguoidung);
+        cart= view.findViewById(R.id.btn_cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment cartFragment = new Frag_GioHang();
+
+                // Lấy ra FragmentManager từ Activity
+                FragmentManager fragmentManager= getFragmentManager();
+
+
+                // Bắt đầu một giao dịch FragmentTransaction
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                // Thay thế Fragment hiện tại bằng Fragment giỏ hàng
+                transaction.replace(R.id.fragMentContainer, cartFragment);
+
+                // Đảm bảo Fragment trước đó không được thêm vào BackStack
+                transaction.addToBackStack(null);
+
+                // Hoàn thành giao dịch và thực hiện chuyển đổi Fragment
+                transaction.commit();
+            }
+        });
+
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setRadius(20);
 

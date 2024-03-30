@@ -12,10 +12,12 @@
     android:id="@+id/searchCart"
     android:hint="Tìm kiếm sản phẩm"
     android:gravity="center_horizontal"
-    android:background="@drawable/background_donhang"/>
+    android:background="@drawable/background_donhang"
+    android:layout_marginHorizontal="5dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:id="@+id/rcv_cart"/>
 
 </LinearLayout>
