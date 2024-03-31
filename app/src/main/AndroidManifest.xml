@@ -57,9 +57,9 @@
         <activity
             android:name=".TrangChuNguoiDung"
             android:exported="false" />
-        <activity
-            android:name=".QuenMatKhau"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".QuenMatKhau"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".DangKy"
             android:exported="false" />

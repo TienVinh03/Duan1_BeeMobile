@@ -103,6 +103,7 @@ public class HangDienThoaiAdapter extends RecyclerView.Adapter<HangDienThoaiAdap
                 Dialog dialog = builder.create();
 
                 edtDialogUpdateLoaiSanPham = view.findViewById(R.id.edtDialogUpdateLoaiSanPham);
+                edtDialogUpdateLoaiSanPham1 = view.findViewById(R.id.edtDialogUpdateLoaiSanPham1);
                 btnDialogHuySuaLoaiSanPham = view.findViewById(R.id.btnDialogHuySuaLoaiSanPham);
                 btnDialogSuaLoaiSanPham = view.findViewById(R.id.btnDialogSuaLoaiSanPham);
                 edtDialogUpdateLoaiSanPham.setText(list.get(position).getTenHang());

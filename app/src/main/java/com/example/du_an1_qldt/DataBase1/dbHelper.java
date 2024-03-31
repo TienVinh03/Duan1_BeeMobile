@@ -56,26 +56,6 @@ public class dbHelper extends SQLiteOpenHelper {
         String insert_voucher = "insert into Voucher values (1,20000,'Sale 30/4',10,1)";
         sqLiteDatabase.execSQL(insert_voucher);
 
-//        String db_admin = "CREATE TABLE Admin (" +
-//                "id integer PRIMARY KEY, " +
-//                "username text not null,"+
-//                "hoTen TEXT NOT NULL, " +
-//                "matKhau TEXT NOT NULL," +
-//                "Sdt TEXT NOT NULL," +
-//                "diaChi TEXT NOT NULL," +
-//               "email text not null)";
-//        sqLiteDatabase.execSQL(db_admin);
-//
-//
-//        String db_user = "CREATE TABLE User (" +
-//                "id integer PRIMARY KEY AUTOINCREMENT, " +
-//                "username text not null,"+
-//                "hoTen TEXT NOT NULL, " +
-//                "matKhau TEXT NOT NULL," +
-//                "Sdt TEXT NOT NULL," +
-//                "diaChi TEXT NOT NULL," +
-//                "email text not null)";
-//        sqLiteDatabase.execSQL(db_user);
 
 
 

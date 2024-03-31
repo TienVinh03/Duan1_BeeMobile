@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:text="SỬA LOẠI SẢN PHẨM"
+        android:text="SỬA Hãng Điện Thoại"
         android:background="@drawable/bkgxanh"
         android:layout_gravity="top"
         android:gravity="center"
