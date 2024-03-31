@@ -48,6 +48,9 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             Menu menu = bottomNavigationView.getMenu();
             menu.findItem(R.id.donMua).setVisible(false);
         }
+
+        navigationView.setItemIconTintList(null);
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -83,7 +86,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         if (loaitaikhoan.equals("admin")){
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.QLDM).setVisible(false);
-//            menu.findItem(R.id.manChinhUser).setVisible(false);
+            menu.findItem(R.id.manChinhUser).setVisible(false);
             menu.findItem(R.id.GIOHANG).setVisible(false);
             menu.findItem(R.id.dsVoucher).setVisible(false);
             menu.findItem(R.id.dsSanPham).setVisible(false);
@@ -133,11 +136,11 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             toolbar.setTitle("Trang chủ(admin)");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
         }
-//        else if (item.getItemId()==R.id.manChinhUser) {
-//            setTitle("Màn hình chính");
-//            toolbar.setTitle("Trang chủ(user)");
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).addToBackStack(null).commit();
-//        }
+        else if (item.getItemId()==R.id.manChinhUser) {
+            setTitle("Màn hình chính");
+            toolbar.setTitle("Trang chủ(user)");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).addToBackStack(null).commit();
+        }
         else if (item.getItemId()==R.id.QLSP) {
             setTitle("Quản lí sản phẩm");
             toolbar.setTitle("Quản lí sản phẩm");
