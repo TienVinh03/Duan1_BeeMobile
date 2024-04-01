@@ -4,7 +4,8 @@
     tools:showIn = "navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:icon="@drawable/gott"
+            android:icon="@drawable/beehive"
+            android:id="@+id/manChinhUser"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />
@@ -12,19 +13,16 @@
             android:id="@+id/dsSanPham"
             android:icon="@drawable/godssp"
 
-            android:textColor="@android:color/primary_text_light"
             android:title="Danh sách sản phẩm " />
         <item
             android:id="@+id/dsVoucher"
             android:icon="@drawable/govoucher"
 
-            android:textColor="@android:color/primary_text_light"
             android:title="Danh sách Voucher " />
         <item
             android:id="@+id/manChinhAdmin"
             android:icon="@drawable/gott"
 
-            android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />
 
 
@@ -99,7 +97,7 @@
 
                 <item
                     android:id="@+id/itDangXuat"
-                    android:icon="@drawable/godx"
+                    android:icon="@drawable/logout"
 
                     android:title="Đăng Xuất" />
             </menu>
