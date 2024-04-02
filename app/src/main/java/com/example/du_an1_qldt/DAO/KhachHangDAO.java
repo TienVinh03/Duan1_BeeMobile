@@ -107,7 +107,17 @@ public class KhachHangDAO {
         }
     }
 
-
+    public int xoaThongTinThanhVien(int manguoidung) {
+        SQLiteDatabase sqLiteDatabase = myDbHelper.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM Oder WHERE manguoidung = ?", new String[]{String.valueOf(manguoidung)});
+        if (cursor.getCount() != 0) {
+            return -1;
+        }
+        long check = sqLiteDatabase.delete("nguoidung", "manguoidung = ?", new String[]{String.valueOf(manguoidung)});
+        if (check == -1)
+            return 0;
+        return 1;
+    }
     public KhachHang_DTO getUserName2(String username) {
         String sqlQuery = "SELECT * FROM nguoiDung WHERE username=?";
         Cursor cursor = sql.rawQuery(sqlQuery, new String[]{username});

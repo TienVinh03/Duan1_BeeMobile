@@ -4,19 +4,19 @@
     tools:showIn = "navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:icon="@drawable/beehive"
+            android:icon="@drawable/gott"
             android:id="@+id/manChinhUser"
 
             android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />
         <item
             android:id="@+id/dsSanPham"
-            android:icon="@drawable/godssp"
+            android:icon="@drawable/tttlistsp"
 
             android:title="Danh sách sản phẩm " />
         <item
             android:id="@+id/dsVoucher"
-            android:icon="@drawable/govoucher"
+            android:icon="@drawable/tttvoucher"
 
             android:title="Danh sách Voucher " />
         <item
@@ -44,7 +44,7 @@
             android:title="Quản lý sản phẩm" />
         <item
             android:id="@+id/QLDM"
-            android:icon="@drawable/gott"
+            android:icon="@drawable/gogiohang"
 
             android:title="Đơn Mua" />
         <item
@@ -57,7 +57,7 @@
             android:id="@+id/QLKH"
             android:icon="@drawable/gouser"
 
-            android:title="Quản lý khách hàng" />
+            android:title="Danh Sách Tài Khoản" />
 
         <item
             android:icon="@drawable/gogiohang"

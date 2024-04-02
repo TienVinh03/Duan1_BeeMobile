@@ -3,6 +3,7 @@ package com.example.du_an1_qldt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,5 +45,31 @@ public class Frag_DanhSachVoucher extends Fragment {
         rc_QLVoucher.setAdapter(DSvoucherAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rc_QLVoucher.setLayoutManager(linearLayoutManager);
+        SearchView srview = view.findViewById(R.id.searchvoucherr);
+        srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<Voucher_DTO> newlist = new ArrayList<>();
+                for (Voucher_DTO s : listVoucher){
+                    if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
+                        newlist.add(s);
+                    }
+                }
+                loadriengchotimkiem(newlist);
+                return false;
+            }
+        });
+    }
+
+
+    private void loadriengchotimkiem (ArrayList<Voucher_DTO> list){
+        //data
+        DSvoucherAdapter = new DSVoucher_Adapter(getContext(), list);
+        rc_QLVoucher.setAdapter(DSvoucherAdapter);
     }
 }

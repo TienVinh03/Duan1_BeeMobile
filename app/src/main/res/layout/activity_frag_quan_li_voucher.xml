@@ -14,17 +14,28 @@
         android:layout_marginVertical="10dp"
         android:weightSum="3"
         >
-        <EditText
-            android:id="@+id/edt_search"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="2.3"
-            android:background="@drawable/khugn_search"
-            android:drawableEnd="@drawable/baseline_search_24"
-            android:paddingHorizontal="5dp"
-            android:hint="Tìm kiếm"
 
-            />
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="100dp"
+            android:iconifiedByDefault="false"
+            android:background="@drawable/khugn_search"
+            android:layout_weight="2.3"
+            android:paddingHorizontal="5dp"
+
+            android:queryHint="Tim kiem "
+            android:layout_height="50dp"
+            android:id="@+id/searchvoucher"/>
+<!--        <EditText-->
+<!--            android:id="@+id/edt_search"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="2.3"-->
+<!--            android:background="@drawable/khugn_search"-->
+<!--            android:drawableEnd="@drawable/baseline_search_24"-->
+<!--            android:paddingHorizontal="5dp"-->
+<!--            android:hint="Tìm kiếm"-->
+
+<!--            />-->
         <Button
             android:layout_width="0dp"
             android:layout_height="50dp"

@@ -75,8 +75,6 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
 
 
 
-
-
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(FragMentContainer.this, drawer, toolbar, 0, 0);
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
@@ -160,7 +158,7 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             toolbar.setTitle("Quản lí Hóa đơn");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiHoaDon()).addToBackStack(null).commit();
         }else if (item.getItemId()==R.id.QLKH) {
-            setTitle("Quản lí khách hàng");
+            setTitle("Quản lí tài khoản");
             toolbar.setTitle("Quản lí khách hàng");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiKhachHang()).addToBackStack(null).commit();
         }else if (item.getItemId()==R.id.ThongKeDoanhThu) {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.du_an1_qldt.Adapter.SanPhamAdapter;
@@ -68,7 +68,25 @@ public class Frag_QuanLiVoucher extends Fragment {
                 EditText menhgia = v1.findViewById(R.id.edt_menhgia_add);
                 Button sua = v1.findViewById(R.id.btn_addVoucher_add);
                 Voucher_DTO voucherDto = new Voucher_DTO();
+                SearchView srview = view.findViewById(R.id.searchvoucher);
+                srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
 
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        ArrayList<Voucher_DTO> newlist = new ArrayList<>();
+                        for (Voucher_DTO s : listVoucher){
+                            if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
+                                newlist.add(s);
+                            }
+                        }
+                        loadriengchotimkiem(newlist);
+                        return false;
+                    }
+                });
 
 
 
@@ -135,5 +153,10 @@ public class Frag_QuanLiVoucher extends Fragment {
             }
         });
 
+    }
+    private void loadriengchotimkiem (ArrayList<Voucher_DTO> list){
+        //data
+        voucherAdapter = new VoucherAdapter(getContext(), list);
+        rc_QLVoucher.setAdapter(voucherAdapter);
     }
 }
