@@ -11,7 +11,7 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String DB_name="BeePhones3333333";
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name,null, 20);
+        super(context, DB_name,null, 21);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "giaTriGiam integer,"+"tenVoucher text,"+"soLuong integer,"+"trangThai integer)";
         sqLiteDatabase.execSQL(db_voucher);
 
-        String insert_voucher = "insert into Voucher values (1,20000,'Sale 30/4',10,1)";
+        String insert_voucher = "insert into Voucher values (1,20,'Sale 30/4',10,1)";
         sqLiteDatabase.execSQL(insert_voucher);
 
 
@@ -70,7 +70,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "diachi TEXT," +
                 "loaitaikhoan TEXT)";
         sqLiteDatabase.execSQL(dbnguoidung);
-//////////
+
         sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user')");
 
 
@@ -85,7 +85,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "soLuong integer NOT NULL," +
                 "giaTien integer NOT NULL," +
                 "FOREIGN KEY (idSp) REFERENCES Phone(maDt),"+
-                "FOREIGN KEY (idDonHang) REFERENCES DonHang(id))";
+                "FOREIGN KEY (idDonHang) REFERENCES Oder(id))";
         sqLiteDatabase.execSQL(db_order_detail);
 
 
@@ -93,13 +93,9 @@ public class dbHelper extends SQLiteOpenHelper {
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "idAdmin integer NOT NULL, " +
                 "idUser integer NOT NULL, " +
-                "idSp integer NOT NULL, " +
-                "idVoucher integer NOT NULL, " +
-                "soLuong integer NOT NULL," +
-                "giaTien integer NOT NULL," +
-                "FOREIGN KEY (idSp) REFERENCES Phone(maDt),"+
+                "date text NOT NULL, " +
+                "status int NOT NULL, " +
                 "FOREIGN KEY (idAdmin) REFERENCES Admin(id),"+
-                "FOREIGN KEY (idVoucher) REFERENCES Voucher(idVoucher),"+
                 "FOREIGN KEY (idUser) REFERENCES User(id))";
         sqLiteDatabase.execSQL(db_order);
 

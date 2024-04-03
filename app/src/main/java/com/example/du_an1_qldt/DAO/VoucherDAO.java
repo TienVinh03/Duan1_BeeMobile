@@ -81,5 +81,24 @@ public class VoucherDAO {
         return db.delete("Voucher","idVoucher=?",dk);
 
     }
-
+    public ArrayList<Voucher_DTO> selectAll() {
+        String sql = "SELECT * FROM Voucher";
+        return getAll(sql);
+    }
+    private ArrayList<Voucher_DTO> getAll(String sql, String... selectionArgs){
+        SQLiteDatabase sqLiteDatabase = myDbHelper.getWritableDatabase();
+        ArrayList<Voucher_DTO> list = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, selectionArgs);
+        if (cursor.moveToFirst()) {
+            do {
+                int discount = Integer.parseInt(String.valueOf(cursor.getInt(1)));
+                String nameVoucher = cursor.getString(2);
+                int id =cursor.getInt(0);
+                int sl =cursor.getInt(3);
+                int tt =cursor.getInt(4);
+                list.add(new Voucher_DTO(id,discount, nameVoucher,sl,tt));
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
 }
