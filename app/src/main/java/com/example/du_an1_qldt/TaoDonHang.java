@@ -1,11 +1,16 @@
 package com.example.du_an1_qldt;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
@@ -14,15 +19,31 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
+import com.example.du_an1_qldt.DAO.VoucherDAO;
+import com.example.du_an1_qldt.model.Voucher_DTO;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class TaoDonHang extends AppCompatActivity {
+    VoucherDAO voucherDAO;
     Toolbar toolbar;
-    TextView sl, price, name, color, rom,quantity1,ship;
-    int quantityPr = 0;
-    int pr;
-    double priceShip=20000;
+    TextView sl, price, name, color, rom, quantity1, ship, priceTotal, priceVoucher;
+    Spinner spnVoucher;
+    VoucherSpinnerAdapter voucherSpinnerAdapter;
+    ArrayList<Voucher_DTO> voucherDtos;
+    int quantityPr = 0,pr;
+    double discount, total = 0,discountAmount, priceShip = 20000, priceDouble;
     String pricePr, namePr, romPr, colorPr;
+    Button btnOrder;
+
+    TextInputEditText nameUser,numberPhone,address;
+    Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +56,16 @@ public class TaoDonHang extends AppCompatActivity {
         color = findViewById(R.id.colorProduct);
         rom = findViewById(R.id.ramProduct);
         price = findViewById(R.id.priceProduct);
-        quantity1=findViewById(R.id.priceProduct2);
-        ship=findViewById(R.id.priceShip);
+        quantity1 = findViewById(R.id.priceProduct2);
+        ship = findViewById(R.id.priceShip);
+        priceTotal = findViewById(R.id.priceTotal);
+        priceVoucher = findViewById(R.id.priceVoucher);
+        nameUser=findViewById(R.id.username);
+        numberPhone=findViewById(R.id.numberphone);
+        address=findViewById(R.id.address);
+        spnVoucher = findViewById(R.id.spnVoucher);
+        btnOrder = findViewById(R.id.btnDatHang);
+        voucherDAO = new VoucherDAO(this);
         Intent intent = getIntent();
         DecimalFormat formatter = new DecimalFormat("#,###,###");
 
@@ -49,14 +78,14 @@ public class TaoDonHang extends AppCompatActivity {
                 romPr = bundle.getString("ram");
                 name.setText(namePr);
                 color.setText(colorPr);
-                double priceDouble = Double.parseDouble(pricePr);
+                priceDouble = Double.parseDouble(pricePr);
                 String yourFormattedString1 = formatter.format(priceDouble);
                 price.setText(yourFormattedString1 + "VND");
-                quantity1.setText(yourFormattedString1 +" đ");
+                quantity1.setText(yourFormattedString1 + " đ");
                 rom.setText("," + romPr + "Gb");
             }
         }
-
+        loadData();
         btnplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,23 +94,33 @@ public class TaoDonHang extends AppCompatActivity {
                 String yourFormattedString = formatter.format(pr);
                 price.setText(yourFormattedString + "VND");
                 sl.setText(String.valueOf(quantityPr));
-                quantity1.setText(yourFormattedString+" đ");
+                quantity1.setText(yourFormattedString + " đ");
+                discountAmount = discount * pr;
+                total = pr-priceShip-discountAmount;
+                priceTotal.setText(formatter.format(total) + "đ");
+                priceVoucher.setText("-" + formatter.format(discountAmount) + "đ");
             }
         });
         btnTru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantityPr--;
-                pr = quantityPr * Integer.parseInt(pricePr);
-                String yourFormattedString = formatter.format(pr);
-                price.setText(yourFormattedString + "VND");
-                sl.setText(String.valueOf(quantityPr));
-                quantity1.setText(yourFormattedString+" đ");
+                if (quantityPr > 1) {
+                    quantityPr--;
+                    pr = quantityPr * Integer.parseInt(pricePr);
+                    String yourFormattedString = formatter.format(pr);
+                    price.setText(yourFormattedString + "VND");
+                    sl.setText(String.valueOf(quantityPr));
+                    quantity1.setText(yourFormattedString + " đ");
+                    discountAmount = discount * pr;
+                   total = pr-priceShip-discountAmount;
+                    priceTotal.setText(formatter.format(total) + "đ");
+                    priceVoucher.setText("-" + formatter.format(discountAmount) + "đ");
+                }
             }
         });
         double shipdouble = priceShip;
         String yourFormattedString2 = formatter.format(shipdouble);
-ship.setText(yourFormattedString2+" đ");
+        ship.setText("-" + yourFormattedString2 + " đ");
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
 
@@ -91,5 +130,69 @@ ship.setText(yourFormattedString2+" đ");
                 startActivity(new Intent(TaoDonHang.this, FragMentContainer.class));
             }
         });
+        date= new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(date);
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nameUser.equals("")&&address.equals("")&&numberPhone.equals("")){
+                    Toast.makeText(TaoDonHang.this, "Vui lòng nhập đầy đủ thông tin người nhận hàng!", Toast.LENGTH_SHORT).show();
+                } else if (nameUser.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
+                } else if (address.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
+                } else if (numberPhone.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
+                } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
+                    Toast.makeText(TaoDonHang.this, "Số điện thoại phải đủ 10 kí tự", Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
+            }
+        });
+    }
+    public void loadData(){
+
+        voucherDtos = voucherDAO.selectAll();
+        voucherSpinnerAdapter = new VoucherSpinnerAdapter(this, voucherDtos);
+        spnVoucher.setAdapter(voucherSpinnerAdapter);
+        spnVoucher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Voucher_DTO voucherDto = voucherDtos.get(position);
+                discount = voucherDto.getGiaTriGiam() / 100.0; // Chuyển phần trăm giảm giá thành số thực
+                 discountAmount = discount * pr;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ship.setTextColor(Color.parseColor("#FF0000"));
+        priceVoucher.setTextColor(Color.parseColor("#FF0000"));
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nameUser.equals("")&&address.equals("")&&numberPhone.equals("")){
+                    Toast.makeText(TaoDonHang.this, "Vui lòng nhập đầy đủ thông tin người nhận hàng!", Toast.LENGTH_SHORT).show();
+                } else if (nameUser.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
+                } else if (address.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
+                } else if (numberPhone.equals("")) {
+                    Toast.makeText(TaoDonHang.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
+                } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
+                    Toast.makeText(TaoDonHang.this, "Số điện thoại phải đủ 10 kí tự", Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
+            }
+        });
+    }
+    public boolean isValidPhoneNumber(String phoneNumber) {
+        String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$"; // Định dạng số điện thoại: [+][mã quốc gia][dấu cách]số điện thoại
+        return phoneNumber.matches(regex);
     }
 }

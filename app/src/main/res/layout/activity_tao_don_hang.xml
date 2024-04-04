@@ -220,7 +220,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -265,7 +265,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -287,7 +287,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
             <TextView
@@ -299,14 +299,15 @@
             <TextView
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"/>
+
             <TextView
+                android:id="@+id/priceTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2000000 đ"
                 android:layout_marginRight="20dp"
-                android:textStyle="bold"
+                android:text="2000000 đ"
                 android:textSize="20sp"
-                android:id="@+id/priceTotal"/>
+                android:textStyle="bold" />
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
