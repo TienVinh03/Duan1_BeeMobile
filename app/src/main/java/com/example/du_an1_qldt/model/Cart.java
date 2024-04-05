@@ -1,6 +1,7 @@
 package com.example.du_an1_qldt.model;
 
 public class Cart {
+    private int id;
     private String name;
     private int idPhone;
     private String color;
@@ -20,13 +21,22 @@ public class Cart {
     }
 
 
-    public Cart(String name, int idPhone, String color, int rom, int price, int quantity) {
+    public Cart(int id,String name, int idPhone, String color, int rom, int price, int quantity) {
+        this.id=id;
         this.name = name;
         this.idPhone = idPhone;
         this.color = color;
         this.rom = rom;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

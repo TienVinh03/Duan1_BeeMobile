@@ -11,7 +11,7 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String DB_name = "BeePhones3333333";
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 24);
+        super(context, DB_name, null, 25);
     }
 
     @Override
@@ -36,7 +36,8 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idHang) REFERENCES Brand(idHang))";
         sqLiteDatabase.execSQL(db_phone);
 
-        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20)";
+        String insert_phone = "insert into Phone Values " +
+                "(1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20),(2,'Iphone 14 Pro',2,8200000,1,128,'Xám',1,20)";
         sqLiteDatabase.execSQL(insert_phone);
 
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +

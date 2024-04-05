@@ -50,7 +50,7 @@ public class TaoDonHang extends AppCompatActivity {
     int idPR;
     TextInputEditText nameUser, numberPhone, address;
     Date date;
-
+    DecimalFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class TaoDonHang extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnDatHang);
         voucherDAO = new VoucherDAO(this);
         Intent intent = getIntent();
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
+         formatter = new DecimalFormat("#,###,###");
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -187,6 +187,8 @@ public class TaoDonHang extends AppCompatActivity {
                 Voucher_DTO voucherDto = voucherDtos.get(position);
                 discount = voucherDto.getGiaTriGiam() / 100.0; // Chuyển phần trăm giảm giá thành số thực
                 discountAmount = discount * pr;
+                total = pr - priceShip - discountAmount;
+                priceTotal.setText(formatter.format(total) + "đ");
             }
 
             @Override
@@ -199,7 +201,7 @@ public class TaoDonHang extends AppCompatActivity {
     }
 
     public boolean isValidPhoneNumber(String phoneNumber) {
-        String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$"; // Định dạng số điện thoại: [+][mã quốc gia][dấu cách]số điện thoại
+        String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
         return phoneNumber.matches(regex);
     }
 }

@@ -29,6 +29,7 @@ public class CartDao {
             c.moveToFirst();
             do {
                 Cart cart = new Cart();
+                cart.setId(c.getInt(0));
                 cart.setQuantity(c.getInt(2));
                 cart.setIdPhone(c.getInt(1));
                 cart.setColor(c.getString(4));
@@ -49,6 +50,11 @@ public class CartDao {
             values.put("soLuong", cart.getQuantity());
 
             return (int) db.insert("ShoppingCart", null, values);
+
+    }
+    public int deleteRowCart(Cart cart){
+        String[] dk = new String[]{String.valueOf(cart.getId())};
+        return db.delete("ShoppingCart","id=?",dk);
 
     }
 }

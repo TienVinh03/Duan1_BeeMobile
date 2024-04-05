@@ -59,6 +59,12 @@ public class OrderDAO {
     public int deletOrder(Order order){
         String[] dk = new String[]{String.valueOf(order.getId())};
         return db.delete("Oder","id=?",dk);
-
+    }
+    public int updateOrder(Order order){
+        ContentValues values= new ContentValues();
+        values.put("status", order.getStatusOrder());
+        String[] dk = new String[]{String.valueOf(order.getId())};
+        int check = db.update("Oder",values,"id=?",dk);
+        return check;
     }
 }

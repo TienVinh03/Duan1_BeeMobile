@@ -9,14 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.du_an1_qldt.DAO.CartDao;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.Frag_GioHang;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.TaoDonHang;
+import com.example.du_an1_qldt.TotalPriceListener;
 import com.example.du_an1_qldt.model.Cart;
 
 import java.text.DecimalFormat;
@@ -27,6 +30,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     ArrayList<Cart> list;
     int sl;
     int price;
+    private TotalPriceListener totalPriceListener;
+CartDao cartDao;
+
+    public void setOnTotalPriceChangedListener(TotalPriceListener listener) {
+        this.totalPriceListener = listener;
+    }
 int quantity;
     public CartAdapter(Context context, ArrayList<Cart> list) {
         this.context = context;
@@ -51,15 +60,23 @@ int quantity;
         holder.tvPrice.setText(String.valueOf(quantity)); // Chuyển int thành chuỗi
         holder.tvRom.setText(String.valueOf(cart.getRom())); // Chuyển int thành chuỗi
         holder.tvColor.setText(cart.getColor());
-        holder.tvQuantity.setText(String.valueOf(cart.getQuantity()));
-        holder.tvMua.setOnClickListener(new View.OnClickListener() {
+        holder.tvQuantity.setText(String.valueOf(1));
+        cartDao= new CartDao(context);
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent  intent=new Intent(context, TaoDonHang.class);
-            context.startActivity(intent);
+                int check =cartDao.deleteRowCart(cart);
+                if(check>0){
+                    list.remove(cart);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "Đã xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-         sl= cart.getQuantity();
+         sl= 1;
          price= cart.getPrice();
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         holder.tvPlus.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +88,9 @@ int quantity;
                 holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
                 holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
                 cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
+                if (totalPriceListener != null) {
+                    totalPriceListener.onTotalPriceChanged(calculateTotalPrice()); // calculateTotalPrice() là phương thức tính tổng giá trị trong giỏ hàng
+                }
 
             }
         });
@@ -84,6 +104,10 @@ int quantity;
                     holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
                     holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
                     cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
+                    if (totalPriceListener != null) {
+                        totalPriceListener.onTotalPriceChanged(calculateTotalPrice());
+
+                    }
                 }
             }
         });
@@ -96,8 +120,8 @@ int quantity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvColor, tvRom, tvPrice, tvMua, tvQuantity;
-        ImageView tvPlus,tvMinus;
+        TextView tvName, tvColor, tvRom, tvPrice, tvQuantity;
+        ImageView tvPlus,tvMinus,btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,9 +130,22 @@ int quantity;
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvRom = itemView.findViewById(R.id.ramProduct);
             tvPrice = itemView.findViewById(R.id.priceProduct);
-            tvMua = itemView.findViewById(R.id.btnMuaNgay);
+            btnDelete = itemView.findViewById(R.id.btndelete);
             tvPlus = itemView.findViewById(R.id.btnPlus);
             tvMinus = itemView.findViewById(R.id.btnApart);
+        }
+
+    }
+    private double calculateTotalPrice() {
+        double totalPrice = 0.0;
+        for (Cart cartItem : list) {
+            totalPrice += cartItem.getPrice() * sl;// Giả sử bạn có phương thức getPrice() và getQuantity() trong class Cart
+        }
+        return totalPrice;
+    }
+    private void notifyTotalPriceChanged(double totalPrice) {
+        if (totalPriceListener != null) {
+            totalPriceListener.onTotalPriceChanged(totalPrice);
         }
     }
 }
