@@ -43,7 +43,7 @@
             android:name=".Frag_GioHang"
             android:exported="false" />
         <activity
-            android:name=".Frag_QuanLiHoaDon"
+            android:name=".Frag_QuanLiDonHang"
             android:exported="false" />
         <activity
             android:name=".DoiMatKhau"
