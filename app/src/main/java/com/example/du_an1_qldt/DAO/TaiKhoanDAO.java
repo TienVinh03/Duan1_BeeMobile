@@ -35,6 +35,7 @@ public class TaiKhoanDAO {
             cursor.moveToFirst();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("hoTen", cursor.getString(1));
+            editor.putString("manguoidung", cursor.getString(0));
             editor.putString("matKhau", cursor.getString(2));
             editor.putString("loaitaikhoan", cursor.getString(7));
             editor.putString("email", cursor.getString(5));
@@ -90,7 +91,22 @@ public class TaiKhoanDAO {
         return list;
     }
 
+    public String getUserNameById(int userId) {
+        SQLiteDatabase db = database.getReadableDatabase();
 
+        // Truy vấn cơ sở dữ liệu để lấy tên người dùng dựa trên id
+        Cursor cursor = db.query("nguoiDung", new String[]{"hoTen"}, "maNguoiDung=?", new String[]{String.valueOf(userId)}, null, null, null);
+        String userName = null;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                userName = cursor.getString(0);
+            }
+            cursor.close();
+        }
+
+        db.close();
+        return userName;
+    }
 
 }
 

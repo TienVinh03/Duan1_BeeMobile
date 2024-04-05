@@ -1,16 +1,14 @@
 package com.example.du_an1_qldt.model;
 
 public class Order {
+    private int id;
     private  int idUser;
-    private  int idAdmin;
-   private int idOrder;
    private String dateOrder;
-   private int statusOrder;
+   private String statusOrder;
 
-    public Order(int idUser, int idAdmin, int idOrder, String dateOrder, int statusOrder) {
+    public Order(int id,int idUser, String dateOrder, String statusOrder) {
+        this.id=id;
         this.idUser = idUser;
-        this.idAdmin = idAdmin;
-        this.idOrder = idOrder;
         this.dateOrder = dateOrder;
         this.statusOrder = statusOrder;
     }
@@ -26,35 +24,28 @@ public class Order {
         this.idUser = idUser;
     }
 
-    public int getIdAdmin() {
-        return idAdmin;
-    }
-
-    public void setIdAdmin(int idAdmin) {
-        this.idAdmin = idAdmin;
-    }
-
-    public int getIdOrder() {
-        return idOrder;
-    }
-
-    public void setIdOrder(int idOrder) {
-        this.idOrder = idOrder;
-    }
 
     public String getDateOrder() {
         return dateOrder;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDateOrder(String dateOrder) {
         this.dateOrder = dateOrder;
     }
 
-    public int getStatusOrder() {
+    public String getStatusOrder() {
         return statusOrder;
     }
 
-    public void setStatusOrder(int statusOrder) {
+    public void setStatusOrder(String statusOrder) {
         this.statusOrder = statusOrder;
     }
 

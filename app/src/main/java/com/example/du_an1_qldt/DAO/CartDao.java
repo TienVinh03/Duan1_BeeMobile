@@ -44,7 +44,7 @@ public class CartDao {
             ContentValues values = new ContentValues();
             values.put("maDt", cart.getIdPhone());
             values.put("donGia", cart.getPrice());
-            values.put("rom", cart.getRom());
+            values.put("ram", cart.getRom());
             values.put("mauSac", cart.getColor());
             values.put("soLuong", cart.getQuantity());
 
