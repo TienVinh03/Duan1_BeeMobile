@@ -65,6 +65,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("name", dt.getName());
+                bundle.putInt("id", dt.getId());
                 bundle.putString("color", dt.getColor());
                 bundle.putString("ram", String.valueOf(dt.getRom()));
                 bundle.putString("price", String.valueOf(dt.getGia()));
