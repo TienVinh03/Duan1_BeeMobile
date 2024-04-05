@@ -25,6 +25,8 @@ public class Frag_DanhSachVoucher extends Fragment {
     RecyclerView rc_QLVoucher;
 
     VoucherDAO voucherDAO;
+    VoucherAdapter voucherAdapter;
+
     DSVoucher_Adapter DSvoucherAdapter;
     ArrayList<Voucher_DTO> listVoucher;
     @Nullable
@@ -45,31 +47,68 @@ public class Frag_DanhSachVoucher extends Fragment {
         rc_QLVoucher.setAdapter(DSvoucherAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rc_QLVoucher.setLayoutManager(linearLayoutManager);
-        SearchView srview = view.findViewById(R.id.searchvoucherr);
-        srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+//        SearchView srview = view.findViewById(R.id.searchvoucherr);
+//        // Trong phương thức onViewCreated của bạn
+//        srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                ArrayList<Voucher_DTO> newlist = new ArrayList<>();
+//                for (Voucher_DTO s : listVoucher){
+//                    if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase()) || String.valueOf(s.getSoLuong()).toLowerCase().contains(newText.toLowerCase())) {
+//                        newlist.add(s);
+//                    }
+//                }
+//                DSvoucherAdapter.updateData(newlist);
+//                DSvoucherAdapter.notifyDataSetChanged();
+//                return false;
+//            }
+//        });
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                ArrayList<Voucher_DTO> newlist = new ArrayList<>();
-                for (Voucher_DTO s : listVoucher){
-                    if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
-                        newlist.add(s);
-                    }
-                }
-                loadriengchotimkiem(newlist);
-                return false;
-            }
-        });
+// Sửa đổi phương thức updateData trong DSvoucherAdapter
+//        public void updateData(ArrayList<Voucher_DTO> newList) {
+//            listVoucher.clear();
+//            listVoucher.addAll(newList);
+//            // Không cần khởi tạo adapter mới
+//        }
+
+//        srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//
+//
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                ArrayList<Voucher_DTO> newlist = new ArrayList<>();
+//                for (Voucher_DTO s : listVoucher){
+//                    if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
+//                        newlist.add(s);
+//                    } else if (String.valueOf(s.getSoLuong()).toLowerCase().contains(newText.toLowerCase())) {
+//
+//                    }
+//                }
+//                loadriengchotimkiem(newlist);
+//                return false;
+//            }
+//        });
     }
 
 
-    private void loadriengchotimkiem (ArrayList<Voucher_DTO> list){
-        //data
-        DSvoucherAdapter = new DSVoucher_Adapter(getContext(), list);
-        rc_QLVoucher.setAdapter(DSvoucherAdapter);
+    private void loadriengchotimkiem(ArrayList<Voucher_DTO> list){
+        // Cập nhật dữ liệu cho adapter hiện tại
+        voucherAdapter = new VoucherAdapter(getContext(), list);
+        rc_QLVoucher.setAdapter(voucherAdapter);
+        DSvoucherAdapter.updateData(list);
+        // Thông báo cho adapter biết dữ liệu đã thay đổi
+        DSvoucherAdapter.notifyDataSetChanged();
     }
+
 }

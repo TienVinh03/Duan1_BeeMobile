@@ -24,6 +24,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextvienhong"
         android:hint="Nhập tên hãng" />
+
     <EditText
         android:id="@+id/edtThemLoaiSanPhamt"
         android:layout_width="match_parent"

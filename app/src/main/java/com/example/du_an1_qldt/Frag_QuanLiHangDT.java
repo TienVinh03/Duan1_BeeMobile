@@ -78,7 +78,7 @@ public class Frag_QuanLiHangDT extends Fragment {
                     public void onClick(View v) {
                         HangDienThoai hangDienThoai = new HangDienThoai();
                         hangDienThoai.setTenHang(edtThemLoaiSanPham.getText().toString());
-hangDienThoai.setHeDieuHanh(edtThemLoaiSanPham.getText().toString());
+                        hangDienThoai.setHeDieuHanh(edtThemLoaiSanPhamt.getText().toString());
 
                         if (edtThemLoaiSanPham.getText().toString().isEmpty()) {
                             Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();

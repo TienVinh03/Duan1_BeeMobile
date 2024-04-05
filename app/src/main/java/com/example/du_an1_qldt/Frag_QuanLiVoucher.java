@@ -88,25 +88,25 @@ public class Frag_QuanLiVoucher extends Fragment {
                 EditText menhgia = v1.findViewById(R.id.edt_menhgia_add);
                 Button sua = v1.findViewById(R.id.btn_addVoucher_add);
                 Voucher_DTO voucherDto = new Voucher_DTO();
-                SearchView srview = view.findViewById(R.id.searchvoucher);
-                srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        ArrayList<Voucher_DTO> newlist = new ArrayList<>();
-                        for (Voucher_DTO s : listVoucher){
-                            if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
-                                newlist.add(s);
-                            }
-                        }
-                        loadriengchotimkiem(newlist);
-                        return false;
-                    }
-                });
+//                SearchView srview = view.findViewById(R.id.searchvoucher);
+//                srview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                    @Override
+//                    public boolean onQueryTextSubmit(String query) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onQueryTextChange(String newText) {
+//                        ArrayList<Voucher_DTO> newlist = new ArrayList<>();
+//                        for (Voucher_DTO s : listVoucher){
+//                            if (s.getTenVoucher().toLowerCase().contains(newText.toLowerCase())){
+//                                newlist.add(s);
+//                            }
+//                        }
+//                        loadriengchotimkiem(newlist);
+//                        return false;
+//                    }
+//                });
 
 
 

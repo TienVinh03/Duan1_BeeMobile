@@ -71,6 +71,9 @@ public class DSVoucher_Adapter extends RecyclerView.Adapter<DSVoucher_Adapter.DS
         return listVoucher.size();
     }
 
+    public void updateData(ArrayList<Voucher_DTO> list) {
+    }
+
     public class DSVoucherViewHolder extends RecyclerView.ViewHolder {
         TextView maVoucher;
         TextView tenVoucher;
@@ -88,6 +91,14 @@ public class DSVoucher_Adapter extends RecyclerView.Adapter<DSVoucher_Adapter.DS
             giaTriGiam = itemView.findViewById(R.id.tv_menhGiaVoucher_ds);
             cardViewVoucher =itemView.findViewById(R.id.cardViewDSVoucher);
             btn_themVoucher = itemView.findViewById(R.id.btn_themVoucher);
+            
         }
+        public void updateData(ArrayList<Voucher_DTO> newList) {
+            // Giả sử 'listVoucher' là bộ dữ liệu nội bộ của adapter
+            listVoucher.clear();
+            listVoucher.addAll(newList);
+        }
+
+
     }
 }
