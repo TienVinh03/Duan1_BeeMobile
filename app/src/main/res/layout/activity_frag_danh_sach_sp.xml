@@ -24,7 +24,7 @@
             android:id="@+id/edt_search_qlsp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
 
 
             android:background="@drawable/khugn_search"
@@ -32,28 +32,17 @@
             android:paddingHorizontal="5dp"
             android:hint="Tìm kiếm"
 
-             />
+            />
         <ImageView
             android:id="@+id/btntimkiem"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.5"
             android:layout_marginHorizontal="5dp"
             android:background="@drawable/khugn_search"
 
 
             android:src="@drawable/baseline_search_24" />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.7"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/btn_add_sp"
-            android:background="@drawable/khugn_search"
-            android:drawableStart="@drawable/baseline_add_box_24"
-
-            />
 
 
     </LinearLayout>
@@ -65,14 +54,10 @@
         >
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewSanPham"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:id="@+id/rc_QLSP"
-            />
+            android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

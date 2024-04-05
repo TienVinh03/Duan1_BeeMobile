@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,20 +52,34 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         }
 
         navigationView.setItemIconTintList(null);
+        navigationView.setItemTextColor(ColorStateList.valueOf(Color.BLACK));
+        navigationView.setItemIconSize(80);
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                drawer.closeDrawer(GravityCompat.START);
-                if (!loaitaikhoan.equals("admin")){
-                    Menu menu = bottomNavigationView.getMenu();
-                    menu.findItem(R.id.work).setVisible(false);
+                Fragment fragment1=null;
+             if (item.getItemId()==R.id.home){
+                 setTitle("Màn hình chính");
+                 toolbar.setTitle("Trang chủ(admin)");
+                 getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
+             } else if (item.getItemId()==R.id.work) {
+                 setTitle("Quản lí Hóa đơn");
+                 toolbar.setTitle("Quản lí Hóa đơn");
+                 getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_QuanLiDonHang()).addToBackStack(null).commit();
+             } else if (item.getItemId()==R.id.donMua) {
+                 setTitle("Giỏ hàng");
+                 toolbar.setTitle("Giỏ hàng");
+                 getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,new Frag_GioHang()).addToBackStack(null).commit();
+             } else if (item.getItemId()==R.id.info) {
+                 setTitle("Màn hình chính");
+                 toolbar.setTitle("Trang chủ(admin)");
+                 getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
 
-                }else {
-                    Menu menu = bottomNavigationView.getMenu();
-                    menu.findItem(R.id.donMua).setVisible(false);
-                }
+             }
+             drawer.close();
 
 
                 return false;
@@ -187,6 +203,10 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             setTitle("Đơn mua gần đây");
             toolbar.setTitle("Đơn mua gần đây");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,new Frag_DonMua()).addToBackStack(null).commit();
+        }else if (item.getItemId()==R.id.dsSanPham) {
+            setTitle("Đơn mua gần đây");
+            toolbar.setTitle("Đơn mua gần đây");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer,new Frag_DanhSachSP()).addToBackStack(null).commit();
         }
         drawer.close();
         return false;

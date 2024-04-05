@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -53,6 +54,10 @@ public class TrangChuAdmin extends Fragment {
     Spinner spn_hangDT;
     dbHelper myDbHelper;
 
+    FragMentContainer fragMentContainer;
+
+    Frag_DanhSachVoucher fragDanhSachVoucher;
+
     private SwipeRefreshLayout swipeRefreshLayout;
     int[] images = {R.drawable.anh_slide1, R.drawable.anh_slide2, R.drawable.anh_slide3, R.drawable.anh_slide4, R.drawable.anh_slide5};
 
@@ -83,6 +88,11 @@ public class TrangChuAdmin extends Fragment {
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setRadius(20);
         Button incon_themSP = view.findViewById(R.id.incon_themSP);
+        Button icon_dsVoucher = view.findViewById(R.id.icon_dsVoucher);
+        Button icon_dsSP = view.findViewById(R.id.icon_dsSP);
+        Button icon_thongKe = view.findViewById(R.id.icon_thongKe);
+
+
 
         cardView.setCardElevation(8);
         viewPager = view.findViewById(R.id.viewPager);
@@ -91,6 +101,45 @@ public class TrangChuAdmin extends Fragment {
 
         handler.postDelayed(runnable, SLIDE_DELAY);
         myDbHelper = new dbHelper(getActivity());
+
+        icon_thongKe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_ThongKe Frag_ThongKe = new Frag_ThongKe();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, Frag_ThongKe);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
+        icon_dsSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiHoaDon = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiHoaDon);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
+
+        icon_dsVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragDanhSachVoucher = new Frag_DanhSachVoucher();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragDanhSachVoucher);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+            }
+        });
+
 
         incon_themSP.setOnClickListener(new View.OnClickListener() {
             @Override

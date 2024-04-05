@@ -6,6 +6,8 @@
         <item
             android:icon="@drawable/beehive"
             android:id="@+id/manChinhUser"
+            
+
 
             android:textColor="@android:color/primary_text_light"
             android:title="Trang chủ" />

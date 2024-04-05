@@ -4,26 +4,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +52,8 @@ public class Frag_QuanLiSanPham extends Fragment {
     ArrayList<phone> listSP;
     Spinner spn_hangDT;
     dbHelper myDbHelper;
-
+    SQLiteDatabase database;
+    private InputMethodManager inputMethodManager;
     private SwipeRefreshLayout swipeRefreshLayout;
 
 
@@ -70,7 +78,108 @@ public class Frag_QuanLiSanPham extends Fragment {
         rc_QLSP.setLayoutManager(linearLayoutManager);
 
         Button btn_add_sp = view.findViewById(R.id.btn_add_sp);
+        EditText edt_search_qlsp = view.findViewById(R.id.edt_search_qlsp);
+        ImageView btntimkiem = view.findViewById(R.id.btntimkiem);
+        inputMethodManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
         myDbHelper = new dbHelper(getActivity());
+        database = myDbHelper.getReadableDatabase();
+
+        edt_search_qlsp.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+
+                    listSP.clear();
+
+                    RecyclerView recycle_sanphammanhinhchinh = view.findViewById(R.id.rc_QLSP);
+                    if (edt_search_qlsp.length() > 0) {
+                        String ten = edt_search_qlsp.getText().toString().trim();
+                        listSP = sanPhamDAO.TimKiemSanPham(ten);
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+                        recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                        SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter( getContext(), listSP,sanPhamDAO);
+                        recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+        edt_search_qlsp.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    listSP.clear();
+
+                    RecyclerView recycle_sanphammanhinhchinh = view.findViewById(R.id.rc_QLSP);
+                    String ten = edt_search_qlsp.getText().toString().trim();
+
+                    if (ten.equals("")) {
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+                        recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                        SanPhamDAO sanPhamDAO2 = new SanPhamDAO(getContext());
+                        listSP = (ArrayList<phone>) sanPhamDAO.getlistSP();
+                        SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter( getContext(), listSP,sanPhamDAO2);
+                        recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                    } else {
+                        listSP.clear();
+                        recycle_sanphammanhinhchinh = view.findViewById(R.id.rc_QLSP);
+                        if (edt_search_qlsp.length() > 0) {
+                            listSP = sanPhamDAO.TimKiemSanPham(ten);
+                            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                            recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                            SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter( getContext(), listSP,sanPhamDAO);
+                            recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                        }
+                    }
+
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+                    recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                    SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter( getContext(), listSP,sanPhamDAO);
+                    recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+        btntimkiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listSP.clear();
+                RecyclerView recycle_sanphammanhinhchinh = view.findViewById(R.id.rc_QLSP);
+                String ten = edt_search_qlsp.getText().toString().trim();
+                if (ten.equals("")) {
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+                    recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                    SanPhamDAO sanPhamDAO1 = new SanPhamDAO(getContext());
+                    listSP = (ArrayList<phone>) sanPhamDAO1.getlistSP();
+                    SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter( getContext(), listSP,sanPhamDAO1);
+                    recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                } else {
+                    listSP.clear();
+                    recycle_sanphammanhinhchinh = view.findViewById(R.id.rc_QLSP);
+                    if (edt_search_qlsp.length() > 0) {
+                        listSP = sanPhamDAO.TimKiemSanPham(ten);
+                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+                        recycle_sanphammanhinhchinh.setLayoutManager(gridLayoutManager);
+                        SanPhamAdapter adapter_sanPhamManHinhChinh = new SanPhamAdapter(getContext(), listSP,sanPhamDAO);
+                        recycle_sanphammanhinhchinh.setAdapter(adapter_sanPhamManHinhChinh);
+                        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    }
+                }
+            }
+        });
+
+
+
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -235,4 +344,8 @@ public class Frag_QuanLiSanPham extends Fragment {
         });
 
     }
+
+
+
+
 }

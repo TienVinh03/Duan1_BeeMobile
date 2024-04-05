@@ -43,9 +43,14 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     ArrayList<phone> listSP;
     Spinner spn_hangDT;
     dbHelper dbHelper1;
+    SanPhamDAO sanPhamDAO11;
     SanPhamAdapter sanPhamAdapter1;
 
-
+    public SanPhamAdapter(Context context, ArrayList<phone> listSP, SanPhamDAO sanPhamDAO11) {
+        this.context = context;
+        this.listSP = listSP;
+        this.sanPhamDAO11 = sanPhamDAO11;
+    }
 
     public SanPhamAdapter(Context context, ArrayList<phone> listSP) {
         this.context = context;
@@ -317,5 +322,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         cursor.close();
         return tenLoaiSanPham;
     }
+
 
 }

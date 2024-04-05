@@ -15,7 +15,7 @@
         android:weightSum="3"
         >
         <EditText
-            android:id="@+id/edt_search"
+            android:id="@+id/edt_search_qlVoucher"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="2.3"
@@ -48,5 +48,24 @@
         android:paddingHorizontal="20dp"
         android:id="@+id/rc_QL_Voucher"
         />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linear_qlvoucher"
+        android:id="@+id/swipeRefreshLayout_qlvoucher"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:id="@+id/rc_QLSP"
+            />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

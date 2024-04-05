@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -38,6 +39,7 @@ public class Frag_QuanLiVoucher extends Fragment {
     VoucherDAO voucherDAO;
     VoucherAdapter voucherAdapter;
     ArrayList<Voucher_DTO> listVoucher;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,12 +53,30 @@ public class Frag_QuanLiVoucher extends Fragment {
         rc_QLVoucher = view.findViewById(R.id.rc_QL_Voucher);
         voucherDAO = new VoucherDAO(getActivity());
         listVoucher = voucherDAO.getListVoucher();
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout_qlvoucher);
         voucherAdapter = new VoucherAdapter(getActivity(),listVoucher);
         rc_QLVoucher.setAdapter(voucherAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rc_QLVoucher.setLayoutManager(linearLayoutManager);
 
         Button btn_addVoucher = view.findViewById(R.id.btn_addVoucher);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                rc_QLVoucher = view.findViewById(R.id.rc_QLSP);
+
+                voucherDAO = new VoucherDAO(getActivity());
+                listVoucher = voucherDAO.getListVoucher();
+                swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout_qlvoucher);
+                voucherAdapter = new VoucherAdapter(getActivity(),listVoucher);
+                rc_QLVoucher.setAdapter(voucherAdapter);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                rc_QLVoucher.setLayoutManager(linearLayoutManager);
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         btn_addVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

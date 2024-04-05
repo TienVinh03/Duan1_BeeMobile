@@ -182,18 +182,19 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="51dp"
                 android:background="@drawable/khung_tron"
+                android:id="@+id/icon_dsSP"
                 android:drawableLeft="@drawable/icon_them"
-                android:paddingLeft="12dp"
-                />
+                android:paddingLeft="12dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tra cứu"
-                />
+                android:text="DS sản phẩm" />
 
 
 
@@ -263,9 +264,10 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/icon_dsVoucher"
                 android:background="@drawable/khung_tron"
                 android:drawableLeft="@drawable/icon_them"
                 android:paddingLeft="12dp"
@@ -286,18 +288,19 @@
             android:gravity="center"
             android:paddingTop="5dp"
             android:orientation="vertical">
-            <TextView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
 
                 android:background="@drawable/khung_tron"
                 android:drawableLeft="@drawable/icon_them"
+                android:id="@+id/icon_thongKe"
                 android:paddingLeft="12dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ĐH hủy"
+                android:text="Thống kê"
                 />
 
 
