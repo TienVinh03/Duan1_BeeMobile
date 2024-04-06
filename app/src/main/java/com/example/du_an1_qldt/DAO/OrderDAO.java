@@ -47,6 +47,17 @@ public class OrderDAO {
 
         return (int)db.insert("Oder",null,values);
     }
+    public long createOrder2(Order order) {
+        ContentValues values = new ContentValues();
+        values.put("idUser", order.getIdUser());
+        values.put("status", order.getStatusOrder());
+        values.put("date", order.getDateOrder());
+
+        long orderId = db.insert("Oder", null, values); // Chú ý: "Order" là tên của bảng đơn hàng trong cơ sở dữ liệu
+
+        return orderId;
+    }
+
     public int createOrderDetail(OrderDetail order){
         ContentValues values = new ContentValues();
         values.put("idSp",order.getIdProduct());

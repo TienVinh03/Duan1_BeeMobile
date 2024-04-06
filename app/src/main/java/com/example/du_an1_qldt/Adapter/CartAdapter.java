@@ -32,6 +32,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     int price;
     private TotalPriceListener totalPriceListener;
 CartDao cartDao;
+DecimalFormat format;
 
     public void setOnTotalPriceChangedListener(TotalPriceListener listener) {
         this.totalPriceListener = listener;
@@ -56,9 +57,11 @@ int quantity;
         Cart cart = list.get(position);
         SanPhamDAO sanPhamDAO= new SanPhamDAO(context);
         holder.tvName.setText(sanPhamDAO.getProductNameById(cart.getIdPhone()));
-        quantity= cart.getPrice()* cart.getQuantity();
-        holder.tvPrice.setText(String.valueOf(quantity)); // Chuyển int thành chuỗi
-        holder.tvRom.setText(String.valueOf(cart.getRom())); // Chuyển int thành chuỗi
+        quantity= cart.getPrice();
+        format=new DecimalFormat("#,###,###");
+        String quantityPr=format.format(quantity);
+        holder.tvPrice.setText(quantityPr); // Chuyển int thành chuỗi
+        holder.tvRom.setText(String.valueOf(cart.getRom())+"gb"); // Chuyển int thành chuỗi
         holder.tvColor.setText(cart.getColor());
         holder.tvQuantity.setText(String.valueOf(1));
         cartDao= new CartDao(context);
@@ -76,12 +79,14 @@ int quantity;
 
             }
         });
-         sl= 1;
+         sl= cart.setQuantity(1);
          price= cart.getPrice();
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         holder.tvPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sl= cart.getQuantity();
+                price= cart.getPrice();
                 sl++; // Tăng số lượng
                 price = sl * cart.getPrice(); // Tính lại giá
                 String doublePrice = formatter.format(price);
@@ -97,6 +102,8 @@ int quantity;
         holder.tvMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sl= cart.getQuantity();
+                price= cart.getPrice();
                 if (sl > 1) { // Đảm bảo số lượng không âm
                     sl--; // Giảm số lượng
                     price = sl * cart.getPrice(); // Tính lại giá

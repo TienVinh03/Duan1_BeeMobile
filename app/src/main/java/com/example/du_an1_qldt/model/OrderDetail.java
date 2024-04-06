@@ -13,6 +13,9 @@ public class OrderDetail {
         this.price = price;
     }
 
+    public OrderDetail() {
+    }
+
     public int getId() {
         return id;
     }
