@@ -58,7 +58,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
         phone dt = listSP.get(position);
         holder.tv_tenSP1.setText(String.valueOf(dt.getName()));
         holder.tv_giaSPham.setText(String.valueOf(dt.getGia()));
-        holder.tv_TrangthaiSP1.setText(String.valueOf(dt.getStatus()));
+        holder.tv_TrangthaiSP1.setText(dt.getSoLuong()>0?"Còn hàng":"Hết Hàng");
 
         holder.btnMuaNgay.setOnClickListener(new View.OnClickListener() {
             @Override

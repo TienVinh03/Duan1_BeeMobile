@@ -179,5 +179,27 @@ public class SanPhamDAO {
         }
         return list;
     }
+    public int getProductQuantityFromDatabase(int productId) {
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        Cursor cursor = db.query("Phone", new String[]{"soluong"},
+                "maDt=?", new String[]{String.valueOf(productId)},
+                null, null, null, null);
+        int quantity = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            quantity = cursor.getInt(8);
+            cursor.close();
+        }
+        return quantity;
+    }
+
+    // Method to update product quantity in database
+    public void updateProductQuantityInDatabase(int productId, int updatedQuantity) {
+        SQLiteDatabase db = myDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("soluong", updatedQuantity);
+        db.update("Phone", values, "maDt=?",
+                new String[]{String.valueOf(productId)});
+        db.close();
+    }
 
 }

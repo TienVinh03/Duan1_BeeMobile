@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     OrderDAO orderDAO;
     Context context;
     TaiKhoanDAO taiKhoanDAO;
+
 
     public OrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
@@ -46,11 +48,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getId()));
         holder.date.setText(order.getDateOrder());
         holder.status.setText(order.getStatusOrder());
+        LinearLayout linearLayoutToRemove = holder.layoutContainer;
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 orders.remove(order);
                 orderDAO.deletOrder(order);
+                notifyDataSetChanged();
+            }
+        });
+        holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                order.setStatusOrder("Đã xác nhận");
+                holder.status.setText(order.getStatusOrder());
+                orderDAO.updateOrder(order);
+                linearLayoutToRemove.setVisibility(View.GONE);
                 notifyDataSetChanged();
             }
         });
@@ -63,6 +76,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView id, nameCustomer, date, status, btnConfirm, btnCancel;
+        LinearLayout layoutContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +86,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             status = itemView.findViewById(R.id.statusOrder);
             btnConfirm = itemView.findViewById(R.id.btnConfirmOrder);
             btnCancel = itemView.findViewById(R.id.btnCancelOrder);
+            layoutContainer=itemView.findViewById(R.id.linearLayout);
         }
     }
 }
