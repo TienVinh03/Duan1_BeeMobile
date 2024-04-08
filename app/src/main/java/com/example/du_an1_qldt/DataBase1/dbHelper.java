@@ -11,7 +11,7 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String DB_name = "BeePhones3333333";
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 25);
+        super(context, DB_name, null, 30);
     }
 
     @Override
@@ -47,6 +47,8 @@ public class dbHelper extends SQLiteOpenHelper {
                 "donGia integer not null," +
                 "mauSac TEXT not null," +
                 "ram TEXT not null," +
+                "idUser INTEGER ," +
+                "FOREIGN KEY (idUser) REFERENCES nguoiDung(manguoidung)," +
                 "FOREIGN KEY (maDt) REFERENCES Phone(maDt))";
         sqLiteDatabase.execSQL(db_cart);
 
@@ -70,7 +72,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "loaitaikhoan TEXT)";
         sqLiteDatabase.execSQL(dbnguoidung);
 
-        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user')");
+        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(3,'hai','hai','Nguyen Xuan Hai','0972512987','hai@gmail.com','Thanh Hoa','user'),(2,'vinh','vinh','Vu Tien Vinh','0332322764','vinh@gmail.com','Thai Binh','user')");
 
 
         String db_order_detail = "CREATE TABLE OderDetail (" +

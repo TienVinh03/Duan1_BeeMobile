@@ -54,23 +54,24 @@ public class Frag_GioHang extends Fragment implements TotalPriceListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("manguoidung", "");
         recyclerView = view.findViewById(R.id.rcv_cart);
         tv_price=view.findViewById(R.id.tv_price);
         btnOrder=view.findViewById(R.id.btn_order);
         cartDao = new CartDao(getContext());
-        cartArrayList = cartDao.getlistCart();
+        cartArrayList = cartDao.getlistCart(Integer.parseInt(id));
         cartAdapter = new CartAdapter(getContext(), cartArrayList);
         recyclerView.setAdapter(cartAdapter);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         cartAdapter.setOnTotalPriceChangedListener(this);
+        onTotalPriceChanged(calculateTotalPrice());
         cartAdapter.notifyDataSetChanged();
-        calculateTotalPrice();
+
 btnOrder.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("thongtin", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("manguoidung", "");
         date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       String formattedDate = dateFormat.format(date);
@@ -86,13 +87,13 @@ btnOrder.setOnClickListener(new View.OnClickListener() {
 //            Toast.makeText(getContext(), "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
 //        }
         cartDao= new CartDao(getContext());
-        ArrayList<Cart> carts= cartDao.getlistCart();
+        ArrayList<Cart> carts= cartDao.getlistCart(Integer.parseInt(id));
         orderDAO= new OrderDAO(getContext());
         Order order= new Order();
         order.setIdUser(Integer.parseInt(id));
         order.setStatusOrder("Chờ xác nhận");
         order.setDateOrder(formattedDate);
-        long orderId = orderDAO.createOrder(order);
+        long orderId = orderDAO.createOrder2(order);
         for (Cart cart: carts) {
             OrderDetail orderDetail= new OrderDetail();
             orderDetail.setId((int) orderId);
@@ -111,11 +112,11 @@ btnOrder.setOnClickListener(new View.OnClickListener() {
     public void onTotalPriceChanged(double totalPrice) {
         tv_price.setText(String.valueOf(totalPrice));
     }
-    private void calculateTotalPrice() {
+    private double calculateTotalPrice() {
         double totalPrice = 0;
         for (Cart cartItem : cartArrayList) {
             totalPrice += cartItem.getPrice(); // Giả sử getPrice() là phương thức lấy giá của một sản phẩm trong giỏ hàng
         }
-        tv_price.setText(String.valueOf(totalPrice));
+        return  totalPrice;
     }
 }

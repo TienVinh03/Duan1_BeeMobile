@@ -3,6 +3,7 @@ package com.example.du_an1_qldt.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
@@ -78,6 +79,8 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
         holder.btnThemvaoGiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+                String idUser = sharedPreferences.getString("manguoidung", "");
                 CartDao cartDao = new CartDao(context);
                 Cart cart = new Cart();
                 cart.setPrice(dt.getGia());
@@ -85,6 +88,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
                 cart.setQuantity(dt.getSoLuong());
                 cart.setIdPhone(dt.getId());
                 cart.setColor(dt.getColor());
+                cart.setIdUser(Integer.parseInt(idUser));
                 SanPhamDAO dao = new SanPhamDAO(context);
                 cart.setName(dao.getProductNameById(dt.getId()));
                 int result = cartDao.addSanPhamtoCart(cart);
