@@ -39,6 +39,13 @@ public class TaiKhoanDAO {
             editor.putString("matKhau", cursor.getString(2));
             editor.putString("loaitaikhoan", cursor.getString(7));
             editor.putString("email", cursor.getString(5));
+
+            editor.putString("sodienthoai", cursor.getString(4));
+            editor.putString("diachi", cursor.getString(6));
+
+
+
+
             editor.apply(); // Sử dụng apply() thay vì commit() để áp dụng thay đổi ngay lập tức
             return true;
         } else {

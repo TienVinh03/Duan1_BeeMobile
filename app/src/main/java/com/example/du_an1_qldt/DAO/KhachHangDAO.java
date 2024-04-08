@@ -57,6 +57,23 @@ public class KhachHangDAO {
 
     }
 
+    public boolean updateTT(int manguoidung, String hoten, String sodienthoai, String email, String diachi) {
+
+        SQLiteDatabase sql = myDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("hoten", hoten);
+        values.put("sodienthoai", sodienthoai);
+        values.put("email", email);
+        values.put("diachi", diachi);
+        long check = sql.update("nguoiDung", values, "manguoidung = ?", new String[]{String.valueOf(manguoidung)});
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     public int update(KhachHang_DTO obj) {
         SQLiteDatabase sql = myDbHelper.getWritableDatabase();

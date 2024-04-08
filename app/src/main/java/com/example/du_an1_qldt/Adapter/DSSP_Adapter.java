@@ -61,6 +61,9 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
         holder.tv_giaSPham.setText(String.valueOf(dt.getGia()));
         holder.tv_TrangthaiSP1.setText(dt.getSoLuong()>0?"Còn hàng":"Hết Hàng");
 
+        holder.tv_mauSac.setText(String.valueOf(dt.getColor()));
+        holder.tv_romSP.setText("Rom:" + String.valueOf(dt.getRom()));
+
         holder.btnMuaNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +121,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
     }
 
     public class ViewHolder_DSSP extends RecyclerView.ViewHolder {
-        TextView tv_tenSP1, tv_giaSPham, tv_TrangthaiSP1;
+        TextView tv_tenSP1, tv_giaSPham, tv_TrangthaiSP1,tv_mauSac,tv_romSP;
         ImageView anh1, btnThemvaoGiohang, btnMuaNgay;
 
         public ViewHolder_DSSP(@NonNull View itemView) {
@@ -128,6 +131,9 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
             tv_giaSPham = itemView.findViewById(R.id.tv_giaSPham);
             tv_TrangthaiSP1 = itemView.findViewById(R.id.tv_TrangthaiSP1);
             anh1 = itemView.findViewById(R.id.anh1);
+            tv_mauSac = itemView.findViewById(R.id.tv_mauSac);
+            tv_romSP = itemView.findViewById(R.id.tv_romSP);
+
             btnThemvaoGiohang = itemView.findViewById(R.id.btnThemvaoGiohang);
             btnMuaNgay = itemView.findViewById(R.id.btnMuaNgay);
 
