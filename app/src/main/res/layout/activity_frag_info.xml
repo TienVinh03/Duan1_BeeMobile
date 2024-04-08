@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Frag_Info">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="126dp"
+        android:layout_height="127dp"
+        android:src="@drawable/kisspng_computer_icons_user_profile_user_account_clip_art_5b07b23b21d528_7546220715272310351386" />
+
+    <TextView
+        android:id="@+id/tv_hotenkhachhang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Họ tên khách hàng"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/khung2">
+
+        <TextView
+            android:id="@+id/tv_emailKhachhangg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/gmail"
+            android:paddingTop="10dp"
+            android:drawablePadding="20dp"
+            android:text="Email  khách hàng"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/khung2">
+
+        <TextView
+            android:id="@+id/tv_sđtkhachhang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/call"
+            android:paddingTop="10dp"
+            android:drawablePadding="20dp"
+            android:text="sđt khách hàng"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+         android:layout_marginTop="20dp"
+        android:background="@drawable/khung2">
+
+        <TextView
+            android:id="@+id/tv_diachikhachhang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/location"
+            android:paddingTop="10dp"
+            android:drawablePadding="20dp"
+            android:text="địa chỉ  khách hàng"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnSuaTTkhachhang"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#9D8DF5"
+        android:text="Sửa thông tin "
+        android:layout_marginTop="250dp"
+        android:background="@drawable/khung_bottom222"
+        android:textSize="14dp" />
+
+
+
+</LinearLayout>

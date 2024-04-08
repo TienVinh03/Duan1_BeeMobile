@@ -152,6 +152,11 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             toolbar.setTitle("Trang chủ(admin)");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuAdmin()).addToBackStack(null).commit();
         }
+        else if (item.getItemId()==R.id.thongTin) {
+            setTitle("Thông tin ");
+            toolbar.setTitle("Thông tin cá nhân");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_Info()).addToBackStack(null).commit();
+        }
         else if (item.getItemId()==R.id.manChinhUser) {
             setTitle("Màn hình chính");
             toolbar.setTitle("Trang chủ(user)");
