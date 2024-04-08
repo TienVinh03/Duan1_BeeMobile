@@ -54,6 +54,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             public void onClick(View v) {
                 orders.remove(order);
                 orderDAO.deletOrder(order);
+                orderDAO.deleteOrderDetailsByOrderId(order.getId());
                 notifyDataSetChanged();
             }
         });

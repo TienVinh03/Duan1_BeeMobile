@@ -8,6 +8,7 @@ public class Cart {
     private int rom;
     private int price;
     private int quantity;
+    private int idUser;
 
     public int getIdPhone() {
         return idPhone;
@@ -21,7 +22,7 @@ public class Cart {
     }
 
 
-    public Cart(int id,String name, int idPhone, String color, int rom, int price, int quantity) {
+    public Cart(int id,String name, int idPhone, String color, int rom, int price, int quantity,int idUser) {
         this.id=id;
         this.name = name;
         this.idPhone = idPhone;
@@ -29,6 +30,7 @@ public class Cart {
         this.rom = rom;
         this.price = price;
         this.quantity = quantity;
+        this.idUser=idUser;
     }
 
     public int getId() {
@@ -37,6 +39,14 @@ public class Cart {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {

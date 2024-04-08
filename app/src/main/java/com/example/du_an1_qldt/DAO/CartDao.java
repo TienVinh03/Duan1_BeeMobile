@@ -22,14 +22,15 @@ public class CartDao {
         db = myDbHelper.getWritableDatabase();
     }
 
-    public ArrayList<Cart> getlistCart() {
+    public ArrayList<Cart> getlistCart(int userId) {
         ArrayList<Cart> list = new ArrayList<>();
-        Cursor c = db.rawQuery("select * from ShoppingCart", null, null);
+        Cursor c = db.rawQuery("select * from ShoppingCart where idUser=?",new String[]{String.valueOf(userId)}, null);
         if (c.getCount() > 0) {
             c.moveToFirst();
             do {
                 Cart cart = new Cart();
                 cart.setId(c.getInt(0));
+                cart.setIdUser(c.getInt(6));
                 cart.setQuantity(c.getInt(2));
                 cart.setIdPhone(c.getInt(1));
                 cart.setColor(c.getString(4));
@@ -48,6 +49,7 @@ public class CartDao {
             values.put("ram", cart.getRom());
             values.put("mauSac", cart.getColor());
             values.put("soLuong", cart.getQuantity());
+            values.put("idUser", cart.getIdUser());
 
             return (int) db.insert("ShoppingCart", null, values);
 
