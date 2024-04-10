@@ -85,10 +85,10 @@
             android:name=".Frag_QuanLiHangDT"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DangNhap"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

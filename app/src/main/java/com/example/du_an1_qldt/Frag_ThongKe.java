@@ -10,6 +10,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.du_an1_qldt.DAO.OrderDetailDao;
 import com.example.du_an1_qldt.DataBase1.dbHelper;
@@ -30,6 +35,10 @@ public class Frag_ThongKe extends Fragment {
     BarChart barChart;
     OrderDetail orderDetail;
     OrderDetailDao orderDetailDao;
+    Spinner spn_loc;
+    TextView tongDoanhThu;
+    TextView tongDonHang;
+    TextView cotcaoNhat;
     dbHelper dbHelper1;
 
     @Nullable
@@ -45,92 +54,142 @@ public class Frag_ThongKe extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tongDoanhThu = view.findViewById(R.id.toongDoanhThu);
+        tongDonHang = view.findViewById(R.id.toongDonHang);
+        cotcaoNhat = view.findViewById(R.id.cotCaoNhat);
         barChart = view.findViewById(R.id.barChart);
         dbHelper1 = new dbHelper(getActivity());
+        spn_loc = view.findViewById(R.id.spn_loc);
 
 
 
-        setupChart();
-//
-//        ArrayList<BarEntry> barEntries = new ArrayList<>();
-//        for (int i=1;i<5;i++){
-//            float value = (float) (i*5.0);
-//
-//            BarEntry barEntry = new BarEntry(i,value);
-//
-//            barEntries.add(barEntry);
-//        }
-//
-//        BarDataSet barDataSet = new BarDataSet(barEntries,"DoanhThu");
-//        barDataSet.setColor(Color.BLUE);
-//        barDataSet.setDrawValues(false);
-//        barChart.setData(new BarData(barDataSet));
-//
-//        barChart.animateY(3000);
-//        barChart.getDescription().setText("Doanh Thu Chart");
-//        barChart.getDescription().setTextColor(Color.RED);
+        String[] intervals = {"Theo tháng", "Theo quý", "Theo năm"};
 
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, intervals);
 
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spn_loc.setAdapter(adapter);
+        spn_loc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String selectedInterval = parent.getItemAtPosition(position).toString();
+                if (selectedInterval.equals("Theo tháng")){
+                    setupChartOrderMonth();
+                } else if (selectedInterval.equals("Theo quý")) {
+                    setupChartOrderQuarter();
+
+                } else if (selectedInterval.equals("Theo năm")) {
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
     }
-    private void setupChart() {
-        ArrayList<BarEntry> entries1 = new ArrayList<>();
-
-        orderDetailDao = new OrderDetailDao(getActivity());
+       private void setupChartOrderMonth() {
 
 
-        entries1.add(new BarEntry( 0, (float)orderDetailDao.getTotalPriceForMonth2()));
-        entries1.add(new BarEntry(1, (float)orderDetailDao.getTotalPriceForMonth3()));
-//        entries1.add(new BarEntry(2, (float)orderDetailDao.getTotalPriceForMonth4()));
-        entries1.add(new BarEntry(2, (float)orderDetailDao.getTotalAmount()));
+           orderDetailDao = new OrderDetailDao(getActivity());
 
-        BarDataSet dataSet = new BarDataSet(entries1, "Doanh thu");
+           ArrayList<BarEntry> entries = new ArrayList<>();
+           entries.add(new BarEntry(0, (float)orderDetailDao.getTotalPriceForMonth1()));
+           entries.add(new BarEntry(1, (float)orderDetailDao.getTotalPriceForMonth2()));
+           entries.add(new BarEntry(2, (float)orderDetailDao.getTotalPriceForMonth3()));
+           entries.add(new BarEntry(3, (float)orderDetailDao.getTotalPriceForMonth4()));
+//           entries.add(new BarEntry(4, (float)orderDetailDao.getTotalPriceForMonth5()));
+//           entries.add(new BarEntry(5, (float)orderDetailDao.getTotalPriceForMonth6()));
+//           entries.add(new BarEntry(6, (float)orderDetailDao.getTotalPriceForMonth7()));
+//           entries.add(new BarEntry(7, (float)orderDetailDao.getTotalPriceForMonth8()));
+//           entries.add(new BarEntry(8, (float)orderDetailDao.getTotalPriceForMonth9()));
+//           entries.add(new BarEntry(9, (float)orderDetailDao.getTotalPriceForMonth10()));
+//           entries.add(new BarEntry(10, (float)orderDetailDao.getTotalPriceForMonth11()));
+//           entries.add(new BarEntry(11, (float)orderDetailDao.getTotalPriceForMonth12()));
+
+           BarDataSet dataSet = new BarDataSet(entries, "Revenue");
+           dataSet.setColor(Color.rgb(255, 102, 0)); // Màu của cột
+           dataSet.setValueTextSize(5);
+
+           ArrayList<String> labels = new ArrayList<>();
+           labels.add("Jan");
+           labels.add("Feb");
+           labels.add("Mar");
+           labels.add("Apr");
+//           labels.add("May");
+//           labels.add("Jun");
+//           labels.add("Jul");
+//           labels.add("Aug");
+//           labels.add("Sep");
+//           labels.add("Oct");
+//           labels.add("Nov");
+//           labels.add("Dec");
+
+           BarData data = new BarData(dataSet);
+           data.setBarWidth(0.7f);
+           barChart.setData(data);
+           barChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(labels));
+           barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+           barChart.getXAxis().setGranularity(1f);
+           barChart.getXAxis().setGranularityEnabled(true);
+           barChart.getAxisLeft().setAxisMinimum(0);
+           barChart.getAxisRight().setAxisMinimum(0);
+           barChart.getXAxis().setAxisMaximum(4);
+           barChart.getDescription().setEnabled(false);
+           barChart.setDrawGridBackground(false);
+           barChart.setFitBars(true); // Căn chỉnh cột
+           barChart.animateY(1000);
+           barChart.invalidate();
+
+
+           tongDoanhThu.setText("Tổng doanh thu của các tháng : "+String.valueOf(orderDetailDao.getTotalAmount())+" VNĐ");
+           tongDonHang.setText("Tổng đơn hàng của các tháng : "+String.valueOf(orderDetailDao.getNumberOfOrdersInYear2024())+" đơn");
+           cotcaoNhat.setText("Tháng có doanh thu cao nhất : Tháng " +String.valueOf(orderDetailDao.getMonthWithHighestTotalPrice())+" - Tổng ĐH trong tháng này: "+orderDetailDao.getTotalOrdersInMonthWithHighestRevenue()+" đơn");
+
+}
+    private void setupChartOrderQuarter() {
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, (float) orderDetailDao.getTotalPriceForQuarter1InYear(1,2024)));
+        entries.add(new BarEntry(1,  (float) orderDetailDao.getTotalPriceForQuarter2InYear(2,2024)));
+        entries.add(new BarEntry(2,  (float) orderDetailDao.getTotalPriceForQuarter3InYear(3,2024)));
+        entries.add(new BarEntry(3,  (float) orderDetailDao.getTotalPriceForQuarter4InYear(4,2024)));
+
+        BarDataSet dataSet = new BarDataSet(entries, "Revenue");
+        dataSet.setColor(Color.rgb(255, 102, 0)); // Màu của cột
+
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("Quý 1");
+        labels.add("Quý 2");
+        labels.add("Quý 3");
+        labels.add("Quý 4");
+
         BarData data = new BarData(dataSet);
         barChart.setData(data);
-
-
+        barChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(labels));
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getXAxis().setGranularity(1f);
+        barChart.getXAxis().setGranularityEnabled(true);
+        barChart.getAxisLeft().setAxisMinimum(0);
+        barChart.getAxisRight().setAxisMinimum(0);
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawGridBackground(false);
+        barChart.setFitBars(true); // Căn chỉnh cột
+        barChart.animateY(1000);
         barChart.invalidate();
 
-
-
-        // Đặt giá trị cho trục X
-        final  String[] months1 = new String[]{"Tháng 2","Tháng 3","Tổng cộng"};
-
-        XAxis xAxis = barChart.getXAxis();
-        IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(months1);
-        xAxis.setAxisLineColor(Color.YELLOW);
-        xAxis.setAxisLineWidth(5);
-        xAxis.setDrawLabels(true);
-
-
-        barChart.getXAxis().setValueFormatter(formatter);
-
-
-
-
-
-        // Thiết lập chiều cao của cột theo số tiền
-        dataSet.setDrawValues(true);
-
-
-
-
-        dataSet.setColor(Color.BLUE);
-        dataSet.setLabel("Tiền");
-        barChart.getDescription().setText("Doanh thu");
-        barChart.animateY(2000);
-        data.setBarWidth(0.7F);
-
-//        barChart.setHighlightFullBarEnabled(true);
-        barChart.setFitBars(true);
-
-
-
-
-
+        tongDoanhThu.setText("Tổng doanh thu của các qúy : "+String.valueOf(orderDetailDao.getTotalAmount())+" VNĐ");
+        tongDonHang.setText("Tổng đơn hàng của các quý : "+String.valueOf(orderDetailDao.getNumberOfOrdersInYear2024())+" đơn");
+        cotcaoNhat.setText("Qúy có doanh thu cao nhất : Qúy " +String.valueOf(orderDetailDao.getQuarterWithHighestRevenue()) +" - Tổng ĐH trong quý này : "+orderDetailDao.getTotalOrdersInQuarterWithHighestRevenue()+" đơn");
 
     }
 }

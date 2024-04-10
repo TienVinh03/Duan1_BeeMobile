@@ -57,7 +57,7 @@ public class HangDienThoaiDAO {
             HangDienThoai hangDienThoai = new HangDienThoai();
             hangDienThoai.setIdHang(cursor.getInt(0));
             hangDienThoai.setTenHang(cursor.getString(1));
-            hangDienThoai.setHeDieuHanh(cursor.getString(1));
+            hangDienThoai.setHeDieuHanh(cursor.getString(2));
             list.add(hangDienThoai);
         }
         return list;
