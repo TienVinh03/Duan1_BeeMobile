@@ -47,7 +47,7 @@ public class OrderDetailDao {
     public double getTotalAmount() {
         double total = 0;
 
-        Cursor cursor = db.rawQuery("SELECT SUM(giaTien) FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) = '2024'", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(giaTien*soLuong) FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) = '2024'", null);
         if (cursor.moveToFirst()) {
             total = cursor.getDouble(0);
         }
@@ -58,7 +58,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth1() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '01' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -75,7 +75,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth5() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '05' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -92,7 +92,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth3() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '03' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -109,7 +109,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth4() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '04' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -126,7 +126,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth2() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '02' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -143,7 +143,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth6() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '06' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -160,7 +160,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth8() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '08' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -177,7 +177,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth7() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '07' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -194,7 +194,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth9() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '9' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -211,7 +211,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth10() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '10' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -228,7 +228,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth11() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '11' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -245,7 +245,7 @@ public class OrderDetailDao {
     public double getTotalPriceForMonth12() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) = '12' and strftime('%Y',Oder.date) = '2024'";
 
 
@@ -262,7 +262,7 @@ public class OrderDetailDao {
     public double getTotalPriceForDay() {
         double totalPrice = 0;
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%d',Oder.date) = '10' and strftime('%m',Oder.date)='04'";
 
 
@@ -314,7 +314,7 @@ public class OrderDetailDao {
         int startMonth = (quarter - 1) * 3 + 1; // Tháng bắt đầu của quý
         int endMonth = startMonth + 2; // Tháng kết thúc của quý
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) BETWEEN '01' AND '03'"
                 + " AND strftime('%Y', Oder.date) = '" + year + "'";
 
@@ -334,7 +334,7 @@ public class OrderDetailDao {
         int startMonth = (quarter - 1) * 3 + 1; // Tháng bắt đầu của quý
         int endMonth = startMonth + 2; // Tháng kết thúc của quý
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) BETWEEN '04' AND '06'"
                 + " AND strftime('%Y', Oder.date) = '" + year + "'";
 
@@ -354,7 +354,7 @@ public class OrderDetailDao {
         int startMonth = (quarter - 1) * 3 + 1; // Tháng bắt đầu của quý
         int endMonth = startMonth + 2; // Tháng kết thúc của quý
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) BETWEEN '07' AND '09'"
                 + " AND strftime('%Y', Oder.date) = '" + year + "'";
 
@@ -374,7 +374,7 @@ public class OrderDetailDao {
         int startMonth = (quarter - 1) * 3 + 1; // Tháng bắt đầu của quý
         int endMonth = startMonth + 2; // Tháng kết thúc của quý
 
-        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
                 + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%m',Oder.date) BETWEEN '10' AND '12'"
                 + " AND strftime('%Y', Oder.date) = '" + year + "'";
 

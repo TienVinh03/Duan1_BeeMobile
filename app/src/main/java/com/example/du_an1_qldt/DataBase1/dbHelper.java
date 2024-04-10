@@ -14,7 +14,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 41);
+        super(context, DB_name, null, 43);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
         //Vinh them
-        String insert_orderDetail = "insert into OderDetail values (1,1,3,1,20000000),(2,1,2,1,42050000.0),(3,1,1,1,10000000),(4,1,4,1,10000000),(5,1,5,1,10000000) ";
+        String insert_orderDetail = "insert into OderDetail values (1,1,3,1,20000000),(2,1,2,5,42050000.0),(3,1,1,1,10000000),(4,1,4,1,10000000),(5,1,5,1,10000000) ";
         sqLiteDatabase.execSQL(insert_orderDetail);
 
 
