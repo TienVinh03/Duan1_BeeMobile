@@ -22,8 +22,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
+import com.example.du_an1_qldt.DAO.CustomerDao;
 import com.example.du_an1_qldt.DAO.OrderDAO;
+import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
+import com.example.du_an1_qldt.model.Customer;
 import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.OrderDetail;
 import com.example.du_an1_qldt.model.Voucher_DTO;
@@ -48,7 +51,7 @@ public class TaoDonHang extends AppCompatActivity {
     Button btnOrder;
     OrderDAO orderDAO;
     int idPR;
-    TextInputEditText nameUser, numberPhone, address;
+    TextInputEditText nameUser, numberPhone, addressUser;
     Date date;
     DecimalFormat formatter;
 
@@ -69,12 +72,12 @@ public class TaoDonHang extends AppCompatActivity {
         priceVoucher = findViewById(R.id.priceVoucher);
         nameUser = findViewById(R.id.username);
         numberPhone = findViewById(R.id.numberphone);
-        address = findViewById(R.id.address);
+        addressUser = findViewById(R.id.address);
         spnVoucher = findViewById(R.id.spnVoucher);
         btnOrder = findViewById(R.id.btnDatHang);
         voucherDAO = new VoucherDAO(this);
         Intent intent = getIntent();
-         formatter = new DecimalFormat("#,###,###");
+        formatter = new DecimalFormat("#,###,###");
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -143,24 +146,32 @@ public class TaoDonHang extends AppCompatActivity {
         String formattedDate = dateFormat.format(date);
         ship.setTextColor(Color.parseColor("#FF0000"));
         priceVoucher.setTextColor(Color.parseColor("#FF0000"));
+        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("manguoidung", "");
+        String name = sharedPreferences.getString("hoTen", "");
+        String sdt = sharedPreferences.getString("sodienthoai", "");
+        String address = sharedPreferences.getString("diachi", "");
+        TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO(TaoDonHang.this);
+        nameUser.setText(name);
+        numberPhone.setText(sdt);
+        addressUser.setText(address);
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(nameUser.getText().toString().trim())) {
                     Toast.makeText(TaoDonHang.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(address.getText().toString().trim())) {
+                } else if (TextUtils.isEmpty(addressUser.getText().toString().trim())) {
                     Toast.makeText(TaoDonHang.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(numberPhone.getText().toString().trim())) {
                     Toast.makeText(TaoDonHang.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
                 } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
                     Toast.makeText(TaoDonHang.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
                 } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
-                    String id = sharedPreferences.getString("manguoidung", "");
+
 
                     orderDAO = new OrderDAO(TaoDonHang.this);
-                    Order order=new Order();
+                    Order order = new Order();
                     order.setIdUser(Integer.parseInt(id));
                     order.setStatusOrder(0);
                     order.setDateOrder(formattedDate);
@@ -170,6 +181,14 @@ public class TaoDonHang extends AppCompatActivity {
                         Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+                    }
+                    if (taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
+                        Customer customer = new Customer();
+                        customer.setNumberPhone(numberPhone.getText().toString());
+                        customer.setAddress(addressUser.getText().toString());
+                        customer.setName(nameUser.getText().toString());
+                        CustomerDao customerDao = new CustomerDao(TaoDonHang.this);
+                        customerDao.addCustomer(customer);
                     }
                 }
             }
