@@ -39,7 +39,7 @@ public class DetailOrderAdapter extends RecyclerView.Adapter<DetailOrderAdapter.
     public void onBindViewHolder(@NonNull DetailOrderAdapter.ViewHolder holder, int position) {
 OrderDetail orderDetail=list.get(position);
         SanPhamDAO sanPhamDAO= new SanPhamDAO(context);
-holder.tvName.setText(sanPhamDAO.getProductNameById(orderDetail.getId()));
+holder.tvName.setText(sanPhamDAO.getProductNameById(orderDetail.getIdProduct()));
 holder.tvPrice.setText(orderDetail.getPrice()+"đ");
 holder.tvQuantity.setText(orderDetail.getQuantity()+"");
     }
