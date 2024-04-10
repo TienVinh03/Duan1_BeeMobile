@@ -3,6 +3,8 @@ package com.example.du_an1_qldt.model;
 public class OrderDetail {
   private   int id;
   private   int idProduct;
+
+  private int idDonHang;
   private   int quantity;
   private   double price;
 
@@ -11,6 +13,22 @@ public class OrderDetail {
         this.idProduct = idProduct;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public void setIdDonHang(int idDonHang) {
+        this.idDonHang = idDonHang;
+    }
+
+    public int getIdDonHang() {
+        return idDonHang;
+    }
+
+    public OrderDetail(int id, int idProduct, int idDonHang, int quantity, double price) {
+        this.id = id;
+        this.idProduct = idProduct;
+        this.quantity = quantity;
+        this.price = price;
+        this.idDonHang = idDonHang;
     }
 
     public OrderDetail() {

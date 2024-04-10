@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.du_an1_qldt.Adapter.SanPhamAdapter;
+import com.example.du_an1_qldt.DAO.OrderDetailDao;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.phone;
@@ -57,6 +58,7 @@ public class TrangChuAdmin extends Fragment {
     FragMentContainer fragMentContainer;
 
     Frag_DanhSachVoucher fragDanhSachVoucher;
+    OrderDetailDao orderDetailDao;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     int[] images = {R.drawable.anh_slide1, R.drawable.anh_slide2, R.drawable.anh_slide3, R.drawable.anh_slide4, R.drawable.anh_slide5};
@@ -85,12 +87,15 @@ public class TrangChuAdmin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         CardView cardView = view.findViewById(R.id.cardViewTrangChu);
+        orderDetailDao = new OrderDetailDao(getActivity());
         cardView.setCardBackgroundColor(Color.WHITE);
         cardView.setRadius(20);
         Button incon_themSP = view.findViewById(R.id.incon_themSP);
         Button icon_dsVoucher = view.findViewById(R.id.icon_dsVoucher);
         Button icon_dsSP = view.findViewById(R.id.icon_dsSP);
         Button icon_thongKe = view.findViewById(R.id.icon_thongKe);
+        TextView doanhthungay = view.findViewById(R.id.doanhthungay);
+        doanhthungay.setText(String.valueOf((int) orderDetailDao.getTotalPriceForDay())+" VNĐ");
 
 
 

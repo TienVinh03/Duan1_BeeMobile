@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="0.7"
-            android:paddingLeft="20dp"
+            android:paddingLeft="25dp"
             android:layout_marginLeft="5dp"
             android:id="@+id/btn_addVoucher"
 
@@ -39,15 +39,7 @@
 
 
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linear_qlvoucher"
 
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:id="@+id/rc_QL_Voucher"
-        />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
@@ -63,7 +55,7 @@
 
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:id="@+id/rc_QLSP"
+            android:id="@+id/rc_QL_Voucher"
             />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

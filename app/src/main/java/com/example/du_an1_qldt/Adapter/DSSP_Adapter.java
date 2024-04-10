@@ -64,6 +64,16 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
         holder.tv_mauSac.setText(String.valueOf(dt.getColor()));
         holder.tv_romSP.setText("Rom:" + String.valueOf(dt.getRom()));
 
+        if (dt.getImage()==1){
+            holder.anh1.setImageResource(R.drawable.k40_gaming);
+        } else if (dt.getImage()==2) {
+            holder.anh1.setImageResource(R.drawable.k50);
+        }else if (dt.getImage()==3) {
+            holder.anh1.setImageResource(R.drawable.iphone3);
+        }else if (dt.getImage()==4) {
+            holder.anh1.setImageResource(R.drawable.iphone5);
+        }
+
         holder.btnMuaNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +140,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
             tv_tenSP1 = itemView.findViewById(R.id.tv_tenSP1);
             tv_giaSPham = itemView.findViewById(R.id.tv_giaSPham);
             tv_TrangthaiSP1 = itemView.findViewById(R.id.tv_TrangthaiSP1);
-            anh1 = itemView.findViewById(R.id.anh1);
+            anh1 = itemView.findViewById(R.id.anh11);
             tv_mauSac = itemView.findViewById(R.id.tv_mauSac);
             tv_romSP = itemView.findViewById(R.id.tv_romSP);
 

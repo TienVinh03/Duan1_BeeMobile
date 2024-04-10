@@ -18,21 +18,20 @@
             android:id="@+id/edt_search_dsVoucher"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.8"
             android:background="@drawable/khugn_search"
             android:drawableEnd="@drawable/baseline_search_24"
             android:paddingHorizontal="5dp"
             android:hint="Tìm kiếm"
 
             />
-        <EditText
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="0.4"
-            android:paddingLeft="17dp"
+            android:layout_weight="0.2"
+            android:paddingLeft="25dp"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center"
-
             android:background="@drawable/khugn_search"
             android:drawableStart="@drawable/filter"
             />

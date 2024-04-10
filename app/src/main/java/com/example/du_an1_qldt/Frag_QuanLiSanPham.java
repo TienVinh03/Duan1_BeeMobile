@@ -18,6 +18,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -30,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,10 +50,15 @@ public class Frag_QuanLiSanPham extends Fragment {
 
     SanPhamDAO sanPhamDAO;
     SanPhamAdapter sanPhamAdapter;
-    SanPhamAdapter sanPhamAdapter1;
+
     ArrayList<phone> listSP;
     Spinner spn_hangDT;
     dbHelper myDbHelper;
+
+    private ImageView mainImage;
+    private int[] imageResources = {R.drawable.k40_gaming,R.drawable.k50, R.drawable.iphone5, R.drawable.iphone3};
+    private int currentImageIndex = 0;
+
     SQLiteDatabase database;
     private InputMethodManager inputMethodManager;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -193,6 +200,7 @@ public class Frag_QuanLiSanPham extends Fragment {
                 rc_QLSP.setAdapter(sanPhamAdapter);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 rc_QLSP.setLayoutManager(linearLayoutManager);
+                sanPhamAdapter.notifyDataSetChanged();
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -212,6 +220,24 @@ public class Frag_QuanLiSanPham extends Fragment {
                 Spinner spn_mausac = v1.findViewById(R.id.spin_mauSac_add);
                 TextView tv_trangThai = v1.findViewById(R.id.tv_trangThai_add);
                 Button btn_save_add = v1.findViewById(R.id.btn_addsp_add);
+
+                 mainImage =v1.findViewById(R.id.anh5);
+
+                 mainImage.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         changeImage(v1);
+
+                     }
+                 });
+
+
+
+
+
+
+
+
 
 
 
@@ -251,7 +277,7 @@ public class Frag_QuanLiSanPham extends Fragment {
 
                 sanPhamDAO = new SanPhamDAO(getActivity());
                 listSP =sanPhamDAO.getlistSP();
-                sanPhamAdapter1= new SanPhamAdapter((FragMentContainer)getActivity(),listSP);
+                sanPhamAdapter= new SanPhamAdapter((FragMentContainer)getActivity(),listSP);
                 phone phoneDTO = new phone();
 
                 builder.setView(v1);
@@ -302,8 +328,23 @@ public class Frag_QuanLiSanPham extends Fragment {
                                 phoneDTO.setColor(spn_mausac.getSelectedItem().toString());
                                 phoneDTO.setRom(rom);
                                 phoneDTO.setSoLuong(soluong);
-                                phoneDTO.setImage(1);
+                                if (currentImageIndex==0){
+                                    phoneDTO.setImage(1);
+                                    currentImageIndex=0;
+                                } else if (currentImageIndex==1) {
+                                    phoneDTO.setImage(2);
+                                    currentImageIndex=0;
+                                } else if (currentImageIndex==2) {
+                                    phoneDTO.setImage(3);
+                                    currentImageIndex=0;
+                                }else {
+                                    phoneDTO.setImage(4);
+                                    currentImageIndex=0;
+                                }
+
                                 phoneDTO.setGia(gia);
+
+
 
 
                                 int check = sanPhamDAO.addSanPham(phoneDTO);
@@ -311,7 +352,7 @@ public class Frag_QuanLiSanPham extends Fragment {
 
                                     listSP.clear();
                                     listSP.addAll(sanPhamDAO.getlistSP());
-                                    sanPhamAdapter1.notifyDataSetChanged();
+                                    sanPhamAdapter.notifyDataSetChanged();
 
                                     Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
 
@@ -343,6 +384,14 @@ public class Frag_QuanLiSanPham extends Fragment {
             }
         });
 
+
+    }
+
+
+    public void changeImage(View view) {
+        // Chuyển sang ảnh tiếp theo trong mảng
+        currentImageIndex = (currentImageIndex + 1) % imageResources.length;
+        mainImage.setImageResource(imageResources[currentImageIndex]);
     }
 
 

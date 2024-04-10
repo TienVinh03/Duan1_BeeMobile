@@ -18,18 +18,18 @@
         android:paddingHorizontal="10dp">
 
 
+        <ImageView
+            android:id="@+id/anh5"
+            android:layout_width="98dp"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
 
 
-    <ImageView
-        android:id="@+id/anh5"
-        android:layout_width="98dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/k40_gaming"
-        android:layout_alignParentTop="true"
+            android:src="@drawable/k40_gaming" />
 
-        />
+        
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

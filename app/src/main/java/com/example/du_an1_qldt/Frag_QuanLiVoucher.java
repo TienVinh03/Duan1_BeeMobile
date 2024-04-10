@@ -64,7 +64,7 @@ public class Frag_QuanLiVoucher extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                rc_QLVoucher = view.findViewById(R.id.rc_QLSP);
+                rc_QLVoucher = view.findViewById(R.id.rc_QL_Voucher);
 
                 voucherDAO = new VoucherDAO(getActivity());
                 listVoucher = voucherDAO.getListVoucher();

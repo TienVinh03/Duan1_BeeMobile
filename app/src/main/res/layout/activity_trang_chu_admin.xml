@@ -56,6 +56,7 @@
                 android:text="12,000,000đ"
                 android:textColor="@color/black"
                 android:textSize="22sp"
+                android:id="@+id/doanhthungay"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold" />
             <TextView

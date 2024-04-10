@@ -70,10 +70,12 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/anh1"
-                    android:layout_width="98dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/k40_gaming" />
+                android:id="@+id/anh1"
+                android:layout_width="98dp"
+                android:layout_height="120dp"
+                android:src="@drawable/k40_gaming" />
+
+
 
             </LinearLayout>
 

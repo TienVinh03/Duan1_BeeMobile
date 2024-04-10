@@ -1,5 +1,6 @@
 package com.example.du_an1_qldt.DataBase1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,10 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class dbHelper extends SQLiteOpenHelper {
-    private static final String DB_name = "BeePhones3333333";
+    private static final String DB_name = "BeePhones4444";
+
+
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 31);
+        super(context, DB_name, null, 38);
     }
 
     @Override
@@ -36,8 +39,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idHang) REFERENCES Brand(idHang))";
         sqLiteDatabase.execSQL(db_phone);
 
-        String insert_phone = "insert into Phone Values " +
-                "(1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20),(2,'Iphone 14 Pro',2,8200000,1,128,'Xám',1,20)";
+        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20)";
         sqLiteDatabase.execSQL(insert_phone);
 
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +
@@ -72,7 +74,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "loaitaikhoan TEXT)";
         sqLiteDatabase.execSQL(dbnguoidung);
 
-        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(3,'hai','hai','Nguyen Xuan Hai','0972512987','hai@gmail.com','Thanh Hoa','user'),(2,'vinh','vinh','Vu Tien Vinh','0332322764','vinh@gmail.com','Thai Binh','user')");
+        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user')");
 
 
         String db_order_detail = "CREATE TABLE OderDetail (" +
@@ -86,6 +88,12 @@ public class dbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(db_order_detail);
 
 
+        //Vinh them
+        String insert_orderDetail = "insert into OderDetail values (1,1,3,10,20000000),(2,1,2,10,42050000.0),(3,1,1,10,10000000) ";
+        sqLiteDatabase.execSQL(insert_orderDetail);
+
+
+
         String db_order = "CREATE TABLE Oder (" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "idUser integer NOT NULL, " +
@@ -93,11 +101,22 @@ public class dbHelper extends SQLiteOpenHelper {
                 "status int NOT NULL, " +
                 "FOREIGN KEY (idUser) REFERENCES User(id))";
         sqLiteDatabase.execSQL(db_order);
+
+        //Vinh them
+        String insert_Order =" insert into Oder values (1,2,'2024-03-09 15:30:00',1),(2,2,'2024-04-10 15:30:00',1),(3,2,'2024-02-09 15:30:00',0) ";
+        sqLiteDatabase.execSQL(insert_Order);
+
+
+
+
+
         String db_customer = "CREATE TABLE Customer(" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "sdt text not null, " +
                 "name text not null)";
         sqLiteDatabase.execSQL(db_customer);
+
+
     }
 
     @Override
@@ -130,4 +149,22 @@ public class dbHelper extends SQLiteOpenHelper {
         return db.query("Brand", new String[]{"tenHang"}, "idHang" + "=?",
                 new String[]{String.valueOf(id)}, null, null, null);
     }
+
+//    @SuppressLint("Range")
+//    public double getTotalPriceForMonth3() {
+//        double totalPrice = 0;
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        String query = "SELECT SUM(OderDetail.giaTien) AS total_price "
+//                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE Oder('%m', Oder.date) = '03'";
+//
+//        Cursor cursor = db.rawQuery(query, null);
+//        if (cursor.moveToFirst()) {
+//            totalPrice = cursor.getDouble(cursor.getColumnIndex("total_price"));
+//        }
+//        cursor.close();
+//
+//        return totalPrice;
+//    }
 }

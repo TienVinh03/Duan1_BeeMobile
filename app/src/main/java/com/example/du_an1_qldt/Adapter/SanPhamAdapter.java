@@ -45,6 +45,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     dbHelper dbHelper1;
     SanPhamDAO sanPhamDAO11;
     SanPhamAdapter sanPhamAdapter1;
+    Frag_QuanLiSanPham fragQuanLiSanPham;
 
     public SanPhamAdapter(Context context, ArrayList<phone> listSP, SanPhamDAO sanPhamDAO11) {
         this.context = context;
@@ -73,12 +74,19 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         listSP = sanPhamDAO.getlistSP();
         dbHelper1 = new dbHelper(context);
         phone phoneDTO = listSP.get(position);
+
         holder.tv_tenSP.setText(phoneDTO.getName());
         holder.tv_giaSp.setText(phoneDTO.getGia()+"");
         holder.tv_hangSP.setText(getTenLoaiSanPham(phoneDTO.getId_Hang()));
-
-
-
+        if (phoneDTO.getImage()==1){
+            holder.img_anhSP.setImageResource(R.drawable.k40_gaming);
+        } else if (phoneDTO.getImage()==2) {
+            holder.img_anhSP.setImageResource(R.drawable.k50);
+        }else if (phoneDTO.getImage()==3) {
+            holder.img_anhSP.setImageResource(R.drawable.iphone3);
+        }else if (phoneDTO.getImage()==4) {
+            holder.img_anhSP.setImageResource(R.drawable.iphone5);
+        }
 
 
         holder.tv_soLuongsp.setText(phoneDTO.getSoLuong()+"");
@@ -263,6 +271,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
                                listSP.remove(phoneDTO);
 
                                notifyDataSetChanged();
+
 
                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                            }else {
