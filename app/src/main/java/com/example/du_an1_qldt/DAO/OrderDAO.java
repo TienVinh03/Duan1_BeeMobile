@@ -91,7 +91,7 @@ public class OrderDAO {
 
     public ArrayList<OrderDetail> getlistOrderDetail(int orderId) {
         ArrayList<OrderDetail> list = new ArrayList<>();
-        Cursor c = db.rawQuery("select * from OderDetail where idDonHang=?", new String[]{String.valueOf(orderId)});
+        Cursor c = db.rawQuery("select * from OderDetail where id=?", new String[]{String.valueOf(orderId)});
         if (c.getCount() > 0) {
             c.moveToFirst();
             do {
