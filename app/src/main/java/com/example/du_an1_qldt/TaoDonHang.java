@@ -162,7 +162,7 @@ public class TaoDonHang extends AppCompatActivity {
                     orderDAO = new OrderDAO(TaoDonHang.this);
                     Order order=new Order();
                     order.setIdUser(Integer.parseInt(id));
-                    order.setStatusOrder("Chờ xác nhận");
+                    order.setStatusOrder(0);
                     order.setDateOrder(formattedDate);
                     int check = orderDAO.createOrder(order);
                     orderDAO.createOrderDetail(new OrderDetail(Integer.parseInt(id), idPR, quantityPr, total));

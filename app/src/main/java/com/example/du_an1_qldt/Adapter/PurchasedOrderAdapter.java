@@ -1,7 +1,9 @@
 package com.example.du_an1_qldt.Adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +12,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.du_an1_qldt.DAO.OrderDAO;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.Order;
+import com.example.du_an1_qldt.model.OrderDetail;
 
 import java.util.ArrayList;
 
 public class PurchasedOrderAdapter extends RecyclerView.Adapter<PurchasedOrderAdapter.ViewHolder> {
     Context context;
     ArrayList<Order> orders;
+    OrderDAO orderDAO;
+    RecyclerView recyclerView;
+    ArrayList<OrderDetail> list;
+    DetailOrderAdapter detailOrderAdapter;
 
     public PurchasedOrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
@@ -38,8 +46,25 @@ public class PurchasedOrderAdapter extends RecyclerView.Adapter<PurchasedOrderAd
         Order order=orders.get(position);
         holder.tvId.setText(String.valueOf(order.getId()));
         holder.tvDate.setText(order.getDateOrder());
-        holder.tvStatus.setText(order.getStatusOrder());
-
+        holder.tvStatus.setText(order.getStatusOrder()>0?"Đã xác nhận":"Chưa xác nhận");
+holder.btnDetail.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_order_detail, null);
+        recyclerView=dialogView.findViewById(R.id.rcvOrderDetail);
+        orderDAO= new OrderDAO(context);
+        list=orderDAO.getlistOrderDetail(order.getId());
+        detailOrderAdapter= new DetailOrderAdapter(context,list);
+        Log.d("re", list.size()+"");
+        recyclerView.setAdapter(detailOrderAdapter);
+        detailOrderAdapter.notifyDataSetChanged();
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+});
     }
 
     @Override

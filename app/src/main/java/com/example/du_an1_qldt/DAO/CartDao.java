@@ -59,4 +59,23 @@ public class CartDao {
         return db.delete("ShoppingCart","id=?",dk);
 
     }
+    public void updateCartItemQuantity(int cartItemId, int newQuantity) {
+        SQLiteDatabase db = myDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("soLuong", newQuantity);
+
+        // Điều kiện để cập nhật chỉ mục cụ thể
+        String selection = "id=?";
+        String[] selectionArgs = { String.valueOf(cartItemId) };
+
+        // Thực hiện cập nhật
+        int count = db.update("ShoppingCart", values, selection, selectionArgs);
+        db.close();
+
+        if (count > 0) {
+            // Cập nhật thành công
+        } else {
+            // Cập nhật không thành công
+        }
+    }
 }

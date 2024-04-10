@@ -4,9 +4,9 @@ public class Order {
     private int id;
     private  int idUser;
    private String dateOrder;
-   private String statusOrder;
+   private int statusOrder;
 
-    public Order(int id,int idUser, String dateOrder, String statusOrder) {
+    public Order(int id,int idUser, String dateOrder, int statusOrder) {
         this.id=id;
         this.idUser = idUser;
         this.dateOrder = dateOrder;
@@ -41,11 +41,11 @@ public class Order {
         this.dateOrder = dateOrder;
     }
 
-    public String getStatusOrder() {
+    public int getStatusOrder() {
         return statusOrder;
     }
 
-    public void setStatusOrder(String statusOrder) {
+    public void setStatusOrder(int statusOrder) {
         this.statusOrder = statusOrder;
     }
 

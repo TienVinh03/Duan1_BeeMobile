@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.du_an1_qldt.Adapter.CartAdapter;
 import com.example.du_an1_qldt.DAO.CartDao;
@@ -35,6 +37,7 @@ public class Frag_GioHang extends Fragment implements TotalPriceListener {
     RecyclerView recyclerView;
     ArrayList<Cart> cartArrayList;
     CartDao cartDao;
+    Toolbar toolbar;
     CartAdapter cartAdapter;
     Adapter adapter;
     TextView tv_price;
@@ -72,39 +75,32 @@ public class Frag_GioHang extends Fragment implements TotalPriceListener {
 btnOrder.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      String formattedDate = dateFormat.format(date);
-//        orderDAO = new OrderDAO(getContext());
-//        Order order=new Order();
+//        date = new Date();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//      String formattedDate = dateFormat.format(date);
+//        cartDao= new CartDao(getContext());
+//        ArrayList<Cart> carts= cartDao.getlistCart(Integer.parseInt(id));
+//        orderDAO= new OrderDAO(getContext());
+//        Order order= new Order();
 //        order.setIdUser(Integer.parseInt(id));
-//        order.setStatusOrder("Chờ xác nhận");
+//        order.setStatusOrder(0);
 //        order.setDateOrder(formattedDate);
-//        int check = orderDAO.createOrder(order);
-//        if (check > 0) {
-//            Toast.makeText(getContext(), "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(getContext(), "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+//        long orderId = orderDAO.createOrder2(order);
+//        for (Cart cart: carts) {
+//            OrderDetail orderDetail= new OrderDetail();
+//            orderDetail.setId((int) orderId);
+//            orderDetail.setPrice(cart.getPrice());
+//            orderDetail.setIdProduct(cart.getIdPhone());
+//            orderDetail.setQuantity(cart.getQuantity());
+//            orderDAO.createOrderDetail(orderDetail);
+//            cartDao.deleteRowCart(cart);
 //        }
-        cartDao= new CartDao(getContext());
-        ArrayList<Cart> carts= cartDao.getlistCart(Integer.parseInt(id));
-        orderDAO= new OrderDAO(getContext());
-        Order order= new Order();
-        order.setIdUser(Integer.parseInt(id));
-        order.setStatusOrder("Chờ xác nhận");
-        order.setDateOrder(formattedDate);
-        long orderId = orderDAO.createOrder2(order);
-        for (Cart cart: carts) {
-            OrderDetail orderDetail= new OrderDetail();
-            orderDetail.setId((int) orderId);
-            orderDetail.setPrice(cart.getPrice());
-            orderDetail.setIdProduct(cart.getIdPhone());
-            orderDetail.setQuantity(cart.getQuantity());
-            orderDAO.createOrderDetail(orderDetail);
-            cartDao.deleteRowCart(cart);
-        }
-        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-
+//        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+   if (cartArrayList.size()==0){
+       Toast.makeText(getContext(), "Giỏ hàng trống!!", Toast.LENGTH_SHORT).show();
+   }else {
+       startActivity(new Intent(getContext(), CreateOrderWithCart.class));
+   }
     }
 });
     }

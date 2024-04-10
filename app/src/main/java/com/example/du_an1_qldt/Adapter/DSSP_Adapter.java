@@ -88,7 +88,7 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
                 Cart cart = new Cart();
                 cart.setPrice(dt.getGia());
                 cart.setRom(dt.getRom());
-                cart.setQuantity(dt.getSoLuong());
+                cart.setQuantity(1);
                 cart.setIdPhone(dt.getId());
                 cart.setColor(dt.getColor());
                 cart.setIdUser(Integer.parseInt(idUser));
