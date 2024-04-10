@@ -15,21 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Du_an1_QLDT"
         tools:targetApi="31">
-
-
-
-
+        <activity
+            android:name=".CreateOrderWithCart"
+            android:exported="false" />
         <activity
             android:name=".Frag_DanhSachSP"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Frag_DS_SP"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_frag_ds_sp"-->
-<!--            android:theme="@style/Theme.Du_an1_QLDT" />-->
-<!--        <activity-->
-<!--            android:name=".row_dsVoucher"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Frag_DS_SP" -->
+        <!-- android:exported="false" -->
+        <!-- android:label="@string/title_activity_frag_ds_sp" -->
+        <!-- android:theme="@style/Theme.Du_an1_QLDT" /> -->
+        <!-- <activity -->
+        <!-- android:name=".row_dsVoucher" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".TaoDonHang"
             android:exported="false" />

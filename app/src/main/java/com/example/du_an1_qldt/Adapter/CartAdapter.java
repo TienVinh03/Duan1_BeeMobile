@@ -71,8 +71,12 @@ int quantity;
                 int check =cartDao.deleteRowCart(cart);
                 if(check>0){
                     list.remove(cart);
+                    if (totalPriceListener != null) {
+                        totalPriceListener.onTotalPriceChanged(calculateTotalPrice()); // calculateTotalPrice() là phương thức tính tổng giá trị trong giỏ hàng
+                    }
                     notifyDataSetChanged();
                     Toast.makeText(context, "Đã xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+
                 }else {
                     Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                 }
@@ -91,6 +95,7 @@ int quantity;
                 price = sl * cart.getPrice(); // Tính lại giá
                 String doublePrice = formatter.format(price);
                 holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
+                cartDao.updateCartItemQuantity(cart.getId(),sl);
                 holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
                 cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
                 if (totalPriceListener != null) {
@@ -109,6 +114,7 @@ int quantity;
                     price = sl * cart.getPrice(); // Tính lại giá
                     String doublePrice = formatter.format(price);
                     holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
+                    cartDao.updateCartItemQuantity(cart.getId(),sl);
                     holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
                     cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
                     if (totalPriceListener != null) {
@@ -118,6 +124,7 @@ int quantity;
                 }
             }
         });
+
     }
 
 
@@ -146,7 +153,7 @@ int quantity;
     private double calculateTotalPrice() {
         double totalPrice = 0.0;
         for (Cart cartItem : list) {
-            totalPrice += cartItem.getPrice() * sl;// Giả sử bạn có phương thức getPrice() và getQuantity() trong class Cart
+            totalPrice += cartItem.getPrice() * cartItem.getQuantity();// Giả sử bạn có phương thức getPrice() và getQuantity() trong class Cart
         }
         return totalPrice;
     }

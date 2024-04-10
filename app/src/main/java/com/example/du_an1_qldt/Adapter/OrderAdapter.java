@@ -47,7 +47,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         taiKhoanDAO = new TaiKhoanDAO(context);
         holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getId()));
         holder.date.setText(order.getDateOrder());
-        holder.status.setText(order.getStatusOrder());
+        holder.status.setText(order.getStatusOrder()==0 ?"Chờ xác nhận":"Đã xác nhận");
         LinearLayout linearLayoutToRemove = holder.layoutContainer;
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,16 +58,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 notifyDataSetChanged();
             }
         });
-        holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                order.setStatusOrder("Đã xác nhận");
-                holder.status.setText(order.getStatusOrder());
-                orderDAO.updateOrder(order);
-                linearLayoutToRemove.setVisibility(View.GONE);
-                notifyDataSetChanged();
-            }
-        });
+      if (order.getStatusOrder()==0){
+          holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  order.setStatusOrder(1);
+                  holder.status.setText(String.valueOf(order.getStatusOrder()));
+                  orderDAO.updateOrder(order);
+                  holder.layoutContainer.setVisibility(View.GONE);
+                  notifyDataSetChanged();
+
+              }
+          });
+      } else {
+          // Nếu đơn hàng đã xác nhận, ẩn LinearLayout
+          holder.layoutContainer.setVisibility(View.GONE);
+      }
     }
 
     @Override
