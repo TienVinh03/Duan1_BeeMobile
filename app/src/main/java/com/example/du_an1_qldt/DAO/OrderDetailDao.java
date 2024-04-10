@@ -22,6 +22,7 @@ public class OrderDetailDao {
         db = myDbHelper.getWritableDatabase();
 
     }
+
     public ArrayList<OrderDetail> getlistOrderDetail(){
         ArrayList<OrderDetail> list = new ArrayList<>();
         Cursor c = db.rawQuery("select * from OderDetail",null,null);

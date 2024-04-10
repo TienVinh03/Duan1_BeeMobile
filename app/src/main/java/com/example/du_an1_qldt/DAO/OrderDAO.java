@@ -96,12 +96,24 @@ public class OrderDAO {
             c.moveToFirst();
             do {
                 OrderDetail order = new OrderDetail();
-                order.setId(c.getInt(2));
+                order.setId(c.getInt(0));
+                order.setIdDonHang(c.getInt(2));
                 order.setIdProduct(c.getInt(1));
                 order.setQuantity(c.getInt(3));
                 order.setPrice(c.getInt(4));
                 list.add(order);
             } while (c.moveToNext());
+
+
+//            String db_order_detail = "CREATE TABLE OderDetail (" +
+//                    "id integer PRIMARY KEY AUTOINCREMENT, " +
+//                    "idSp integer NOT NULL, " +
+//                    "idDonHang integer NOT NULL, " +
+//                    "soLuong integer NOT NULL," +
+//                    "giaTien integer NOT NULL," +
+//                    "FOREIGN KEY (idSp) REFERENCES Phone(maDt)," +
+//                    "FOREIGN KEY (idDonHang) REFERENCES Oder(id))";
+//            sqLiteDatabase.execSQL(db_order_detail);
         }
         return list;
     }

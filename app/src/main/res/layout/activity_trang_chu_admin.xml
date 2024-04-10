@@ -164,6 +164,7 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:id="@+id/icon_donhang"
                 android:background="@drawable/khung_tron"
                 android:drawableLeft="@drawable/icon_them"
                 android:paddingLeft="12dp"
@@ -171,7 +172,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tạo đơn hàng"
+                android:text="Đơn hàng"
                 />
 
 
@@ -453,6 +454,7 @@
                         android:id="@+id/mo_rong1"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="10dp"
+
                         android:textSize="22sp"/>
 
 

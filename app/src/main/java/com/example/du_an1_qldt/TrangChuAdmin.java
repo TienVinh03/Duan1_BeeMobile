@@ -94,7 +94,9 @@ public class TrangChuAdmin extends Fragment {
         Button icon_dsVoucher = view.findViewById(R.id.icon_dsVoucher);
         Button icon_dsSP = view.findViewById(R.id.icon_dsSP);
         Button icon_thongKe = view.findViewById(R.id.icon_thongKe);
+        Button icon_donhang = view.findViewById(R.id.icon_donhang);
         TextView doanhthungay = view.findViewById(R.id.doanhthungay);
+        TextView mo_rong1 = view.findViewById(R.id.mo_rong1);
         doanhthungay.setText(String.valueOf((int) orderDetailDao.getTotalPriceForDay())+" VNĐ");
 
 
@@ -106,6 +108,30 @@ public class TrangChuAdmin extends Fragment {
 
         handler.postDelayed(runnable, SLIDE_DELAY);
         myDbHelper = new dbHelper(getActivity());
+
+        mo_rong1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
+        icon_donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
 
         icon_thongKe.setOnClickListener(new View.OnClickListener() {
             @Override
