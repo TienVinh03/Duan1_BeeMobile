@@ -161,7 +161,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
+            <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/icon_donhang"
@@ -637,11 +637,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/black"
-        />
+
 </LinearLayout>
     </RelativeLayout>
 </ScrollView>

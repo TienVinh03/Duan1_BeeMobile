@@ -40,8 +40,10 @@ import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.phone;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TrangChuAdmin extends Fragment {
     ViewPager viewPager;
@@ -94,10 +96,15 @@ public class TrangChuAdmin extends Fragment {
         Button icon_dsVoucher = view.findViewById(R.id.icon_dsVoucher);
         Button icon_dsSP = view.findViewById(R.id.icon_dsSP);
         Button icon_thongKe = view.findViewById(R.id.icon_thongKe);
-//        Button icon_donhang = view.findViewById(R.id.icon_donhang);
+        Button icon_donhang = view.findViewById(R.id.icon_donhang);
         TextView doanhthungay = view.findViewById(R.id.doanhthungay);
         TextView mo_rong1 = view.findViewById(R.id.mo_rong1);
-        doanhthungay.setText(String.valueOf((int) orderDetailDao.getTotalPriceForDay())+" VNĐ");
+
+        double sum = orderDetailDao.getTotalRevenueForCurrentDate();
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formattedRevenueDay = currencyFormat.format(sum);
+        doanhthungay.setText(formattedRevenueDay+" VNĐ");
 
 
 
@@ -121,17 +128,17 @@ public class TrangChuAdmin extends Fragment {
             }
         });
 
-//        icon_donhang.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
-//                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
-//                transaction.addToBackStack(null);
-//
-//                transaction.commit();
-//            }
-//        });
+        icon_donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
 
         icon_thongKe.setOnClickListener(new View.OnClickListener() {
             @Override
