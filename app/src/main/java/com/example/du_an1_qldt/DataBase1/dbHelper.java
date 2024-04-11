@@ -12,9 +12,8 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String DB_name = "BeePhones4444";
 
 
-
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 43);
+        super(context, DB_name, null, 40);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "loaitaikhoan TEXT)";
         sqLiteDatabase.execSQL(dbnguoidung);
 
-        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user')");
+        sqLiteDatabase.execSQL("INSERT INTO nguoiDung  VALUES(1,'admin','admin','Vu Tien Vinh','0332322764','vinhvtph45732@fpt.edu.vn','Thai Binh','admin'),(2,'vinh','vinh','Vu Tien Vinh','0376937097','vinh@gmail.com','Thai Binh','user'),(3,'hai','hai','Nguyễn Xuân Hải','0972512987','hai@gmail.com','Thanh Hoa','user')");
 
 
         String db_order_detail = "CREATE TABLE OderDetail (" +
@@ -89,9 +88,8 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
         //Vinh them
-        String insert_orderDetail = "insert into OderDetail values (1,1,3,1,20000000),(2,1,2,5,42050000.0),(3,1,1,1,10000000),(4,1,4,1,10000000),(5,1,5,1,10000000) ";
+        String insert_orderDetail = "insert into OderDetail values (1,1,3,10,20000000),(2,1,2,10,42050000.0),(3,1,1,10,10000000) ";
         sqLiteDatabase.execSQL(insert_orderDetail);
-
 
 
         String db_order = "CREATE TABLE Oder (" +
@@ -103,17 +101,15 @@ public class dbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(db_order);
 
         //Vinh them
-        String insert_Order =" insert into Oder values (1,2,'2024-03-09 15:30:00',1),(2,2,'2024-04-10 15:30:00',1),(3,2,'2024-02-09 15:30:00',0),(4,2,'2024-04-10 15:30:00',0),(5,2,'2024-05-10 15:30:00',0)";
+        String insert_Order = " insert into Oder values (1,2,'2024-03-09 15:30:00',1),(2,2,'2024-04-10 15:30:00',1),(3,2,'2024-02-09 15:30:00',0) ";
         sqLiteDatabase.execSQL(insert_Order);
-
-
-
 
 
         String db_customer = "CREATE TABLE Customer(" +
                 "id integer PRIMARY KEY AUTOINCREMENT, " +
                 "sdt text not null, " +
-                "name text not null)";
+                "name text not null, " +
+                "address text not null)";
         sqLiteDatabase.execSQL(db_customer);
 
 

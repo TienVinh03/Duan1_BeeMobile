@@ -45,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         Order order = orders.get(position);
         holder.id.setText(String.valueOf(order.getId()));
         taiKhoanDAO = new TaiKhoanDAO(context);
-        holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getId()));
+        holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getIdUser()));
         holder.date.setText(order.getDateOrder());
         holder.status.setText(order.getStatusOrder()==0 ?"Chờ xác nhận":"Đã xác nhận");
         LinearLayout linearLayoutToRemove = holder.layoutContainer;

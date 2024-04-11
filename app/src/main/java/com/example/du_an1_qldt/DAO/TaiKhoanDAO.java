@@ -34,7 +34,7 @@ public class TaiKhoanDAO {
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("hoTen", cursor.getString(1));
+            editor.putString("hoTen", cursor.getString(3));
             editor.putString("manguoidung", cursor.getString(0));
             editor.putString("matKhau", cursor.getString(2));
             editor.putString("loaitaikhoan", cursor.getString(7));
@@ -102,7 +102,7 @@ public class TaiKhoanDAO {
         SQLiteDatabase db = database.getReadableDatabase();
 
         // Truy vấn cơ sở dữ liệu để lấy tên người dùng dựa trên id
-        Cursor cursor = db.query("nguoiDung", new String[]{"hoTen"}, "maNguoiDung=?", new String[]{String.valueOf(userId)}, null, null, null);
+        Cursor cursor = db.query("nguoiDung", new String[]{"hoTen"}, "manguoidung=?", new String[]{String.valueOf(userId)}, null, null, null);
         String userName = null;
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -114,6 +114,13 @@ public class TaiKhoanDAO {
         db.close();
         return userName;
     }
-
+    public boolean isUserExists(int userId) {
+        SQLiteDatabase db = database.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Customer WHERE id=?", new String[]{String.valueOf(userId)});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return exists;
+    }
 }
 

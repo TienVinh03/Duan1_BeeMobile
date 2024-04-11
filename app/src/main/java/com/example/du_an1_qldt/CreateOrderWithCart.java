@@ -28,9 +28,12 @@ import com.example.du_an1_qldt.Adapter.CartAdapter;
 import com.example.du_an1_qldt.Adapter.CartAdapter2;
 import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
 import com.example.du_an1_qldt.DAO.CartDao;
+import com.example.du_an1_qldt.DAO.CustomerDao;
 import com.example.du_an1_qldt.DAO.OrderDAO;
+import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.model.Cart;
+import com.example.du_an1_qldt.model.Customer;
 import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.OrderDetail;
 import com.example.du_an1_qldt.model.Voucher_DTO;
@@ -41,14 +44,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CreateOrderWithCart extends AppCompatActivity{
+public class CreateOrderWithCart extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Cart> cartArrayList;
     CartDao cartDao;
     Toolbar toolbar;
     CartAdapter2 cartAdapter;
-    TextView tv_price,tv_priceShip,tv_priceVoucher,tvTotal;
-    TextInputEditText nameUser, numberPhone, address;
+    TextView tv_price, tv_priceShip, tv_priceVoucher, tvTotal;
+    TextInputEditText nameUser, numberPhone, addressUser;
     LinearLayoutManager linearLayoutManager;
     OrderDAO orderDAO;
     Date date;
@@ -57,26 +60,27 @@ public class CreateOrderWithCart extends AppCompatActivity{
     ArrayList<Voucher_DTO> voucherDtos;
     VoucherDAO voucherDAO;
     Button btnOrder;
-    double priceShip=20000,priceVoucher,priceTotal;
+    double priceShip = 20000, priceVoucher, priceTotal;
 
     DecimalFormat formatter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_order_with_cart);
-        recyclerView=findViewById(R.id.rcvOrder);
+        recyclerView = findViewById(R.id.rcvOrder);
         SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("manguoidung", "");
-        tv_price=findViewById(R.id.priceProduct);
-        tv_priceShip=findViewById(R.id.priceShip);
-        tv_priceVoucher=findViewById(R.id.priceVoucher);
+        tv_price = findViewById(R.id.priceProduct);
+        tv_priceShip = findViewById(R.id.priceShip);
+        tv_priceVoucher = findViewById(R.id.priceVoucher);
         tvTotal = findViewById(R.id.priceTotal);
         spinner = findViewById(R.id.spnVoucher);
         toolbar = findViewById(R.id.toolbar);
-        btnOrder=findViewById(R.id.btnDatHang);
+        btnOrder = findViewById(R.id.btnDatHang);
         nameUser = findViewById(R.id.username);
         numberPhone = findViewById(R.id.numberphone);
-        address = findViewById(R.id.address);
+        addressUser = findViewById(R.id.address);
         cartDao = new CartDao(CreateOrderWithCart.this);
         voucherDAO = new VoucherDAO(CreateOrderWithCart.this);
         cartArrayList = cartDao.getlistCart(Integer.parseInt(id));
@@ -85,8 +89,8 @@ public class CreateOrderWithCart extends AppCompatActivity{
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
-        tv_price.setText(caculatorPrice()+"đ");
-        tv_priceShip.setText("-"+priceShip+"đ");
+        tv_price.setText(caculatorPrice() + "đ");
+        tv_priceShip.setText("-" + priceShip + "đ");
         cartAdapter.notifyDataSetChanged();
         loadData();
 
@@ -97,14 +101,16 @@ public class CreateOrderWithCart extends AppCompatActivity{
             }
         });
 
+    }
+
+    public double caculatorPrice() {
+        double price = 0;
+        for (Cart carts : cartArrayList) {
+            price += carts.getPrice() * carts.getQuantity();
         }
-        public double caculatorPrice(){
-        double price=0;
-            for (Cart carts: cartArrayList) {
-                price+=carts.getPrice()*carts.getQuantity();
-            }
-            return  price;
-        }
+        return price;
+    }
+
     public void loadData() {
 
         voucherDtos = voucherDAO.selectAll();
@@ -114,10 +120,10 @@ public class CreateOrderWithCart extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Voucher_DTO voucherDto = voucherDtos.get(position);
-                priceVoucher=voucherDto.getGiaTriGiam();
-                tv_priceVoucher.setText("-"+caculatorPrice()*priceVoucher/100+"đ");
-                priceTotal=caculatorPrice()-priceShip-(caculatorPrice()*priceVoucher/100);
-                tvTotal.setText(priceTotal+"đ");
+                priceVoucher = voucherDto.getGiaTriGiam();
+                tv_priceVoucher.setText("-" + caculatorPrice() * priceVoucher / 100 + "đ");
+                priceTotal = caculatorPrice() - priceShip - (caculatorPrice() * priceVoucher / 100);
+                tvTotal.setText(priceTotal + "đ");
             }
 
             @Override
@@ -130,12 +136,20 @@ public class CreateOrderWithCart extends AppCompatActivity{
         String formattedDate = dateFormat.format(date);
         tv_priceShip.setTextColor(Color.parseColor("#FF0000"));
         tv_priceVoucher.setTextColor(Color.parseColor("#FF0000"));
+        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString("hoTen", "");
+        String sdt = sharedPreferences.getString("sodienthoai", "");
+        String address = sharedPreferences.getString("diachi", "");
+        nameUser.setText(name);
+        numberPhone.setText(sdt);
+        addressUser.setText(address);
+        TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO(CreateOrderWithCart.this);
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(nameUser.getText().toString().trim())) {
                     Toast.makeText(CreateOrderWithCart.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(address.getText().toString().trim())) {
+                } else if (TextUtils.isEmpty(addressUser.getText().toString().trim())) {
                     Toast.makeText(CreateOrderWithCart.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(numberPhone.getText().toString().trim())) {
                     Toast.makeText(CreateOrderWithCart.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
@@ -144,32 +158,40 @@ public class CreateOrderWithCart extends AppCompatActivity{
                 } else {
                     SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
                     String id = sharedPreferences.getString("manguoidung", "");
-
                     orderDAO = new OrderDAO(CreateOrderWithCart.this);
-                    Order order=new Order();
+                    Order order = new Order();
                     order.setIdUser(Integer.parseInt(id));
                     order.setStatusOrder(0);
                     order.setDateOrder(formattedDate);
                     int check = orderDAO.createOrder(order);
                     long orderId = orderDAO.createOrder2(order);
-        for (Cart cart: cartArrayList) {
-            OrderDetail orderDetail= new OrderDetail();
-            orderDetail.setId((int) orderId);
-            orderDetail.setPrice(cart.getPrice());
-            orderDetail.setIdProduct(cart.getIdPhone());
-            orderDetail.setQuantity(cart.getQuantity());
-            orderDAO.createOrderDetail(orderDetail);
-            cartDao.deleteRowCart(cart);
-        }
+                    for (Cart cart : cartArrayList) {
+                        OrderDetail orderDetail = new OrderDetail();
+                        orderDetail.setId((int) orderId);
+                        orderDetail.setPrice(cart.getPrice());
+                        orderDetail.setIdProduct(cart.getIdPhone());
+                        orderDetail.setQuantity(cart.getQuantity());
+                        orderDAO.createOrderDetail(orderDetail);
+                        cartDao.deleteRowCart(cart);
+                    }
                     if (check > 0) {
                         Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                     }
+                    if (taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
+                        Customer customer = new Customer();
+                        customer.setNumberPhone(sdt);
+                        customer.setAddress(address);
+                        customer.setName(name);
+                        CustomerDao customerDao = new CustomerDao(CreateOrderWithCart.this);
+                        customerDao.addCustomer(customer);
+                    }
                 }
             }
         });
     }
+
     public boolean isValidPhoneNumber(String phoneNumber) {
         String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
         return phoneNumber.matches(regex);
