@@ -16,7 +16,7 @@
             android:id="@+id/imagesProduct"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/user_avatar" />
+            android:src="@drawable/user" />
     </LinearLayout>
 
     <LinearLayout

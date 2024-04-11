@@ -58,19 +58,6 @@ public class TaiKhoanDAO {
         values.put("password", obj.getPassword());
         return db.update("nguoiDung", values, "manguoidung = ?", new String[]{String.valueOf(obj.getManguoidung())});
     }
-
-
-
-//    public KhachHang_DTO getID(String id) {
-//        String sql = "SELECT * FROM nguoiDung WHERE manguoidung=?";
-//        List<KhachHang_DTO> list = getData(sql, id);
-//        if (!list.isEmpty()) { // Kiểm tra nếu danh sách không trống
-//            return list.get(0); // Trả về phần tử đầu tiên nếu danh sách không trống
-//        } else {
-//            return null; // Trả về null nếu danh sách trống
-//        }
-//    }
-
     public KhachHang_DTO getID(String userName) {
         String sql = "SELECT * FROM nguoiDung WHERE username=?";
         List<KhachHang_DTO> list = getData(sql, userName);

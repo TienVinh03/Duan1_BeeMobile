@@ -62,7 +62,8 @@ public class CreateOrderWithCart extends AppCompatActivity {
     Button btnOrder;
     double priceShip = 20000, priceVoucher, priceTotal;
 
-    DecimalFormat formatter;
+
+    DecimalFormat formatter = new DecimalFormat("#,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,8 @@ public class CreateOrderWithCart extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24);
-        tv_price.setText(caculatorPrice() + "đ");
+        String formattedTotalPrice = formatter.format(caculatorPrice());
+        tv_price.setText(formattedTotalPrice + "đ");
         tv_priceShip.setText("-" + priceShip + "đ");
         cartAdapter.notifyDataSetChanged();
         loadData();
@@ -123,7 +125,8 @@ public class CreateOrderWithCart extends AppCompatActivity {
                 priceVoucher = voucherDto.getGiaTriGiam();
                 tv_priceVoucher.setText("-" + caculatorPrice() * priceVoucher / 100 + "đ");
                 priceTotal = caculatorPrice() - priceShip - (caculatorPrice() * priceVoucher / 100);
-                tvTotal.setText(priceTotal + "đ");
+                String formattedTotalPrice = formatter.format(priceTotal);
+                tvTotal.setText(formattedTotalPrice + "đ");
             }
 
             @Override
@@ -176,6 +179,7 @@ public class CreateOrderWithCart extends AppCompatActivity {
                     }
                     if (check > 0) {
                         Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(CreateOrderWithCart.this,FragMentContainer.class));
                     } else {
                         Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                     }
