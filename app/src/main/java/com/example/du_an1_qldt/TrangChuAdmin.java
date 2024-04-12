@@ -34,14 +34,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.du_an1_qldt.Adapter.OrderAdapter;
 import com.example.du_an1_qldt.Adapter.SanPhamAdapter;
+import com.example.du_an1_qldt.DAO.OrderDAO;
 import com.example.du_an1_qldt.DAO.OrderDetailDao;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DataBase1.dbHelper;
+import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.phone;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,6 +61,12 @@ public class TrangChuAdmin extends Fragment {
     ArrayList<phone> listSP;
     Spinner spn_hangDT;
     dbHelper myDbHelper;
+    ArrayList<Order> Listorders0;
+    ArrayList<Order> Listorders1;
+    ArrayList<Order> Listorders2;
+    OrderAdapter orderAdapter;
+    OrderDAO orderDAO;
+
 
     FragMentContainer fragMentContainer;
 
@@ -99,6 +110,25 @@ public class TrangChuAdmin extends Fragment {
         Button icon_donhang = view.findViewById(R.id.icon_donhang);
         TextView doanhthungay = view.findViewById(R.id.doanhthungay);
         TextView mo_rong1 = view.findViewById(R.id.mo_rong1);
+        TextView donhang_admin = view.findViewById(R.id.donhang_admin);
+        TextView donhuy_admin = view.findViewById(R.id.donhuy_admin);
+        TextView donXN = view.findViewById(R.id.donXN_admin);
+
+        orderDAO=new OrderDAO(getActivity());
+        Listorders2 = orderDAO.getOrdersByStatus(2);
+        donhuy_admin.setText(Listorders2.size()+"");
+
+        Listorders0 = orderDAO.getOrdersByStatus(0);
+        donhang_admin.setText(Listorders0.size()+"");
+
+
+
+        Listorders1 = orderDAO.getOrdersByStatus(1);
+        donXN.setText(Listorders1.size()+"");
+
+
+
+
 
         double sum = orderDetailDao.getTotalRevenueForCurrentDate();
 
@@ -115,6 +145,10 @@ public class TrangChuAdmin extends Fragment {
 
         handler.postDelayed(runnable, SLIDE_DELAY);
         myDbHelper = new dbHelper(getActivity());
+
+
+
+
 
         mo_rong1.setOnClickListener(new View.OnClickListener() {
             @Override

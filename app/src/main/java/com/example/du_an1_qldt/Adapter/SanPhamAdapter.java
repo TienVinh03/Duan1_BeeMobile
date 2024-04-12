@@ -35,7 +35,9 @@ import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.phone;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamViewHolder> {
     Context context;
@@ -76,7 +78,12 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         phone phoneDTO = listSP.get(position);
 
         holder.tv_tenSP.setText(phoneDTO.getName());
-        holder.tv_giaSp.setText(phoneDTO.getGia()+"");
+
+        double sum = phoneDTO.getGia();
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formattedRevenueDay = currencyFormat.format(sum);
+        holder.tv_giaSp.setText(formattedRevenueDay+"");
         holder.tv_hangSP.setText(getTenLoaiSanPham(phoneDTO.getId_Hang()));
         if (phoneDTO.getImage()==1){
             holder.img_anhSP.setImageResource(R.drawable.k40_gaming);
@@ -100,9 +107,9 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         holder.tv_mauSacSp.setText(phoneDTO.getColor());
 
 
-        holder.cardViewSP.setCardBackgroundColor(Color.WHITE);
-        holder.cardViewSP.setRadius(70);
-        holder.cardViewSP.setCardElevation(8);
+
+//        holder.cardViewSP.setRadius(70);
+//        holder.cardViewSP.setCardElevation(8);
 
         holder.select_row_qlsp.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -314,7 +321,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
             tv_giaSp = itemView.findViewById(R.id.tv_GiaSP);
             tv_mauSacSp = itemView.findViewById(R.id.tv_MauSacSP);
             img_anhSP =itemView.findViewById(R.id.anh1);
-            cardViewSP = itemView.findViewById(R.id.cardViewSanPham);
+//            cardViewSP = itemView.findViewById(R.id.cardViewSanPham);
             select_row_qlsp = itemView.findViewById(R.id.select_row_qlsp);
 
 

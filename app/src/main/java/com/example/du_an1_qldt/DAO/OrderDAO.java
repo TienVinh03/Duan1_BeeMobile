@@ -1,5 +1,6 @@
 package com.example.du_an1_qldt.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import com.example.du_an1_qldt.model.OrderDetail;
 import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private SQLiteDatabase db;
@@ -128,4 +130,6 @@ public class OrderDAO {
         }
         return confirmedOrders;
     }
+
+
 }

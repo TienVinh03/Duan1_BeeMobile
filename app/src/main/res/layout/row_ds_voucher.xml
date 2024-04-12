@@ -12,6 +12,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
+
         android:layout_marginLeft="10dp"
         android:orientation="vertical"
 
@@ -37,6 +38,7 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:weightSum="2"
+            android:background="@drawable/khung2"
             android:orientation="vertical"
             >
             <LinearLayout
@@ -165,7 +167,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mệnh giá :"
+                            android:text="Phần trăm giảm :"
                             />
                         <TextView
                             android:layout_width="wrap_content"

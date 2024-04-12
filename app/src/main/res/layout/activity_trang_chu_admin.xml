@@ -88,6 +88,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="22sp"
+                        android:id="@+id/donhang_admin"
                         android:layout_gravity="center"
                         android:text="0"/>
                 </LinearLayout>
@@ -108,6 +109,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="22sp"
+                        android:id="@+id/donhuy_admin"
                         android:layout_gravity="center"
                         android:text="0"/>
                 </LinearLayout>
@@ -121,13 +123,14 @@
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Đơn hàng trả"/>
+                        android:text="ĐH đã xác nhận"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:textSize="22sp"
+                        android:id="@+id/donXN_admin"
                         android:layout_gravity="center"
                         android:text="0"/>
 

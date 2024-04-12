@@ -63,12 +63,12 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
         }else {
             holder.trangThai.setText("Hết voucher");
         }
-        holder.giaTriGiam.setText(voucherDto.getGiaTriGiam()+"");
+        holder.giaTriGiam.setText(voucherDto.getGiaTriGiam()+" %");
 
-
-        holder.cardViewVoucher.setCardBackgroundColor(Color.WHITE);
-        holder.cardViewVoucher.setRadius(70);
-        holder.cardViewVoucher.setCardElevation(8);
+//
+//        holder.cardViewVoucher.setCardBackgroundColor(Color.WHITE);
+//        holder.cardViewVoucher.setRadius(70);
+//        holder.cardViewVoucher.setCardElevation(8);
 
         holder.select_row_qlvoucher.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -198,7 +198,7 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
             trangThai = itemView.findViewById(R.id.tv_trangthaiVoucher);
             soLuong = itemView.findViewById(R.id.tv_soLuongVoucher);
             giaTriGiam = itemView.findViewById(R.id.tv_menhGiaVoucher);
-            cardViewVoucher =itemView.findViewById(R.id.cardViewVoucher_ql);
+//            cardViewVoucher =itemView.findViewById(R.id.cardViewVoucher_ql);
             select_row_qlvoucher = itemView.findViewById(R.id.select_row_qlvoucher);
         }
     }
