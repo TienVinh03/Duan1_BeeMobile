@@ -26,11 +26,6 @@ import java.util.ArrayList;
 public class PurchasedOrderAdapter extends RecyclerView.Adapter<PurchasedOrderAdapter.ViewHolder> {
     Context context;
     ArrayList<Order> orders;
-    OrderDAO orderDAO;
-    RecyclerView recyclerView;
-    ArrayList<OrderDetail> list;
-    DetailOrderAdapter detailOrderAdapter;
-
     public PurchasedOrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
         this.orders = orders;

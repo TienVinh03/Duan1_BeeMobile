@@ -43,8 +43,7 @@ public class Frag_GioHang extends Fragment implements TotalPriceListener {
     TextView tv_price;
     LinearLayoutManager linearLayoutManager;
     Button btnOrder;
-    OrderDAO orderDAO;
-    Date date;
+    DecimalFormat formatter = new DecimalFormat("#,###");
 
     @Nullable
     @Override
@@ -75,27 +74,6 @@ public class Frag_GioHang extends Fragment implements TotalPriceListener {
 btnOrder.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-//        date = new Date();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//      String formattedDate = dateFormat.format(date);
-//        cartDao= new CartDao(getContext());
-//        ArrayList<Cart> carts= cartDao.getlistCart(Integer.parseInt(id));
-//        orderDAO= new OrderDAO(getContext());
-//        Order order= new Order();
-//        order.setIdUser(Integer.parseInt(id));
-//        order.setStatusOrder(0);
-//        order.setDateOrder(formattedDate);
-//        long orderId = orderDAO.createOrder2(order);
-//        for (Cart cart: carts) {
-//            OrderDetail orderDetail= new OrderDetail();
-//            orderDetail.setId((int) orderId);
-//            orderDetail.setPrice(cart.getPrice());
-//            orderDetail.setIdProduct(cart.getIdPhone());
-//            orderDetail.setQuantity(cart.getQuantity());
-//            orderDAO.createOrderDetail(orderDetail);
-//            cartDao.deleteRowCart(cart);
-//        }
-//        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
    if (cartArrayList.size()==0){
        Toast.makeText(getContext(), "Giỏ hàng trống!!", Toast.LENGTH_SHORT).show();
    }else {
@@ -106,7 +84,8 @@ btnOrder.setOnClickListener(new View.OnClickListener() {
     }
     @Override
     public void onTotalPriceChanged(double totalPrice) {
-        tv_price.setText(String.valueOf(totalPrice));
+        String formattedTotalPrice = formatter.format(totalPrice);
+        tv_price.setText(String.valueOf(formattedTotalPrice+"VND"));
     }
     private double calculateTotalPrice() {
         double totalPrice = 0;

@@ -179,6 +179,7 @@ public class TaoDonHang extends AppCompatActivity {
                     orderDAO.createOrderDetail(new OrderDetail(Integer.parseInt(id), idPR, quantityPr, total));
                     if (check > 0) {
                         Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(TaoDonHang.this,FragMentContainer.class));
                     } else {
                         Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                     }

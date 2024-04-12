@@ -47,13 +47,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         taiKhoanDAO = new TaiKhoanDAO(context);
         holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getIdUser()));
         holder.date.setText(order.getDateOrder());
-        holder.status.setText(order.getStatusOrder()==0 ?"Chờ xác nhận":"Đã xác nhận");
-        LinearLayout linearLayoutToRemove = holder.layoutContainer;
+       switch (order.getStatusOrder()){
+           case 0:
+               holder.status.setText("Chờ xác nhận");
+               break;
+           case 1:
+               holder.status.setText("Đã xác nhận");
+               break;
+           case 2:
+               holder.status.setText("Đã hủy");
+               break;
+       }
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orders.remove(order);
-                orderDAO.deletOrder(order);
+                order.setStatusOrder(2);
+                orderDAO.updateOrder(order);
                 orderDAO.deleteOrderDetailsByOrderId(order.getId());
                 notifyDataSetChanged();
             }
