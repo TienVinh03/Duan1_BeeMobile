@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="190dp"
+    android:background="@drawable/khung2"
+    android:layout_marginVertical="15dp"
+
 
 
 
@@ -9,23 +12,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewSanPham"
-        android:layout_width="430dp"
-        android:layout_height="200dp"
-        android:background="@color/white"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
 
-       >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/select_row_qlsp"
@@ -40,8 +31,9 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="10dp"
+
 
             android:orientation="horizontal"
             >
@@ -63,7 +55,7 @@
                         android:text="XXX"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="25sp"
+                        android:textSize="18sp"
                         android:gravity="center"
                         android:id="@+id/tv_tenSP"
                         />
@@ -236,6 +228,6 @@
 
 
 
-    </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>

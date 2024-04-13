@@ -112,9 +112,11 @@ public class Frag_QuanLiVoucher extends Fragment {
                             if (TextUtils.isEmpty(tenVoucher.getText().toString())||TextUtils.isEmpty(soLuong.getText().toString())||TextUtils.isEmpty(menhgia.getText().toString())){
                                 Toast.makeText(getActivity(), "Vui lòng Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                             }else if (menhgia1<=0) {
-                                Toast.makeText(getActivity(), "Gía không phù hợp", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Gía trị không phù hợp", Toast.LENGTH_SHORT).show();
 
-                            }else if (soluong1<0) {
+                            } else if (menhgia1>100) {
+                                Toast.makeText(getActivity(), "Gía trị không phù hợp", Toast.LENGTH_SHORT).show();
+                            } else if (soluong1<0) {
                                 Toast.makeText(getActivity(), "Số lượng không phù hợp", Toast.LENGTH_SHORT).show();
 
                             }else {

@@ -27,8 +27,10 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Frag_ThongKe extends Fragment {
 
@@ -83,7 +85,7 @@ public class Frag_ThongKe extends Fragment {
                     setupChartOrderQuarter();
 
                 } else if (selectedInterval.equals("Theo năm")) {
-
+                    setupChartOrderYear();
                 }
 
 
@@ -149,11 +151,14 @@ public class Frag_ThongKe extends Fragment {
            barChart.setFitBars(true); // Căn chỉnh cột
            barChart.animateY(1000);
            barChart.invalidate();
+           double sum=orderDetailDao.getTotalAmount();
 
+           NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+           String formattedRevenue = currencyFormat.format(sum);
 
-           tongDoanhThu.setText("Tổng doanh thu của các tháng : "+String.valueOf(orderDetailDao.getTotalAmount())+" VNĐ");
+           tongDoanhThu.setText("Tổng doanh thu của các tháng : "+formattedRevenue+" VNĐ");
            tongDonHang.setText("Tổng đơn hàng của các tháng : "+String.valueOf(orderDetailDao.getNumberOfOrdersInYear2024())+" đơn");
-           cotcaoNhat.setText("Tháng có doanh thu cao nhất : Tháng " +String.valueOf(orderDetailDao.getMonthWithHighestTotalPrice())+" - Tổng ĐH trong tháng này: "+orderDetailDao.getTotalOrdersInMonthWithHighestRevenue()+" đơn");
+           cotcaoNhat.setText("Tháng có doanh thu cao nhất : " +String.valueOf(orderDetailDao.getMonthWithHighestTotalPrice())+" - Tổng ĐH trong tháng này: "+orderDetailDao.getTotalOrdersInMonthWithHighestRevenue()+" đơn");
 
 }
     private void setupChartOrderQuarter() {
@@ -186,10 +191,56 @@ public class Frag_ThongKe extends Fragment {
         barChart.setFitBars(true); // Căn chỉnh cột
         barChart.animateY(1000);
         barChart.invalidate();
+        double sum=orderDetailDao.getTotalAmount();
 
-        tongDoanhThu.setText("Tổng doanh thu của các qúy : "+String.valueOf(orderDetailDao.getTotalAmount())+" VNĐ");
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formattedRevenue = currencyFormat.format(sum);
+
+        tongDoanhThu.setText("Tổng doanh thu của các qúy : "+formattedRevenue+" VNĐ");
         tongDonHang.setText("Tổng đơn hàng của các quý : "+String.valueOf(orderDetailDao.getNumberOfOrdersInYear2024())+" đơn");
-        cotcaoNhat.setText("Qúy có doanh thu cao nhất : Qúy " +String.valueOf(orderDetailDao.getQuarterWithHighestRevenue()) +" - Tổng ĐH trong quý này : "+orderDetailDao.getTotalOrdersInQuarterWithHighestRevenue()+" đơn");
+        cotcaoNhat.setText("Qúy có doanh thu cao nhất : " +String.valueOf(orderDetailDao.getQuarterWithHighestRevenue()) +" - Tổng ĐH trong quý này : "+orderDetailDao.getTotalOrdersInQuarterWithHighestRevenue()+" đơn");
+
+    }
+    private void setupChartOrderYear() {
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, (float)orderDetailDao.getTotalPriceForYear2022()));
+        entries.add(new BarEntry(1,  (float) orderDetailDao.getTotalPriceForYear2023()));
+        entries.add(new BarEntry(2,  (float) orderDetailDao.getTotalPriceForYear2024()));
+
+
+        BarDataSet dataSet = new BarDataSet(entries, "Revenue");
+        dataSet.setColor(Color.rgb(255, 102, 0)); // Màu của cột
+
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("Năm 2022");
+        labels.add("Năm 2023");
+        labels.add("Năm 2024");
+
+
+        BarData data = new BarData(dataSet);
+        barChart.setData(data);
+        barChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(labels));
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getXAxis().setGranularity(1f);
+        barChart.getXAxis().setGranularityEnabled(true);
+        barChart.getAxisLeft().setAxisMinimum(0);
+        barChart.getAxisRight().setAxisMinimum(0);
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawGridBackground(false);
+        barChart.setFitBars(true); // Căn chỉnh cột
+        barChart.animateY(1000);
+        barChart.invalidate();
+
+        double sum=orderDetailDao.getTotalRevenueForThreeYears();
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formattedRevenue = currencyFormat.format(sum);
+
+
+        tongDoanhThu.setText("Tổng doanh thu của 3 năm gần nhất : "+formattedRevenue+" VNĐ");
+        tongDonHang.setText("Tổng đơn hàng của các năm : "+String.valueOf(orderDetailDao.getTotalOrdersForThreeYears())+" đơn");
+        cotcaoNhat.setText("Năm có doanh thu cao nhất : " +String.valueOf(orderDetailDao.getYearWithHighestRevenue()) +" - Tổng ĐH trong năm này : "+orderDetailDao.getTotalOrdersInYearWithHighestRevenue()+" đơn");
 
     }
 }

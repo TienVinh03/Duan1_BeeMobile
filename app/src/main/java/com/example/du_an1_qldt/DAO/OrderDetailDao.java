@@ -9,7 +9,9 @@ import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.OrderDetail;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderDetailDao {
     private SQLiteDatabase db;
@@ -461,5 +463,153 @@ public class OrderDetailDao {
         cursor.close();
 
         return totalOrders;
+    }
+
+    @SuppressLint("Range")
+    public double getTotalPriceForYear2024() {
+        double totalPrice = 0;
+
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
+                + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) = '2024'";
+
+
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalPrice = cursor.getDouble(cursor.getColumnIndex("total_price"));
+        }
+        cursor.close();
+
+        return totalPrice;
+    }
+    @SuppressLint("Range")
+    public double getTotalPriceForYear2023() {
+        double totalPrice = 0;
+
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
+                + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) = '2023'";
+
+
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalPrice = cursor.getDouble(cursor.getColumnIndex("total_price"));
+        }
+        cursor.close();
+
+        return totalPrice;
+    }
+    @SuppressLint("Range")
+    public double getTotalPriceForYear2022() {
+        double totalPrice = 0;
+
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
+                + "FROM OderDetail JOIN Oder ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) = '2022'";
+
+
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalPrice = cursor.getDouble(cursor.getColumnIndex("total_price"));
+        }
+        cursor.close();
+
+        return totalPrice;
+    }
+    @SuppressLint("Range")
+    public double getTotalRevenueForThreeYears() {
+        double totalRevenue = 0;
+
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_revenue "
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y',Oder.date) IN ('2022', '2023', '2024')";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalRevenue = cursor.getDouble(cursor.getColumnIndex("total_revenue"));
+        }
+        cursor.close();
+
+        return totalRevenue;
+    }
+    @SuppressLint("Range")
+    public int getTotalOrdersForThreeYears() {
+        int totalOrders = 0;
+
+        String query = "SELECT COUNT(*) AS total_orders "
+                + "FROM Oder WHERE strftime('%Y',Oder.date) IN ('2022', '2023', '2024')";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalOrders = cursor.getInt(cursor.getColumnIndex("total_orders"));
+        }
+        cursor.close();
+
+        return totalOrders;
+    }
+    @SuppressLint("Range")
+    public int getYearWithHighestRevenue() {
+        int highestRevenueYear = 0;
+
+        String query = "SELECT strftime('%Y', Oder.date) AS year, "
+                + "SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_revenue "
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE strftime('%Y', Oder.date) IN ('2022', '2023', '2024')"
+                + " GROUP BY year"
+                + " ORDER BY total_revenue DESC LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            highestRevenueYear = cursor.getInt(cursor.getColumnIndex("year"));
+        }
+        cursor.close();
+
+        return highestRevenueYear;
+    }
+    @SuppressLint("Range")
+    public int getTotalOrdersInYearWithHighestRevenue() {
+        int totalOrders = 0;
+
+        // Truy vấn lấy năm có doanh thu cao nhất
+        String highestRevenueYearQuery = "SELECT strftime('%Y',Oder.date) AS year "
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang GROUP BY year"
+                + " ORDER BY SUM(OderDetail.giaTien * OderDetail.soLuong) DESC LIMIT 1";
+
+        Cursor cursor = db.rawQuery(highestRevenueYearQuery, null);
+        int highestRevenueYear = 0;
+        if (cursor.moveToFirst()) {
+            highestRevenueYear = cursor.getInt(cursor.getColumnIndex("year"));
+        }
+        cursor.close();
+
+        // Truy vấn lấy tổng số đơn hàng trong năm có doanh thu cao nhất
+        String totalOrdersQuery = "SELECT COUNT(*) AS total_orders "
+                + "FROM Oder WHERE strftime('%Y', Oder.date) = '" + highestRevenueYear + "'";
+
+        cursor = db.rawQuery(totalOrdersQuery, null);
+        if (cursor.moveToFirst()) {
+            totalOrders = cursor.getInt(cursor.getColumnIndex("total_orders"));
+        }
+        cursor.close();
+
+        return totalOrders;
+    }
+    @SuppressLint("Range")
+    public double getTotalRevenueForCurrentDate() {
+        double totalRevenue = 0;
+
+        // Lấy ngày hiện tại
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+
+        // Truy vấn lấy tổng doanh thu của ngày hiện tại
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_revenue "
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE date(Oder.date) = '" + currentDate + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalRevenue = cursor.getDouble(cursor.getColumnIndex("total_revenue"));
+        }
+        cursor.close();
+
+        return totalRevenue;
     }
 }
