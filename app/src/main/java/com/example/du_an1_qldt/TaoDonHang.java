@@ -168,16 +168,19 @@ public class TaoDonHang extends AppCompatActivity {
                 } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
                     Toast.makeText(TaoDonHang.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     orderDAO = new OrderDAO(TaoDonHang.this);
                     Order order = new Order();
                     order.setIdUser(Integer.parseInt(id));
                     order.setStatusOrder(0);
                     order.setDateOrder(formattedDate);
-                    int check = orderDAO.createOrder(order);
-                    orderDAO.createOrderDetail(new OrderDetail(Integer.parseInt(id), idPR, quantityPr, total));
-                    if (check > 0) {
+                    long orderId = orderDAO.createOrder2(order);
+                    OrderDetail orderDetail= new OrderDetail();
+                    orderDetail.setIdDonHang((int) orderId);
+                    orderDetail.setQuantity(quantityPr);
+                    orderDetail.setIdProduct(idPR);
+                    orderDetail.setPrice(total);
+                    orderDAO.createOrderDetail(orderDetail);
+                    if (orderId > 0) {
                         Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(TaoDonHang.this,FragMentContainer.class));
                     } else {
