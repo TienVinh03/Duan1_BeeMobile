@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -67,7 +68,7 @@ public class TrangChuAdmin extends Fragment {
     OrderAdapter orderAdapter;
     OrderDAO orderDAO;
 
-
+    Toolbar toolbar;
     FragMentContainer fragMentContainer;
 
     Frag_DanhSachVoucher fragDanhSachVoucher;
@@ -102,30 +103,42 @@ public class TrangChuAdmin extends Fragment {
         CardView cardView = view.findViewById(R.id.cardViewTrangChu);
         orderDetailDao = new OrderDetailDao(getActivity());
         cardView.setCardBackgroundColor(Color.WHITE);
+
         cardView.setRadius(20);
         Button incon_themSP = view.findViewById(R.id.incon_themSP);
         Button icon_dsVoucher = view.findViewById(R.id.icon_dsVoucher);
         Button icon_dsSP = view.findViewById(R.id.icon_dsSP);
         Button icon_thongKe = view.findViewById(R.id.icon_thongKe);
         Button icon_donhang = view.findViewById(R.id.icon_donhang);
+        Button icon_qlsp = view.findViewById(R.id.icon_qlsp);
+        Button icon_qlVoucher = view.findViewById(R.id.icon_qlVoucher);
         TextView doanhthungay = view.findViewById(R.id.doanhthungay);
         TextView mo_rong1 = view.findViewById(R.id.mo_rong1);
         TextView donhang_admin = view.findViewById(R.id.donhang_admin);
         TextView donhuy_admin = view.findViewById(R.id.donhuy_admin);
         TextView donXN = view.findViewById(R.id.donXN_admin);
 
+        TextView donhang_admin1 = view.findViewById(R.id.donhang_admin1);
+        TextView donhuy_admin1 = view.findViewById(R.id.donhuy_admin1);
+        TextView donXN1 = view.findViewById(R.id.donXN_admin1);
+
+        TextView mo_rong2 = view.findViewById(R.id.mo_rong2);
+
+        TextView mo_rong3 = view.findViewById(R.id.mo_rong3);
+
+
         orderDAO=new OrderDAO(getActivity());
         Listorders2 = orderDAO.getOrdersByStatus(2);
         donhuy_admin.setText(Listorders2.size()+"");
-
+        donhuy_admin1.setText(Listorders2.size()+"");
         Listorders0 = orderDAO.getOrdersByStatus(0);
         donhang_admin.setText(Listorders0.size()+"");
-
+        donhang_admin1.setText(Listorders0.size()+"");
 
 
         Listorders1 = orderDAO.getOrdersByStatus(1);
         donXN.setText(Listorders1.size()+"");
-
+        donXN1.setText(Listorders1.size()+"");
 
 
 
@@ -148,14 +161,58 @@ public class TrangChuAdmin extends Fragment {
 
 
 
+        mo_rong3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
 
+                transaction.commit();
+            }
+        });
 
+        mo_rong2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
         mo_rong1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Frag_QuanLiDonHang fragQuanLiDonHang = new Frag_QuanLiDonHang();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragMentContainer, fragQuanLiDonHang);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
+        icon_qlVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiVoucher fragQuanLiVouchcer = new Frag_QuanLiVoucher();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiVouchcer);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+        icon_qlsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frag_QuanLiSanPham fragQuanLiSP = new Frag_QuanLiSanPham();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragMentContainer, fragQuanLiSP);
                 transaction.addToBackStack(null);
 
                 transaction.commit();
@@ -189,9 +246,9 @@ public class TrangChuAdmin extends Fragment {
         icon_dsSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Frag_QuanLiDonHang fragQuanLiHoaDon = new Frag_QuanLiDonHang();
+                Frag_DanhSachSP fragDSSP = new Frag_DanhSachSP();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragMentContainer, fragQuanLiHoaDon);
+                transaction.replace(R.id.fragMentContainer, fragDSSP);
                 transaction.addToBackStack(null);
 
                 transaction.commit();
