@@ -12,9 +12,8 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String DB_name = "BeePhones4444";
 
 
-
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 47);
+        super(context, DB_name, null, 40);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (idHang) REFERENCES Brand(idHang))";
         sqLiteDatabase.execSQL(db_phone);
 
-        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'Trắng',1,20)";
+        String insert_phone = "insert into Phone Values (1,'K40 Gaming',1,8200000,1,128,'Trắng',1,300)";
         sqLiteDatabase.execSQL(insert_phone);
 
         String db_cart = "CREATE TABLE IF NOT EXISTS ShoppingCart (" +
@@ -89,9 +88,8 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
         //Vinh them
-        String insert_orderDetail = "insert into OderDetail values (1,1,3,1,20000000),(2,1,2,5,42050000.0),(3,1,1,1,10000000),(4,1,4,1,10000000),(5,1,5,1,10000000) ";
+        String insert_orderDetail = "insert into OderDetail values (1,1,3,10,20000000),(2,1,2,10,42050000.0),(3,1,1,10,10000000) ";
         sqLiteDatabase.execSQL(insert_orderDetail);
-
 
 
         String db_order = "CREATE TABLE Oder (" +
@@ -103,11 +101,8 @@ public class dbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(db_order);
 
         //Vinh them
-        String insert_Order =" insert into Oder values (1,2,'2024-03-09 15:30:00',1),(2,2,'2024-04-10 15:30:00',1),(3,2,'2024-02-09 15:30:00',0),(4,2,'2024-04-10 15:30:00',0),(5,2,'2024-04-11 15:30:00',0)";
+        String insert_Order = " insert into Oder values (1,2,'2024-03-09 15:30:00',1),(2,2,'2024-04-10 15:30:00',1),(3,2,'2024-02-09 15:30:00',0) ";
         sqLiteDatabase.execSQL(insert_Order);
-
-
-
 
 
         String db_customer = "CREATE TABLE Customer(" +

@@ -1,6 +1,5 @@
 package com.example.du_an1_qldt.DAO;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import com.example.du_an1_qldt.model.OrderDetail;
 import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderDAO {
     private SQLiteDatabase db;
@@ -71,7 +69,7 @@ public class OrderDAO {
     public int createOrderDetail(OrderDetail order) {
         ContentValues values = new ContentValues();
         values.put("idSp", order.getIdProduct());
-        values.put("idDonHang", order.getId());
+        values.put("idDonHang", order.getIdDonHang());
         values.put("soLuong", order.getQuantity());
         values.put("giaTien", order.getPrice());
 
@@ -98,7 +96,7 @@ public class OrderDAO {
 
     public ArrayList<OrderDetail> getlistOrderDetail(int orderId) {
         ArrayList<OrderDetail> list = new ArrayList<>();
-        Cursor c = db.rawQuery("select * from OderDetail where id=?", new String[]{String.valueOf(orderId)});
+        Cursor c = db.query("OderDetail", null, "idDonHang=?", new String[]{String.valueOf(orderId)}, null, null, null);
         if (c.getCount() > 0) {
             c.moveToFirst();
             do {
@@ -130,6 +128,5 @@ public class OrderDAO {
         }
         return confirmedOrders;
     }
-
 
 }

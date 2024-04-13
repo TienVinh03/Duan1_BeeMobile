@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an1_qldt.DAO.OrderDAO;
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.Order;
+import com.example.du_an1_qldt.model.OrderDetail;
 
 import java.util.ArrayList;
 
@@ -63,7 +65,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             public void onClick(View v) {
                 order.setStatusOrder(2);
                 orderDAO.updateOrder(order);
-                orderDAO.deleteOrderDetailsByOrderId(order.getId());
                 notifyDataSetChanged();
             }
         });
@@ -74,6 +75,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                   order.setStatusOrder(1);
                   holder.status.setText(String.valueOf(order.getStatusOrder()));
                   orderDAO.updateOrder(order);
+                  updateProductQuantities(order.getId());
                   holder.layoutContainer.setVisibility(View.GONE);
                   notifyDataSetChanged();
 
@@ -81,6 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
           });
       } else {
           // Nếu đơn hàng đã xác nhận, ẩn LinearLayout
+
           holder.layoutContainer.setVisibility(View.GONE);
       }
     }
@@ -103,6 +106,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             btnConfirm = itemView.findViewById(R.id.btnConfirmOrder);
             btnCancel = itemView.findViewById(R.id.btnCancelOrder);
             layoutContainer=itemView.findViewById(R.id.linearLayout);
+        }
+    }
+    private void updateProductQuantities(int orderId) {
+        SanPhamDAO sanPhamDAO= new SanPhamDAO(context);
+        // Lấy danh sách sản phẩm trong đơn hàng từ cơ sở dữ liệu
+        ArrayList<OrderDetail> orderDetails = orderDAO.getlistOrderDetail(orderId);
+
+        for (OrderDetail orderDetail : orderDetails) {
+            // Lấy số lượng sản phẩm hiện tại từ cơ sở dữ liệu
+            int currentQuantity = sanPhamDAO.getProductQuantityFromDatabase(orderDetail.getIdProduct());
+
+            // Tính toán số lượng mới (ví dụ: giảm số lượng bằng số lượng trong đơn hàng)
+            int updatedQuantity = currentQuantity - orderDetail.getQuantity();
+
+            // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
+            sanPhamDAO.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
         }
     }
 }
