@@ -2,6 +2,8 @@ package com.example.du_an1_qldt.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.du_an1_qldt.DAO.OrderDAO;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
+import com.example.du_an1_qldt.OrderDetailView;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.OrderDetail;
@@ -60,6 +63,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                holder.status.setText("Đã hủy");
                break;
        }
+       holder.btnShowDetail.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Bundle bundle= new Bundle();
+               bundle.putInt("idOrder",order.getId());
+               Intent intent = new Intent(context, OrderDetailView.class);
+               intent.putExtras(bundle);
+               context.startActivity(intent);
+           }
+       });
         holder.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +107,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id, nameCustomer, date, status, btnConfirm, btnCancel;
+        TextView id, nameCustomer, date, status, btnConfirm, btnCancel,btnShowDetail;
         LinearLayout layoutContainer;
 
         public ViewHolder(@NonNull View itemView) {
@@ -106,6 +119,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             btnConfirm = itemView.findViewById(R.id.btnConfirmOrder);
             btnCancel = itemView.findViewById(R.id.btnCancelOrder);
             layoutContainer=itemView.findViewById(R.id.linearLayout);
+            btnShowDetail=itemView.findViewById(R.id.showDetail);
         }
     }
     private void updateProductQuantities(int orderId) {

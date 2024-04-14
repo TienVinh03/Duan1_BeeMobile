@@ -75,11 +75,6 @@
 
                     android:title="Thống kê theo doanh thu" />
 
-                <item
-                    android:id="@+id/ThongKeTop"
-                    android:icon="@drawable/gotop"
-
-                    android:title="Thống kê theo TOP 10" />
 
             </menu>
         </item>
