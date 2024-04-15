@@ -20,7 +20,7 @@ import com.example.du_an1_qldt.DAO.KhachHangDAO;
 
 public class DangKy extends AppCompatActivity {
 
-    EditText edTendn, edEmail, edMatkhau, edNhaplaimk;
+    EditText edTendn, edEmail, edMatkhau, edNhaplaimk,edtSDT;
 
     Button btnDangky, btnTrolai;
 
@@ -40,6 +40,7 @@ public class DangKy extends AppCompatActivity {
         edNhaplaimk = findViewById(R.id.edNhaplaimk);
         btnDangky = findViewById(R.id.btnDangky);
         btnTrolai = findViewById(R.id.btnTrolai);
+        edtSDT = findViewById(R.id.edtSdt);
         khachHangDAO = new KhachHangDAO(getApplicationContext());
 
         btnTrolai.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +57,7 @@ public class DangKy extends AppCompatActivity {
                 String email = edEmail.getText().toString();
                 String pass = edMatkhau.getText().toString();
                 String repass = edNhaplaimk.getText().toString();
+                String sdt = edtSDT.getText().toString();
 
                 String loaitaikhoan = "nguoiDung";
 
@@ -88,7 +90,7 @@ public class DangKy extends AppCompatActivity {
                     return;
                 }
 
-                boolean check = khachHangDAO.themkhachhang(name, email, pass);
+                boolean check = khachHangDAO.themkhachhang(name, email, pass,sdt);
                 if (check) {
                     Toast.makeText(DangKy.this, "Thêm khách hàng thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DangKy.this, DangNhap.class);

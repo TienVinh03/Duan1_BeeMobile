@@ -183,7 +183,7 @@ public class CreateOrderWithCart extends AppCompatActivity {
                     } else {
                         Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                     }
-                    if (taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
+                    if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
                         Customer customer = new Customer();
                         customer.setNumberPhone(sdt);
                         customer.setAddress(address);

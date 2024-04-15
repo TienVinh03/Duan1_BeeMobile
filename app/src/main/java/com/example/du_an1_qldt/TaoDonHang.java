@@ -186,7 +186,7 @@ public class TaoDonHang extends AppCompatActivity {
                     } else {
                         Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                     }
-                    if (taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
+                    if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
                         Customer customer = new Customer();
                         customer.setNumberPhone(numberPhone.getText().toString());
                         customer.setAddress(addressUser.getText().toString());

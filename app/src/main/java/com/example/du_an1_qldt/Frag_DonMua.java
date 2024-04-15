@@ -1,5 +1,7 @@
 package com.example.du_an1_qldt;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +32,9 @@ public class Frag_DonMua extends Fragment {
         View v = inflater.inflate(R.layout.activity_frag_don_mua,container,false);
         recyclerView= v.findViewById(R.id.rcvHistoryOrder);
         orderDAO= new OrderDAO(getContext());
-        orders=orderDAO.getConfirmedOrders();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("manguoidung", "");
+        orders=orderDAO.getConfirmedOrders(Integer.parseInt(id));
         purchasedOrderAdapter= new PurchasedOrderAdapter(getContext(),orders);
         recyclerView.setAdapter(purchasedOrderAdapter);
         linearLayoutManager = new LinearLayoutManager(getContext());

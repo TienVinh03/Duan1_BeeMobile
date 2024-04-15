@@ -112,10 +112,10 @@ public class OrderDAO {
         return list;
     }
 
-    public ArrayList<Order> getConfirmedOrders() {
+    public ArrayList<Order> getConfirmedOrders(int idUser) {
         ArrayList<Order> confirmedOrders = new ArrayList<>();
         SQLiteDatabase db = myDbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Oder WHERE status = 1", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Oder WHERE status = 1 AND idUser = ?",  new String[]{String.valueOf(idUser)});
         if (cursor.moveToFirst()) {
             do {
                 Order order = new Order();

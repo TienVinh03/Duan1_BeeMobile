@@ -54,6 +54,7 @@ public class Frag_Info extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("thongtin", Context.MODE_PRIVATE);
         String hoTen = sharedPreferences.getString("hoTen", "");
         String email = sharedPreferences.getString("email", "");
+        String sdt = sharedPreferences.getString("sdt","");
         String sodienthoai = sharedPreferences.getString("sodienthoai", "");
         String diachi = sharedPreferences.getString("diachi", "");
 
