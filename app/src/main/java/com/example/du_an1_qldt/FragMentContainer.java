@@ -124,7 +124,6 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
             menu.findItem(R.id.QLHANG).setVisible(false);
             menu.findItem(R.id.QLHD).setVisible(false);
             menu.findItem(R.id.ThongKeDoanhThu).setVisible(false);
-            menu.findItem(R.id.ThongKeTop).setVisible(false);
             repLaceFragment((TrangChuNguoiDung));
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new TrangChuNguoiDung()).commit();
         }
@@ -194,10 +193,6 @@ public class FragMentContainer extends AppCompatActivity implements NavigationVi
         }else if (item.getItemId()==R.id.ThongKeDoanhThu) {
             setTitle("Thống kê theo doanh thu");
             toolbar.setTitle("Thống kê theo doanh thu");
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_ThongKe()).addToBackStack(null).commit();
-        }else if (item.getItemId()==R.id.ThongKeTop) {
-            setTitle("Top 10 điện thoại bán nhiều nhất");
-            toolbar.setTitle("Top 10 điện thoại bán nhiều nhất");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragMentContainer, new Frag_ThongKe()).addToBackStack(null).commit();
         }else if (item.getItemId()==R.id.QLHANG) {
             setTitle("Quản lí hãng điện thoại");
