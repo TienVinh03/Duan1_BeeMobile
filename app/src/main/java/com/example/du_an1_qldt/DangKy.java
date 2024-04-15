@@ -60,27 +60,31 @@ public class DangKy extends AppCompatActivity {
                 String loaitaikhoan = "nguoiDung";
 
                 if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || repass.isEmpty()) {
-                    snackBar(R.layout.custom_snackbar_error2, "Không được bỏ trống trường nào ");
+                    Toast.makeText(DangKy.this, "Không được bỏ trống trường nào", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (!checkEmail(email)) {
-                    snackBar(R.layout.custom_snackbar_error2, "Nhập sai cấu trúc email");
+                    Toast.makeText(DangKy.this, "Nhập sai cấu trúc email", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
                 if (khachHangDAO.checkEmail(email) < 0) {
-                    snackBar(R.layout.custom_snackbar_error2, "Email đã tồn tại trên hệ thống");
+                    Toast.makeText(DangKy.this, "Email đã tồn tại trên hệ thống", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
                 if (pass.length() < 8) {
-                    snackBar(R.layout.custom_snackbar_error2, "Mật khẩu phải có ít nhất 8 ký tự");
+                    Toast.makeText(DangKy.this, "Mật khẩu phải có ít nhất 8 ký tự", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
                 if (!pass.equals(repass)) {
-                    snackBar(R.layout.custom_snackbar_error2, "Nhập lại mật khẩu không khớp");
+                    Toast.makeText(DangKy.this, "Nhập lại mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 

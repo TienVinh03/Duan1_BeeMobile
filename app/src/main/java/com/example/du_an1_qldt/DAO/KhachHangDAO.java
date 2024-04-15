@@ -155,7 +155,7 @@ public class KhachHangDAO {
         values.put("username", ten);
         values.put("email", email);
         values.put("password", pass);
-
+        values.put("loaitaikhoan", "user");
         long check = sql.insert("nguoiDung", null, values);
 
         return check != -1;

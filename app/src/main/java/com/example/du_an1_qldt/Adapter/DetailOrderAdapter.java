@@ -14,7 +14,9 @@ import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.OrderDetail;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailOrderAdapter extends RecyclerView.Adapter<DetailOrderAdapter.ViewHolder> {
     Context context;
@@ -40,7 +42,12 @@ public class DetailOrderAdapter extends RecyclerView.Adapter<DetailOrderAdapter.
 OrderDetail orderDetail=list.get(position);
         SanPhamDAO sanPhamDAO= new SanPhamDAO(context);
 holder.tvName.setText(sanPhamDAO.getProductNameById(orderDetail.getIdProduct()));
-holder.tvPrice.setText(orderDetail.getPrice()+"đ");
+
+
+double sum = orderDetail.getPrice();
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        String formattedRevenueDay = currencyFormat.format(sum);
+holder.tvPrice.setText(formattedRevenueDay+" VNĐ");
 holder.tvQuantity.setText(orderDetail.getQuantity()+"");
     }
 
