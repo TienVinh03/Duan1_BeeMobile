@@ -70,7 +70,7 @@ public class CartDao {
 
         // Thực hiện cập nhật
         int count = db.update("ShoppingCart", values, selection, selectionArgs);
-        db.close();
+
 
         if (count > 0) {
             // Cập nhật thành công
