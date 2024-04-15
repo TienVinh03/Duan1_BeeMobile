@@ -5,20 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".Frag_GioHang">
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:id="@+id/searchCart"
-    android:hint="Tìm kiếm sản phẩm"
-    android:gravity="center_horizontal"
-    android:background="@drawable/background_donhang"
-    android:layout_marginHorizontal="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="9"
-        android:layout_margin="5dp"
+        android:layout_marginTop="15dp"
+
         android:id="@+id/rcv_cart"/>
 <LinearLayout
     android:layout_width="wrap_content"
