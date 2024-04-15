@@ -46,7 +46,8 @@ holder.tvName.setText(sanPhamDAO.getProductNameById(orderDetail.getIdProduct()))
 
 double sum = orderDetail.getPrice();
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-        String formattedRevenueDay = currencyFormat.format(sum);
+
+        String formattedRevenueDay = currencyFormat.format(sum*orderDetail.getQuantity());
 holder.tvPrice.setText(formattedRevenueDay+" VNĐ");
 holder.tvQuantity.setText(orderDetail.getQuantity()+"");
     }
