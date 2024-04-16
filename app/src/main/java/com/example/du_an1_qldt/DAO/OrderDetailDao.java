@@ -602,7 +602,7 @@ public class OrderDetailDao {
 
         // Truy vấn lấy tổng doanh thu của ngày hiện tại
         String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_revenue "
-                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE date(Oder.date) = '" + currentDate + "'";
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE date(Oder.date) = '" + currentDate + "' and Oder.status = 1";
 
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
