@@ -1,5 +1,6 @@
 package com.example.du_an1_qldt.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import com.example.du_an1_qldt.model.OrderDetail;
 import com.example.du_an1_qldt.model.phone;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDAO {
     private SQLiteDatabase db;
@@ -25,6 +27,26 @@ public class OrderDAO {
     }
 
     public ArrayList<Order> getOrdersByStatus(int status) {
+        ArrayList<Order> orders = new ArrayList<>();
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        Cursor cursor = db.query("Oder", null, "status=?", new String[]{String.valueOf(status)}, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Order order = new Order();
+                    order.setIdUser(cursor.getInt(1));
+                    order.setId(cursor.getInt(0));
+                    order.setDateOrder(cursor.getString(2));
+                    order.setStatusOrder(cursor.getInt(3));
+                    orders.add(order);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        db.close();
+        return orders;
+    }
+    public ArrayList<Order> getOrdersByStatus1(int status,String start, String end ) {
         ArrayList<Order> orders = new ArrayList<>();
         SQLiteDatabase db = myDbHelper.getReadableDatabase();
         Cursor cursor = db.query("Oder", null, "status=?", new String[]{String.valueOf(status)}, null, null, null);
@@ -127,6 +149,29 @@ public class OrderDAO {
             } while (cursor.moveToNext());
         }
         return confirmedOrders;
+    }
+    @SuppressLint("Range")
+    public ArrayList<Order> getOrdersWithStatusAndDateBetween(String startDate, String endDate) {
+        ArrayList<Order> orders = new ArrayList<>();
+
+        // Truy vấn lấy danh sách đơn hàng có trạng thái bằng 1 và ngày nằm trong khoảng StartDate và EndDate
+        String query = "SELECT * FROM Oder AS dh "
+                + "JOIN OderDetail AS dhct ON dh.id = dhct.idDonHang WHERE dh.status = 1 "
+                + "AND dh.date BETWEEN '" + startDate + "' AND '" + endDate + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            // Lấy thông tin của đơn hàng từ Cursor và thêm vào danh sách
+            Order order = new Order();
+            order.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            order.setStatusOrder(cursor.getInt(cursor.getColumnIndex("status")));
+            order.setDateOrder(cursor.getString(cursor.getColumnIndex("date")));
+            // Thêm thông tin khác của đơn hàng nếu cần
+            orders.add(order);
+        }
+        cursor.close();
+
+        return orders;
     }
 
 }

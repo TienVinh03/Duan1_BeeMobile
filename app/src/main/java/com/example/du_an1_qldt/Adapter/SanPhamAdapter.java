@@ -97,7 +97,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
 
 
         holder.tv_soLuongsp.setText(phoneDTO.getSoLuong()+"");
-        if (phoneDTO.getStatus()==1){
+        if (phoneDTO.getSoLuong()>0){
             holder.tv_statusSP.setText("Còn hàng");
         }else {
             holder.tv_statusSP.setText("Hết hàng");

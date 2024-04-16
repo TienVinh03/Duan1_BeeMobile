@@ -17,6 +17,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:id="@+id/load1"
+        android:layout_marginBottom="20dp"
         android:layout_below="@+id/tabLayout"
         android:layout_height="match_parent">
 

@@ -20,6 +20,140 @@
             android:layout_marginBottom="20dp"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearThongKe"
+
+            android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày bắt đầu: "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="XXX"
+                android:id="@+id/startDay"
+                />
+
+            <TextView
+                android:id="@+id/btnstartDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/baseline_calendar_month_24" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày kết thúc: "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="XXX"
+                android:id="@+id/endDay"
+                />
+
+            <TextView
+                android:id="@+id/btnendDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/baseline_calendar_month_24" />
+
+
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thống kê theo khoảng"
+            android:id="@+id/btnXacNhanThongKe"
+            android:background="@drawable/khung"
+            />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Tổng doanh thu trong mốc :"
+                   />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/sumMoc"
+                   />
+
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng đơn hàng trong mốc :"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sumDH"
+                    android:layout_marginHorizontal="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/xemthem"
+                    android:textColor="#2196F3"
+                    android:text="Xem thêm"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sản phẩm bán nhiều nhất trong khoảng :"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sumSP"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <com.github.mikephil.charting.charts.BarChart
             android:layout_width="match_parent"
             android:layout_height="700dp"
@@ -32,6 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="25sp"
+            android:id="@+id/textVND"
             android:text="Đơn vị tính : VNĐ"
             android:textStyle="bold"
             android:textColor="@color/black"

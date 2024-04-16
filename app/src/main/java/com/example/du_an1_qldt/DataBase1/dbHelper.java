@@ -13,7 +13,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
 
     public dbHelper(@Nullable Context context) {
-        super(context, DB_name, null, 52);
+        super(context, DB_name, null, 55);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 "giaTriGiam integer," + "tenVoucher text," + "soLuong integer," + "trangThai integer)";
         sqLiteDatabase.execSQL(db_voucher);
 
-        String insert_voucher = "insert into Voucher values (1,20,'Sale 30/4',10,1)";
+        String insert_voucher = "insert into Voucher values (1,20,'Sale 30/4',10,1),(2,30,'Sale 1/6',10,1),(3,40,'Sale 1/5',10,1)";
         sqLiteDatabase.execSQL(insert_voucher);
 
 

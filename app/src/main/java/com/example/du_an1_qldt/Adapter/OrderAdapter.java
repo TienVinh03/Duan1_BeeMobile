@@ -3,6 +3,7 @@ package com.example.du_an1_qldt.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an1_qldt.DAO.OrderDAO;
+
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.OrderDetailView;
 import com.example.du_an1_qldt.R;
+import com.example.du_an1_qldt.Singleton;
+import com.example.du_an1_qldt.TaoDonHang;
+
 import com.example.du_an1_qldt.model.Order;
 import com.example.du_an1_qldt.model.OrderDetail;
+import com.example.du_an1_qldt.model.Voucher_DTO;
 
 import java.util.ArrayList;
 
@@ -29,7 +35,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     OrderDAO orderDAO;
     Context context;
     TaiKhoanDAO taiKhoanDAO;
+    ArrayList<Voucher_DTO> listVoucher;
+    TaoDonHang taoDonHang;
+    VoucherDAO voucherDAO;
 
+    VoucherSpinnerAdapter voucherSpinnerAdapter;
 
     public OrderAdapter(Context context, ArrayList<Order> orders) {
         this.context = context;
@@ -50,6 +60,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
         Order order = orders.get(position);
         holder.id.setText(String.valueOf(order.getId()));
+        voucherDAO = new VoucherDAO(context);
+        taoDonHang = new TaoDonHang();
+        listVoucher = voucherDAO.getListVoucher();
+        voucherSpinnerAdapter= new VoucherSpinnerAdapter(context,listVoucher);
         taiKhoanDAO = new TaiKhoanDAO(context);
         holder.nameCustomer.setText(taiKhoanDAO.getUserNameById(order.getIdUser()));
         holder.date.setText(order.getDateOrder());
@@ -82,15 +96,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 notifyDataSetChanged();
             }
         });
-      if (order.getStatusOrder()==0){
+
+
+        if (order.getStatusOrder()==0){
           holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
+                  SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                  int receivedValue = sharedPreferences.getInt("value", 0); // Giá trị mặc định là 0 nếu không tìm thấy
+
                   order.setStatusOrder(1);
                   holder.status.setText(String.valueOf(order.getStatusOrder()));
                   orderDAO.updateOrder(order);
                   updateProductQuantities(order.getId());
-                  updateVoucherQuantities(order.getId());
+                  updateVoucherQuantities( 2, 2);
                   holder.layoutContainer.setVisibility(View.GONE);
                   notifyDataSetChanged();
 
@@ -140,20 +159,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             sanPhamDAO.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
         }
     }
-    private void updateVoucherQuantities(int orderId) {
+    private void updateVoucherQuantities(int voucherid,int vitriVoucher) {
         VoucherDAO voucherDAO= new VoucherDAO(context);
         // Lấy danh sách sản phẩm trong đơn hàng từ cơ sở dữ liệu
-        ArrayList<OrderDetail> orderDetails = orderDAO.getlistOrderDetail(orderId);
+        ArrayList<Voucher_DTO> voucher_DTO = voucherDAO.getListVoucher();
 
-        for (OrderDetail orderDetail : orderDetails) {
-            // Lấy số lượng sản phẩm hiện tại từ cơ sở dữ liệu
-            int currentQuantity = voucherDAO.getVoucherQuantityFromDatabase(orderDetail.getIdProduct());
+        voucherDAO.getVoucherQuantityFromDatabase(voucherid);
+          voucherDAO.updateProductQuantityInDatabase(voucherid, voucher_DTO.get(vitriVoucher).getSoLuong()-1);
 
-            // Tính toán số lượng mới (ví dụ: giảm số lượng bằng số lượng trong đơn hàng)
-            int updatedQuantity = currentQuantity - 1;
-
-            // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
-            voucherDAO.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
-        }
     }
 }

@@ -4,7 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.du_an1_qldt.DAO.OrderDetailDao;
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.OrderDetail;
 import com.github.mikephil.charting.charts.BarChart;
@@ -27,8 +36,13 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,10 +52,27 @@ public class Frag_ThongKe extends Fragment {
     OrderDetail orderDetail;
     OrderDetailDao orderDetailDao;
     Spinner spn_loc;
+    TextView textVND;
     TextView tongDoanhThu;
+    TextView sumDH;
     TextView tongDonHang;
     TextView cotcaoNhat;
+    SanPhamDAO sanPhamDAO;
+    TextView xemthem;
+    TextView sumSP;
     dbHelper dbHelper1;
+    TextView sumMoc;
+    private Calendar calendarStart, calendarEnd;
+    TextView startDay;
+    TextView endDay;
+    TextView btnStartDay;
+    TextView btnEndDay;
+    LinearLayout linearLayout;
+    Button btnXacNhanThongKe;
+    private SQLiteDatabase db;
+
+
+
 
     @Nullable
     @Override
@@ -59,13 +90,29 @@ public class Frag_ThongKe extends Fragment {
         tongDoanhThu = view.findViewById(R.id.toongDoanhThu);
         tongDonHang = view.findViewById(R.id.toongDonHang);
         cotcaoNhat = view.findViewById(R.id.cotCaoNhat);
+        sanPhamDAO = new SanPhamDAO(getActivity());
         barChart = view.findViewById(R.id.barChart);
         dbHelper1 = new dbHelper(getActivity());
         spn_loc = view.findViewById(R.id.spn_loc);
+        startDay = view.findViewById(R.id.startDay);
+        endDay = view.findViewById(R.id.endDay);
+        xemthem = view.findViewById(R.id.xemthem);
+        btnEndDay = view.findViewById(R.id.btnendDay);
+        sumSP = view.findViewById(R.id.sumSP);
+        btnStartDay = view.findViewById(R.id.btnstartDay);
+        linearLayout = view.findViewById(R.id.linearThongKe);
+        sumMoc = view.findViewById(R.id.sumMoc);
+        textVND = view.findViewById(R.id.textVND);
+        calendarStart = Calendar.getInstance();
+        calendarEnd = Calendar.getInstance();
+        btnXacNhanThongKe = view.findViewById(R.id.btnXacNhanThongKe);
+        sumDH= view.findViewById(R.id.sumDH);
 
 
 
-        String[] intervals = {"Theo tháng", "Theo quý", "Theo năm"};
+
+
+        String[] intervals = {"Theo mốc","Theo tháng", "Theo quý", "Theo năm"};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, intervals);
@@ -79,13 +126,82 @@ public class Frag_ThongKe extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String selectedInterval = parent.getItemAtPosition(position).toString();
-                if (selectedInterval.equals("Theo tháng")){
+                if (selectedInterval.equals("Theo mốc")){
+
+                    linearLayout.setVisibility(View.VISIBLE);
+                    barChart.setVisibility(View.GONE);
+                    textVND.setVisibility(View.GONE);
+
+                    orderDetailDao = new OrderDetailDao(getActivity());
+
+                    btnStartDay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showDatePickerDialog(startDay);
+                        }
+                    });
+                    btnEndDay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showDatePickerDialog(endDay);
+                        }
+                    });
+
+
+                        btnXacNhanThongKe.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String DateStart = startDay.getText().toString();
+                                String DateEnd = endDay.getText().toString();
+                                double sum = orderDetailDao.getTotalPriceOfOrdersBetweenDates(DateStart,DateEnd);
+                                NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+                                String formattedRevenueDay = currencyFormat.format(sum);
+                                sumMoc.setText( String.valueOf(formattedRevenueDay) + "VNĐ");
+                                sumDH.setText(String.valueOf(orderDetailDao.getTotalOrdersBetweenDates(DateStart,DateEnd)+1));
+
+                                sanPhamDAO.getProductNameById(orderDetailDao.getMostSoldProductIDBetweenDates(DateStart,DateEnd));
+                                sumSP.setText(sanPhamDAO.getProductNameById(orderDetailDao.getMostSoldProductIDBetweenDates(DateStart,DateEnd)));
+
+
+                               Bundle bundle = new Bundle();
+                                xemthem.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                       bundle.putString("startDate",DateStart);
+                                       bundle.putString("endDate",DateEnd);
+                                       Frag_XemDonHangByDate fragXemDH= new Frag_XemDonHangByDate();
+                                        fragXemDH.setArguments(bundle);
+                                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.fragMentContainer,fragXemDH).commit();
+                                    }
+                                });
+                            }
+                        });
+
+
+
+
+
+
+                }
+                else if (selectedInterval.equals("Theo tháng")) {
                     setupChartOrderMonth();
-                } else if (selectedInterval.equals("Theo quý")) {
+                    linearLayout.setVisibility(View.GONE);
+                    barChart.setVisibility(View.VISIBLE);
+                    textVND.setVisibility(View.VISIBLE);
+
+                }else if (selectedInterval.equals("Theo quý")) {
                     setupChartOrderQuarter();
+                    linearLayout.setVisibility(View.GONE);
+                    barChart.setVisibility(View.VISIBLE);
+                    textVND.setVisibility(View.VISIBLE);
 
                 } else if (selectedInterval.equals("Theo năm")) {
                     setupChartOrderYear();
+                    linearLayout.setVisibility(View.GONE);
+                    barChart.setVisibility(View.VISIBLE);
+                    textVND.setVisibility(View.VISIBLE);
                 }
 
 
@@ -243,4 +359,23 @@ public class Frag_ThongKe extends Fragment {
         cotcaoNhat.setText("Năm có doanh thu cao nhất : " +String.valueOf(orderDetailDao.getYearWithHighestRevenue()) +" - Tổng ĐH trong năm này : "+orderDetailDao.getTotalOrdersInYearWithHighestRevenue()+" đơn");
 
     }
+    private void showDatePickerDialog(final TextView textView) {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.set(Calendar.YEAR, year);
+                selectedDate.set(Calendar.MONTH, monthOfYear);
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String dateFormat = "yyyy-MM-dd"; // Định dạng ngày tháng năm
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.getDefault());
+                textView.setText(simpleDateFormat.format(selectedDate.getTime()));
+
+            }
+        };
+        new DatePickerDialog(getActivity(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
 }

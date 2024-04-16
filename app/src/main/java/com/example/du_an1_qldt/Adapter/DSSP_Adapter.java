@@ -64,8 +64,12 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
         String formattedRevenueDay = currencyFormat.format(sum);
         holder.tv_giaSPham.setText(formattedRevenueDay+"");
-        holder.tv_TrangthaiSP1.setText(dt.getSoLuong()>0?"Còn hàng":"Hết Hàng");
 
+        if (dt.getSoLuong()>0){
+            holder.tv_TrangthaiSP1.setText("Còn hàng");
+        }else {
+            holder.tv_TrangthaiSP1.setText("Hết hàng");
+        }
         holder.tv_mauSac.setText(String.valueOf(dt.getColor()));
         holder.tv_romSP.setText("Rom:" + String.valueOf(dt.getRom()));
 
@@ -121,11 +125,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
 
         phone phoneDTO = listSP.get(position);
 
-        if (phoneDTO.getStatus() == 1) {
-            holder.tv_TrangthaiSP1.setText("Còn hàng");
-        } else {
-            holder.tv_TrangthaiSP1.setText("Hết hàng");
-        }
 
     }
 

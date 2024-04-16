@@ -412,7 +412,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="4"
+            android:weightSum="3"
             android:paddingHorizontal="10dp"
             >
             <LinearLayout
@@ -485,10 +485,11 @@
                     />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="70dp"
                     android:text="Đã duyệt"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
                     android:textSize="16sp"
@@ -583,61 +584,7 @@
                 </RelativeLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="horizontal"
-                android:layout_weight="1">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/cart"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:text="Đã vận chuyển"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
-                    />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="80dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="50dp"
-                        android:gravity="center"
-                        android:text="2"
-                        android:textColor="@color/black"
-
-
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:background="@drawable/arrow"
-                        android:id="@+id/mo_rong4"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="22sp"/>
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
 
 
         </LinearLayout>

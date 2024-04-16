@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Du_an1_QLDT"
         tools:targetApi="31">
         <activity
+            android:name=".Frag_XemDonHangByDate"
+            android:exported="false" />
+        <activity
             android:name=".tabLayout_order3"
             android:exported="false" />
         <activity

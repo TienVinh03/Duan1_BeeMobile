@@ -46,14 +46,23 @@ public class DSVoucher_Adapter extends RecyclerView.Adapter<DSVoucher_Adapter.DS
         holder.maVoucher.setText(voucherDto.getId()+"");
         holder.trangThai.setText(voucherDto.getTrangThai()+"");
         holder.soLuong.setText(voucherDto.getSoLuong()+"");
-        if (voucherDto.getTrangThai()==1){
+        if (voucherDto.getSoLuong()<0){
+            holder.soLuong.setText("0");
+            voucherDto.setGiaTriGiam(0);
+            voucherDto.setTrangThai(0);
+        }else {
+            holder.soLuong.setText(voucherDto.getSoLuong()+"");
+        }
+
+
+        if (voucherDto.getSoLuong()>0){
             holder.trangThai.setText("Còn voucher");
+            holder.giaTriGiam.setText(voucherDto.getGiaTriGiam()+" %");
         }else {
             holder.trangThai.setText("Hết voucher");
+
+            holder.giaTriGiam.setText(voucherDto.getGiaTriGiam()+" %");
         }
-        holder.giaTriGiam.setText(voucherDto.getGiaTriGiam()+"");
-
-
         holder.cardViewVoucher.setCardBackgroundColor(Color.WHITE);
         holder.cardViewVoucher.setRadius(70);
         holder.cardViewVoucher.setCardElevation(8);

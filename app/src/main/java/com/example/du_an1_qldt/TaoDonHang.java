@@ -21,6 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.du_an1_qldt.Adapter.OrderAdapter;
 import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
 import com.example.du_an1_qldt.DAO.CustomerDao;
 import com.example.du_an1_qldt.DAO.OrderDAO;
@@ -45,6 +46,7 @@ public class TaoDonHang extends AppCompatActivity {
     TextView sl, price, name, color, rom, quantity1, ship, priceTotal, priceVoucher;
     Spinner spnVoucher;
     VoucherSpinnerAdapter voucherSpinnerAdapter;
+
     ArrayList<Voucher_DTO> voucherDtos;
     int quantityPr = 0, pr;
     double discount, total = 0, discountAmount, priceShip = 20000, priceDouble;
@@ -153,12 +155,29 @@ public class TaoDonHang extends AppCompatActivity {
         String sdt = sharedPreferences.getString("sodienthoai", "");
         String address = sharedPreferences.getString("diachi", "");
         TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO(TaoDonHang.this);
+
         nameUser.setText(name);
         numberPhone.setText(sdt);
         addressUser.setText(address);
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                VoucherDAO voucherDAO1 = new VoucherDAO(TaoDonHang.this);
+                ArrayList<Voucher_DTO> listVoucher = voucherDAO1.getListVoucher();
+                Voucher_DTO voucher_dto = listVoucher.get(spnVoucher.getSelectedItemPosition());
+
+
+
+                // Sử dụng Singleton để đặt giá trị và chuyển sang AnotherClass
+                SharedPreferences sharedPreferences1 = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+                editor1.putInt("value", spnVoucher.getSelectedItemPosition());
+                editor1.apply();
+
+
+
+
 
                 if (TextUtils.isEmpty(nameUser.getText().toString().trim())) {
                     Toast.makeText(TaoDonHang.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
@@ -185,9 +204,12 @@ public class TaoDonHang extends AppCompatActivity {
                     int getQuantity=sanPhamDAO.getProductQuantityFromDatabase(idPR);
                     if(getQuantity<quantityPr){
                         Toast.makeText(TaoDonHang.this, "Đặt hàng không thành công do số lượng sản phẩm trong kho không đủ", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else if (voucher_dto.getSoLuong()<=0) {
+                        Toast.makeText(TaoDonHang.this, "Đặt hàng không thành công do số lượng Voucher không đủ", Toast.LENGTH_SHORT).show();
+                    } else {
                         if (orderId > 0) {
                             Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
+
                             startActivity(new Intent(TaoDonHang.this,FragMentContainer.class));
                         } else {
                             Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
@@ -241,4 +263,5 @@ public class TaoDonHang extends AppCompatActivity {
         String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
         return phoneNumber.matches(regex);
     }
+
 }

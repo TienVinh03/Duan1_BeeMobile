@@ -226,5 +226,21 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
             select_row_qlvoucher = itemView.findViewById(R.id.select_row_qlvoucher);
         }
     }
+//    private void updateVoucherQuantities(int orderId) {
+//        VoucherDAO voucherDAO= new VoucherDAO(context);
+//        // Lấy danh sách sản phẩm trong đơn hàng từ cơ sở dữ liệu
+//        ArrayList<Voucher_DTO> voucher_DTO = voucherDAO.getListVoucher();
+//
+//        for (Voucher_DTO voucher_dto : voucher_DTO) {
+//            // Lấy số lượng sản phẩm hiện tại từ cơ sở dữ liệu
+//            int currentQuantity = voucherDAO.getVoucherQuantityFromDatabase(voucher_dto.getId());
+//
+//            // Tính toán số lượng mới (ví dụ: giảm số lượng bằng số lượng trong đơn hàng)
+//            int updatedQuantity = currentQuantity - 1;
+//
+//            // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
+//            voucherDAO.updateProductQuantityInDatabase(voucher_dto.getId(), updatedQuantity);
+//        }
+//    }
 
 }

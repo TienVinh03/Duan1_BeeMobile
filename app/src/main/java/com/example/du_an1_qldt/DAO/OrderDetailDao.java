@@ -612,4 +612,63 @@ public class OrderDetailDao {
 
         return totalRevenue;
     }
+    @SuppressLint("Range")
+    public double getTotalPriceOfOrdersBetweenDates(String startDate, String endDate) {
+        double totalPrice = 0;
+
+        // Truy vấn lấy tổng tiền của các đơn hàng với điều kiện ngày nằm trong khoảng đã chọn
+        String query = "SELECT SUM(OderDetail.giaTien * OderDetail.soLuong) AS total_price "
+                + "FROM Oder JOIN OderDetail ON Oder.id = OderDetail.idDonHang WHERE Oder.date BETWEEN '" + startDate + "' AND '" + endDate + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalPrice = cursor.getDouble(cursor.getColumnIndex("total_price"));
+        }
+        cursor.close();
+
+        return totalPrice;
+    }
+    @SuppressLint("Range")
+    public int getTotalOrdersBetweenDates(String startDate, String endDate) {
+        int totalOrders = 0;
+
+        // Truy vấn lấy tổng số đơn hàng với điều kiện ngày nằm trong khoảng đã chọn
+        String query = "SELECT COUNT(*) AS total_orders "
+                + "FROM Oder WHERE Oder.status = 1 AND Oder.date BETWEEN '" + startDate + "' AND '" + endDate + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            totalOrders = cursor.getInt(cursor.getColumnIndex("total_orders"));
+        }
+        cursor.close();
+
+        return totalOrders;
+    }
+    @SuppressLint("Range")
+    public int getMostSoldProductIDBetweenDates(String startDate, String endDate) {
+        int mostSoldProductID = -1;
+
+        // Truy vấn lấy ID sản phẩm được bán nhiều nhất trong khoảng StartDate và EndDate
+//        String query = "SELECT dhct.idSp, COUNT(*) AS total_orders "
+//                + "FROM Oder AS dh "
+//                + "JOIN OderDetail AS dhct ON dh.id = dhct.idDonHang WHERE dh.status = 1 "
+//                + "AND dh.date BETWEEN '" + startDate + "' AND '" + endDate + "' "
+//                + "GROUP BY dhct.idSp ORDER BY total_orders DESC "
+//                + "LIMIT 1";
+        // Truy vấn lấy ID sản phẩm được bán nhiều nhất trong khoảng StartDate và EndDate
+        String query = "SELECT dhct.idSp, SUM(dhct.soLuong) AS total_quantity "
+                + "FROM Oder AS dh "
+                + "JOIN OderDetail AS dhct ON dh.id = dhct.idDonHang WHERE dh.status = 1 "
+                + "AND dh.date BETWEEN '" + startDate + "' AND '" + endDate + "' "
+                + "GROUP BY dhct.idSp ORDER BY total_quantity DESC "
+                + "LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            mostSoldProductID = cursor.getInt(cursor.getColumnIndex("idSp"));
+        }
+        cursor.close();
+
+        return mostSoldProductID;
+    }
 }
