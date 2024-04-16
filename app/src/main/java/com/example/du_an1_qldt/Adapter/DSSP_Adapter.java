@@ -136,8 +136,8 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
     }
 
     public class ViewHolder_DSSP extends RecyclerView.ViewHolder {
-        TextView tv_tenSP1, tv_giaSPham, tv_TrangthaiSP1,tv_mauSac,tv_romSP;
-        ImageView anh1, btnThemvaoGiohang, btnMuaNgay;
+        TextView tv_tenSP1, tv_giaSPham, tv_TrangthaiSP1,tv_mauSac,tv_romSP,btnThemvaoGiohang,btnMuaNgay;
+        ImageView anh1 ;
 
         public ViewHolder_DSSP(@NonNull View itemView) {
             super(itemView);
@@ -148,7 +148,6 @@ public class DSSP_Adapter extends RecyclerView.Adapter<DSSP_Adapter.ViewHolder_D
             anh1 = itemView.findViewById(R.id.anh11);
             tv_mauSac = itemView.findViewById(R.id.tv_mauSac);
             tv_romSP = itemView.findViewById(R.id.tv_romSP);
-
             btnThemvaoGiohang = itemView.findViewById(R.id.btnThemvaoGiohang);
             btnMuaNgay = itemView.findViewById(R.id.btnMuaNgay);
 
