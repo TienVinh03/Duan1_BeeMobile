@@ -65,7 +65,7 @@ public class VoucherSpinnerAdapter extends BaseAdapter {
             viewHolder.txtDiscount.setText("-"+String.valueOf(voucherDto.getGiaTriGiam()+"%"));
         }else {viewHolder.txtVoucherName.setText(voucherDto.getTenVoucher());
             viewHolder.txtDiscount.setText("-"+String.valueOf("Voucher đã hết"));
-            voucherDto.setGiaTriGiam(0);
+
 
         }
 

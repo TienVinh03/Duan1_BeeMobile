@@ -216,9 +216,7 @@ public class TaoDonHang extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Voucher_DTO voucherDto = voucherDtos.get(position);
-                if (voucherDto.getSoLuong()<0){
-                    voucherDto.setGiaTriGiam(0);
-                }
+
                 if (voucherDto.getSoLuong()<=0){
                     discount = 0;
                 }else {

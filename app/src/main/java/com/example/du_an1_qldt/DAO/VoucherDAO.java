@@ -102,7 +102,7 @@ public class VoucherDAO {
         }
         return list;
     }
-    public int getProductQuantityFromDatabase(int VoucherId) {
+    public int getVoucherQuantityFromDatabase(int VoucherId) {
         SQLiteDatabase db = myDbHelper.getReadableDatabase();
         Cursor cursor = db.query("Voucher", new String[]{"soLuong"},
                 "idVoucher=?", new String[]{String.valueOf(VoucherId)},

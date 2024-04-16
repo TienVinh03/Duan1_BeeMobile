@@ -141,19 +141,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
     }
     private void updateVoucherQuantities(int orderId) {
-        VoucherDAO sanPhamDAO1= new VoucherDAO(context);
+        VoucherDAO voucherDAO= new VoucherDAO(context);
         // Lấy danh sách sản phẩm trong đơn hàng từ cơ sở dữ liệu
         ArrayList<OrderDetail> orderDetails = orderDAO.getlistOrderDetail(orderId);
 
         for (OrderDetail orderDetail : orderDetails) {
             // Lấy số lượng sản phẩm hiện tại từ cơ sở dữ liệu
-            int currentQuantity = sanPhamDAO1.getProductQuantityFromDatabase(orderDetail.getIdProduct());
+            int currentQuantity = voucherDAO.getVoucherQuantityFromDatabase(orderDetail.getIdProduct());
 
             // Tính toán số lượng mới (ví dụ: giảm số lượng bằng số lượng trong đơn hàng)
-            int updatedQuantity = currentQuantity - orderDetail.getQuantity();
+            int updatedQuantity = currentQuantity - 1;
 
             // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
-            sanPhamDAO1.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
+            voucherDAO.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
         }
     }
 }
