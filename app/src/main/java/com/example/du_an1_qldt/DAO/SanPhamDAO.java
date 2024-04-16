@@ -210,5 +210,26 @@ public class SanPhamDAO {
             Log.d("UpdateProductQuantity", rowsAffected + " rows affected.");
         }
     }
+    public phone getProductById(int idPr){
+        phone phone1= null;
 
+        Cursor c = db.query("Phone", null, "maDt = ?", new String[]{String.valueOf(idPr)}, null, null, null);
+        if (c.getCount()>0){
+            c.moveToFirst();
+            if (c != null && c.moveToFirst()){
+              int id=c.getInt(0);
+              String color=c.getString(6);
+              String name=c.getString(1);
+              int idBrand=c.getInt(2);
+              int price=c.getInt(3);
+              int image=c.getInt(4);
+              int rom=c.getInt(5);
+              int status=c.getInt(7);
+              int quantity=c.getInt(8);
+              phone1= new phone(id,name,color,image,rom,price,quantity,idBrand,status);
+                c.close();
+            }
+        }
+        return phone1;
+    }
 }

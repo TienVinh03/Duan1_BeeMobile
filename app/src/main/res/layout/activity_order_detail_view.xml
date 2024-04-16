@@ -6,15 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".OrderDetailView">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Chi tiết đơn hàng"
-        android:gravity="center_horizontal"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#F44336"/>
+<Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:title="Chi tiết đơn hàng"
+    android:gravity="center_horizontal"
+    android:id="@+id/toolbar"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

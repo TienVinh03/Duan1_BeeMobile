@@ -97,7 +97,7 @@ int quantity;
                 String doublePrice = formatter.format(price);
                 holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
                 cartDao.updateCartItemQuantity(cart.getId(),sl);
-                holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
+                holder.tvPrice.setText(String.valueOf(doublePrice)+"VND"); // Cập nhật giá hiển thị
                 cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
                 if (totalPriceListener != null) {
                     totalPriceListener.onTotalPriceChanged(calculateTotalPrice()); // calculateTotalPrice() là phương thức tính tổng giá trị trong giỏ hàng
@@ -116,7 +116,7 @@ int quantity;
                     String doublePrice = formatter.format(price);
                     holder.tvQuantity.setText(String.valueOf(sl)); // Cập nhật số lượng hiển thị
                     cartDao.updateCartItemQuantity(cart.getId(),sl);
-                    holder.tvPrice.setText(String.valueOf(doublePrice)); // Cập nhật giá hiển thị
+                    holder.tvPrice.setText(String.valueOf(doublePrice)+"VND"); // Cập nhật giá hiển thị
                     cart.setQuantity(sl); // Cập nhật số lượng trong đối tượng Cart
                     if (totalPriceListener != null) {
                         totalPriceListener.onTotalPriceChanged(calculateTotalPrice());

@@ -152,32 +152,33 @@ public class CreateOrderWithCart extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(nameUser.getText().toString().trim())) {
-                    Toast.makeText(CreateOrderWithCart.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(addressUser.getText().toString().trim())) {
-                    Toast.makeText(CreateOrderWithCart.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(numberPhone.getText().toString().trim())) {
-                    Toast.makeText(CreateOrderWithCart.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
-                } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
-                    Toast.makeText(CreateOrderWithCart.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
-                } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
-                    String id = sharedPreferences.getString("manguoidung", "");
-                    orderDAO = new OrderDAO(CreateOrderWithCart.this);
-                    Order order = new Order();
-                    order.setIdUser(Integer.parseInt(id));
-                    order.setStatusOrder(0);
-                    order.setDateOrder(formattedDate);
-                    long orderId = orderDAO.createOrder2(order);
-                    for (Cart cart : cartArrayList) {
-                        OrderDetail orderDetail = new OrderDetail();
-                        orderDetail.setIdDonHang((int) orderId);
-                        orderDetail.setPrice(cart.getPrice());
-                        orderDetail.setIdProduct(cart.getIdPhone());
-                        orderDetail.setQuantity(cart.getQuantity());
-                        orderDAO.createOrderDetail(orderDetail);
-                        cartDao.deleteRowCart(cart);
-                    }
+                if (checkProductQuantities(cartArrayList)) {
+                    if (TextUtils.isEmpty(nameUser.getText().toString().trim())) {
+                        Toast.makeText(CreateOrderWithCart.this, "Không để họ tên trống", Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(addressUser.getText().toString().trim())) {
+                        Toast.makeText(CreateOrderWithCart.this, "Không để địa chỉ trống", Toast.LENGTH_SHORT).show();
+                    } else if (TextUtils.isEmpty(numberPhone.getText().toString().trim())) {
+                        Toast.makeText(CreateOrderWithCart.this, "Không để số điện thoại trống", Toast.LENGTH_SHORT).show();
+                    } else if (!isValidPhoneNumber(numberPhone.getText().toString())) {
+                        Toast.makeText(CreateOrderWithCart.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        SharedPreferences sharedPreferences = getSharedPreferences("thongtin", Context.MODE_PRIVATE);
+                        String id = sharedPreferences.getString("manguoidung", "");
+                        orderDAO = new OrderDAO(CreateOrderWithCart.this);
+                        Order order = new Order();
+                        order.setIdUser(Integer.parseInt(id));
+                        order.setStatusOrder(0);
+                        order.setDateOrder(formattedDate);
+                        long orderId = orderDAO.createOrder2(order);
+                        for (Cart cart : cartArrayList) {
+                            OrderDetail orderDetail = new OrderDetail();
+                            orderDetail.setIdDonHang((int) orderId);
+                            orderDetail.setPrice(cart.getPrice());
+                            orderDetail.setIdProduct(cart.getIdPhone());
+                            orderDetail.setQuantity(cart.getQuantity());
+                            orderDAO.createOrderDetail(orderDetail);
+                            cartDao.deleteRowCart(cart);
+                        }
 
                         if (orderId > 0) {
                             Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
@@ -185,15 +186,21 @@ public class CreateOrderWithCart extends AppCompatActivity {
                         } else {
                             Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                         }
-                    if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
-                        Customer customer = new Customer();
-                        customer.setNumberPhone(sdt);
-                        customer.setAddress(address);
-                        customer.setName(name);
-                        CustomerDao customerDao = new CustomerDao(CreateOrderWithCart.this);
-                        customerDao.addCustomer(customer);
+                        if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
+                            Customer customer = new Customer();
+                            customer.setNumberPhone(sdt);
+                            customer.setAddress(address);
+                            customer.setName(name);
+                            CustomerDao customerDao = new CustomerDao(CreateOrderWithCart.this);
+                            customerDao.addCustomer(customer);
+                        }
                     }
+                } else {
+                    // Nếu có sản phẩm vượt quá số lượng trong kho, không đặt đơn hàng và thông báo cho người dùng
+                    Toast.makeText(CreateOrderWithCart.this, "Số lượng sản phẩm trong giỏ hàng vượt quá số lượng trong kho.", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
     }
@@ -201,5 +208,24 @@ public class CreateOrderWithCart extends AppCompatActivity {
     public boolean isValidPhoneNumber(String phoneNumber) {
         String regex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
         return phoneNumber.matches(regex);
+    }
+    public boolean checkProductQuantities(ArrayList<Cart> cartItems) {
+        SanPhamDAO sanPhamDAO= new SanPhamDAO(this);
+        boolean allProductsValid = true;
+        for (Cart cartItem : cartItems) {
+            int productId = cartItem.getIdPhone();
+            int quantityInCart = cartItem.getQuantity();
+            int quantityInStock = sanPhamDAO.getProductQuantityFromDatabase(productId);
+            if (quantityInCart > quantityInStock) {
+                allProductsValid = false;
+                // Hiển thị thông báo cảnh báo cho người dùng
+                String productName = sanPhamDAO.getProductById(productId).getName();
+                String message = "Số lượng của sản phẩm " + productName + " vượt quá số lượng trong kho.";
+                // Hiển thị thông báo cảnh báo
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        return allProductsValid;
     }
 }
