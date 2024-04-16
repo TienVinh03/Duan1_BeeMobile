@@ -208,10 +208,18 @@ public class TaoDonHang extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Voucher_DTO voucherDto = voucherDtos.get(position);
-                discount = voucherDto.getGiaTriGiam() / 100.0; // Chuyển phần trăm giảm giá thành số thực
-                discountAmount = discount * pr;
-                total = pr - priceShip - discountAmount;
-                priceTotal.setText(formatter.format(total) + "đ");
+                if (voucherDto.getSoLuong()<0){
+                    voucherDto.setGiaTriGiam(0);
+                }
+                if (voucherDto.getSoLuong()<=0){
+                    discount = 0;
+                }else {
+                    discount = voucherDto.getGiaTriGiam() / 100.0; // Chuyển phần trăm giảm giá thành số thực
+                    discountAmount = discount * pr;
+                    total = pr - priceShip - discountAmount;
+                    priceTotal.setText(formatter.format(total) + "đ");
+                }
+
             }
 
             @Override

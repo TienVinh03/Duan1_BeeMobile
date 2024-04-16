@@ -302,7 +302,7 @@ public class Frag_QuanLiSanPham extends Fragment {
                             } else if (!(rom==128||rom==256||rom==512)) {
                                 Toast.makeText(getActivity(), "Vui lòng Nhập đúng định dạng của Rom", Toast.LENGTH_SHORT).show();
 
-                            } else if (gia<0) {
+                            } else if (gia<=0) {
                                 Toast.makeText(getActivity(), "Gía không phù hợp", Toast.LENGTH_SHORT).show();
 
                             }else if (soluong<0) {

@@ -58,9 +58,17 @@ public class VoucherSpinnerAdapter extends BaseAdapter {
         } else {
             viewHolder = (TheLoaiViewHolder) convertView.getTag();
         }
+
         Voucher_DTO voucherDto = listVoucher.get(position);
-        viewHolder.txtVoucherName.setText(voucherDto.getTenVoucher());
-        viewHolder.txtDiscount.setText("-"+String.valueOf(voucherDto.getGiaTriGiam()+"%"));
+        if (voucherDto.getSoLuong()>0){
+            viewHolder.txtVoucherName.setText(voucherDto.getTenVoucher());
+            viewHolder.txtDiscount.setText("-"+String.valueOf(voucherDto.getGiaTriGiam()+"%"));
+        }else {viewHolder.txtVoucherName.setText(voucherDto.getTenVoucher());
+            viewHolder.txtDiscount.setText("-"+String.valueOf("Voucher đã hết"));
+            voucherDto.setGiaTriGiam(0);
+
+        }
+
         return convertView;
     }
 }

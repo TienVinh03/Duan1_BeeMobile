@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.du_an1_qldt.DAO.OrderDAO;
 import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
+import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.OrderDetailView;
 import com.example.du_an1_qldt.R;
 import com.example.du_an1_qldt.model.Order;
@@ -89,6 +90,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                   holder.status.setText(String.valueOf(order.getStatusOrder()));
                   orderDAO.updateOrder(order);
                   updateProductQuantities(order.getId());
+                  updateVoucherQuantities(order.getId());
                   holder.layoutContainer.setVisibility(View.GONE);
                   notifyDataSetChanged();
 
@@ -136,6 +138,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
             // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
             sanPhamDAO.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
+        }
+    }
+    private void updateVoucherQuantities(int orderId) {
+        VoucherDAO sanPhamDAO1= new VoucherDAO(context);
+        // Lấy danh sách sản phẩm trong đơn hàng từ cơ sở dữ liệu
+        ArrayList<OrderDetail> orderDetails = orderDAO.getlistOrderDetail(orderId);
+
+        for (OrderDetail orderDetail : orderDetails) {
+            // Lấy số lượng sản phẩm hiện tại từ cơ sở dữ liệu
+            int currentQuantity = sanPhamDAO1.getProductQuantityFromDatabase(orderDetail.getIdProduct());
+
+            // Tính toán số lượng mới (ví dụ: giảm số lượng bằng số lượng trong đơn hàng)
+            int updatedQuantity = currentQuantity - orderDetail.getQuantity();
+
+            // Cập nhật số lượng sản phẩm mới vào cơ sở dữ liệu
+            sanPhamDAO1.updateProductQuantityInDatabase(orderDetail.getIdProduct(), updatedQuantity);
         }
     }
 }

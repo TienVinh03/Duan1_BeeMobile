@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.du_an1_qldt.DataBase1.dbHelper;
 import com.example.du_an1_qldt.model.Voucher_DTO;
@@ -100,5 +101,34 @@ public class VoucherDAO {
             } while (cursor.moveToNext());
         }
         return list;
+    }
+    public int getProductQuantityFromDatabase(int VoucherId) {
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        Cursor cursor = db.query("Voucher", new String[]{"soLuong"},
+                "idVoucher=?", new String[]{String.valueOf(VoucherId)},
+                null, null, null, null);
+        int quantity = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            // Lấy giá trị của cột "soluong"
+            quantity = cursor.getInt(0);
+            cursor.close();
+        }
+        return quantity;
+    }
+
+    public void updateProductQuantityInDatabase(int VoucherId, int updatedQuantity) {
+        SQLiteDatabase db = myDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("soluong", updatedQuantity);
+        int rowsAffected = db.update("Voucher", values, "idVoucher=?",
+                new String[]{String.valueOf(VoucherId)});
+        db.close();
+
+        if (rowsAffected == 0) {
+            // Không có sản phẩm nào được cập nhật, có thể có lỗi xảy ra
+            Log.e("UpdateVoucherQuantity", "No rows affected! Product ID: " + VoucherId);
+        } else {
+            Log.d("UpdateVoucherQuantity", rowsAffected + " rows affected.");
+        }
     }
 }
