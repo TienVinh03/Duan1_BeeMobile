@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
 import com.example.du_an1_qldt.DAO.CustomerDao;
 import com.example.du_an1_qldt.DAO.OrderDAO;
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.model.Customer;
@@ -180,12 +181,19 @@ public class TaoDonHang extends AppCompatActivity {
                     orderDetail.setIdProduct(idPR);
                     orderDetail.setPrice(total);
                     orderDAO.createOrderDetail(orderDetail);
-                    if (orderId > 0) {
-                        Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(TaoDonHang.this,FragMentContainer.class));
-                    } else {
-                        Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+                    SanPhamDAO sanPhamDAO= new SanPhamDAO(TaoDonHang.this);
+                    int getQuantity=sanPhamDAO.getProductQuantityFromDatabase(idPR);
+                    if(getQuantity<quantityPr){
+                        Toast.makeText(TaoDonHang.this, "Đặt hàng không thành công do số lượng sản phẩm trong kho không đủ", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (orderId > 0) {
+                            Toast.makeText(TaoDonHang.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(TaoDonHang.this,FragMentContainer.class));
+                        } else {
+                            Toast.makeText(TaoDonHang.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                     if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
                         Customer customer = new Customer();
                         customer.setNumberPhone(numberPhone.getText().toString());

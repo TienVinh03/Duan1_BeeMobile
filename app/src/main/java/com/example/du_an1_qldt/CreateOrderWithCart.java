@@ -30,6 +30,7 @@ import com.example.du_an1_qldt.Adapter.VoucherSpinnerAdapter;
 import com.example.du_an1_qldt.DAO.CartDao;
 import com.example.du_an1_qldt.DAO.CustomerDao;
 import com.example.du_an1_qldt.DAO.OrderDAO;
+import com.example.du_an1_qldt.DAO.SanPhamDAO;
 import com.example.du_an1_qldt.DAO.TaiKhoanDAO;
 import com.example.du_an1_qldt.DAO.VoucherDAO;
 import com.example.du_an1_qldt.model.Cart;
@@ -54,6 +55,7 @@ public class CreateOrderWithCart extends AppCompatActivity {
     TextInputEditText nameUser, numberPhone, addressUser;
     LinearLayoutManager linearLayoutManager;
     OrderDAO orderDAO;
+    int getQuantity;
     Date date;
     VoucherSpinnerAdapter voucherSpinnerAdapter;
     Spinner spinner;
@@ -166,23 +168,23 @@ public class CreateOrderWithCart extends AppCompatActivity {
                     order.setIdUser(Integer.parseInt(id));
                     order.setStatusOrder(0);
                     order.setDateOrder(formattedDate);
-                    int check = orderDAO.createOrder(order);
                     long orderId = orderDAO.createOrder2(order);
                     for (Cart cart : cartArrayList) {
                         OrderDetail orderDetail = new OrderDetail();
-                        orderDetail.setId((int) orderId);
+                        orderDetail.setIdDonHang((int) orderId);
                         orderDetail.setPrice(cart.getPrice());
                         orderDetail.setIdProduct(cart.getIdPhone());
                         orderDetail.setQuantity(cart.getQuantity());
                         orderDAO.createOrderDetail(orderDetail);
                         cartDao.deleteRowCart(cart);
                     }
-                    if (check > 0) {
-                        Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CreateOrderWithCart.this,FragMentContainer.class));
-                    } else {
-                        Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
-                    }
+
+                        if (orderId > 0) {
+                            Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(CreateOrderWithCart.this,FragMentContainer.class));
+                        } else {
+                            Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+                        }
                     if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
                         Customer customer = new Customer();
                         customer.setNumberPhone(sdt);
