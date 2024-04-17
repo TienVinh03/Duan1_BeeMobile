@@ -173,7 +173,7 @@ public class CreateOrderWithCart extends AppCompatActivity {
                         for (Cart cart : cartArrayList) {
                             OrderDetail orderDetail = new OrderDetail();
                             orderDetail.setIdDonHang((int) orderId);
-                            orderDetail.setPrice(cart.getPrice());
+                            orderDetail.setPrice((cart.getPrice()-cart.getPrice()*priceVoucher/100)-20000);
                             orderDetail.setIdProduct(cart.getIdPhone());
                             orderDetail.setQuantity(cart.getQuantity());
                             orderDAO.createOrderDetail(orderDetail);
