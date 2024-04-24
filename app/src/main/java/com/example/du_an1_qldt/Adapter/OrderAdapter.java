@@ -109,7 +109,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                   holder.status.setText(String.valueOf(order.getStatusOrder()));
                   orderDAO.updateOrder(order);
                   updateProductQuantities(order.getId());
-                  updateVoucherQuantities( 2, 2);
+                  updateVoucherQuantities( listVoucher.size()-1, listVoucher.size()-1);
                   holder.layoutContainer.setVisibility(View.GONE);
                   notifyDataSetChanged();
 

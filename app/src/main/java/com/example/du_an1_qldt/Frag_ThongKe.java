@@ -66,6 +66,7 @@ public class Frag_ThongKe extends Fragment {
     TextView startDay;
     TextView endDay;
     TextView btnStartDay;
+    LinearLayout thongsoBar;
     TextView btnEndDay;
     LinearLayout linearLayout;
     Button btnXacNhanThongKe;
@@ -108,6 +109,7 @@ public class Frag_ThongKe extends Fragment {
         btnXacNhanThongKe = view.findViewById(R.id.btnXacNhanThongKe);
         sumDH= view.findViewById(R.id.sumDH);
 
+        thongsoBar = view.findViewById(R.id.thongsoBar);
 
 
 
@@ -127,7 +129,7 @@ public class Frag_ThongKe extends Fragment {
 
                 String selectedInterval = parent.getItemAtPosition(position).toString();
                 if (selectedInterval.equals("Theo mốc")){
-
+                    thongsoBar.setVisibility(View.GONE);
                     linearLayout.setVisibility(View.VISIBLE);
                     barChart.setVisibility(View.GONE);
                     textVND.setVisibility(View.GONE);
@@ -190,17 +192,20 @@ public class Frag_ThongKe extends Fragment {
                     linearLayout.setVisibility(View.GONE);
                     barChart.setVisibility(View.VISIBLE);
                     textVND.setVisibility(View.VISIBLE);
+                    thongsoBar.setVisibility(View.VISIBLE);
 
                 }else if (selectedInterval.equals("Theo quý")) {
                     setupChartOrderQuarter();
                     linearLayout.setVisibility(View.GONE);
                     barChart.setVisibility(View.VISIBLE);
                     textVND.setVisibility(View.VISIBLE);
+                    thongsoBar.setVisibility(View.VISIBLE);
 
                 } else if (selectedInterval.equals("Theo năm")) {
                     setupChartOrderYear();
                     linearLayout.setVisibility(View.GONE);
                     barChart.setVisibility(View.VISIBLE);
+                    thongsoBar.setVisibility(View.VISIBLE);
                     textVND.setVisibility(View.VISIBLE);
                 }
 

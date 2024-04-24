@@ -166,6 +166,7 @@ public class CreateOrderWithCart extends AppCompatActivity {
                         String id = sharedPreferences.getString("manguoidung", "");
                         orderDAO = new OrderDAO(CreateOrderWithCart.this);
                         Order order = new Order();
+                        Boolean check = true;
                         order.setIdUser(Integer.parseInt(id));
                         order.setStatusOrder(0);
                         order.setDateOrder(formattedDate);
@@ -179,12 +180,23 @@ public class CreateOrderWithCart extends AppCompatActivity {
                             orderDAO.createOrderDetail(orderDetail);
                             cartDao.deleteRowCart(cart);
                         }
+                        for (Cart cart : cartArrayList) {
+                            if(cart.getQuantity()<=0){
+                                check=false;
+                                break;
+                            }
 
-                        if (orderId > 0) {
+                        }
+
+                        if (orderId < 0) {
+                            Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
+
+                        } else if (!check) {
+                            Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI DO SO LUONG KHONG DU", Toast.LENGTH_SHORT).show();
+
+                        } else {
                             Toast.makeText(CreateOrderWithCart.this, "ĐÃ TẠO ĐƠN HÀNG", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(CreateOrderWithCart.this,FragMentContainer.class));
-                        } else {
-                            Toast.makeText(CreateOrderWithCart.this, "TẠO ĐƠN HÀNG THẤT BẠI", Toast.LENGTH_SHORT).show();
                         }
                         if (!taiKhoanDAO.isUserExists(Integer.parseInt(id))) {
                             Customer customer = new Customer();
